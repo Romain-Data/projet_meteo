@@ -1,3 +1,6 @@
+matplotlib
 numpy
 pandas
+plotly.graph_objects
 requests
+seaborn
