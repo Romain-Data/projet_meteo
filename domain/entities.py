@@ -12,9 +12,11 @@ class WeatherReport:
 
 
 class Station:
-    def __init__(self, id: str, name: str, reports: list[WeatherReport] = []) -> None:
+    def __init__(self, id: str, name: str, longitude: str, latitude: str, reports: list[WeatherReport] = []) -> None:
         self.id: str = id
         self.name: str = name
+        self.longitude = longitude
+        self.latitude = latitude
         self.reports: list[WeatherReport] = reports
 
     def get_all_reports(self)-> pd.DataFrame:

@@ -1,0 +1,78 @@
+﻿longitude;latitude;id_nom;nom
+1.438051307;43.6046192;00-station-meteo-toulouse-valade;Valade
+1.373732608;43.57441578;01-station-meteo-toulouse-meteopole;Meteopole
+1.459479547;43.6094731;02-station-meteo-toulouse-marengo;Marengo
+1.452060306;43.58843456;03-station-meteo-toulouse-busca;Busca
+1.436663157;43.57083382;04-station-meteo-toulouse-ile-empalot;Ile Empalot
+1.436834217;43.58903752;05-station-meteo-toulouse-LIFE-hall-1;Life Hall 1
+1.43638064;43.58807645;05-station-meteo-toulouse-nakache;Nakache
+1.437787331;43.58917972;05-station-meteo-toulouse-pont-Banleve;Pont Banleve
+1.440123984;43.59268047;06-station-meteo-toulouse-ecluse;Ecluse
+1.44027254;43.59114868;06-station-meteo-toulouse-LIFE-sud-est-pointe;Life Sud Est Pointe
+1.416393889;43.59744133;07-station-meteo-toulouse-avenue-de-grande-bretagne;Avenue De Grande Bretagne
+1.38566893;43.56643283;08-station-meteo-toulouse-basso-cambo;Basso Cambo
+1.435021315;43.62939389;09-station-meteo-toulouse-la-salade;La Salade
+1.424571801;43.69496197;10-station-meteo-castelginest-ecole;Ecole
+1.478675314;43.60763006;11-station-meteo-toulouse-soupetard;Soupetard
+1.491330098;43.56336218;12-station-meteo-toulouse-montaudran;Montaudran
+1.448637078;43.56396456;13-station-meteo-toulouse-pech-david;Pech David
+1.425715643;43.56198034;14-station-meteo-toulouse-centre-pierre-potier;Centre Pierre Potier
+1.483381599;43.65582282;15-station-meteo-l-union-ecole;Union Ecole
+1.398387095;43.70871587;16-station-meteo-saint-alban-leon-jouhaux;Alban Leon Jouhaux
+1.391840918;43.68007067;17-station-meteo-fenouillet-foyer;Foyer
+1.241883645;43.61642579;18-station-meteo-brax-ecole;Ecole
+1.556401812;43.63373354;19-station-meteo-mondouzil-mairie;Mairie
+1.279726859;43.66888709;20-station-meteo-mondonville-ecole;Ecole
+1.345824309;43.54121956;21-station-meteo-cugnaux-general-de-gaulle;General De Gaulle
+1.30880876;43.61287769;22-station-meteo-colomiers-za-perget;Za Perget
+1.223229555;43.62797752;23-station-meteo-pibrac-bouconne-centre-equestre;Bouconne Centre Equestre
+1.221884564;43.62855974;23-station-meteo-pibrac-bouconne-foret;Bouconne Foret
+1.300503372;43.59567409;24-station-meteo-colomiers-zi-enjacca;Zi Enjacca
+1.318186198;43.57914314;25-station-meteo-tournefeuille-residentiel;Residentiel
+1.398311543;43.56059847;26-station-meteo-toulouse-reynerie;Reynerie
+1.431004052;43.59814671;27-station-meteo-toulouse-saint-cyprien;Saint Cyprien
+1.445442331;43.59769029;28-station-meteo-toulouse-carmes;Carmes
+1.447218468;43.59632101;28-station-meteo-toulouse-carmes-ozenne;Carmes Ozenne
+1.278005343;43.64830394;29-station-meteo-pibrac-route-mondonville;Route Mondonville
+1.408942;43.587697;30-station-meteo-toulouse-george-sand;George Sand
+1.558494834;43.60985175;31-station-meteo-mons-station-epuration;Station Epuration
+1.571650975;43.61107854;32-station-meteo-mons-ecole;Ecole
+1.35242748;43.73414488;33-station-meteo-saint-jory-chapelle-beldou;Jory Chapelle Beldou
+1.448938214;43.61622354;34-station-meteo-toulouse-TESO;Teso
+1.434329843;43.65305982;35-station-meteo-toulouse-lise-meitner;Lise Meitner
+1.397601209;43.60768923;36-station-meteo-toulouse-purpan;Purpan
+1.467598713;43.56121264;37-station-meteo-toulouse-universite-paul-sabatier;Universite Paul Sabatier
+1.450647723;43.59324316;38-station-meteo-toulouse-parc-jardin-des-plantes;Parc Jardin Des Plantes
+1.449093882;43.5949312;38-station-meteo-toulouse-parc-jardin-des-plantes-grand-rond;Parc Jardin Des Plantes Grand Rond
+1.451848418;43.59278278;38-station-meteo-toulouse-parc-jardin-des-plantes-guesdes;Parc Jardin Des Plantes Guesdes
+1.452130935;43.59544272;38-station-meteo-toulouse-parc-jardin-des-plantes-point-frais;Parc Jardin Des Plantes Point Frais
+1.324941298573893;43.58067010014745;39-station-meteo-tournefeuille-ecole;Ecole
+1.403608727;43.55281844;40-station-meteo-toulouse-zi-thibaud;Zi Thibaud
+1.40676837;43.61121544;41-station-meteo-toulouse-avenue-de-casselardit;Avenue De Casselardit
+1.431863473;43.61245993;42-station-meteo-toulouse-parc-compans-cafarelli;Parc Compans Cafarelli
+1.433410432;43.61133989;42-station-meteo-toulouse-parc-compans-cafarelli-point-frais;Parc Compans Cafarelli Point Frais
+1.432608305;43.62096327;43-station-meteo-toulouse-minimes;Minimes
+1.454208429;43.60735735;44-station-meteo-toulouse-jean-jaures;Jean Jaures
+1.476286095;43.58383021;45-station-meteo-toulouse-st-exupery;St Exupery
+1.441660877;43.61258438;46-station-meteo-toulouse-chalets;Chalets
+1.475905599963223;43.57418297818462;47-station-meteo-toulouse-la-machine-tm;La Machine Tm
+1.477009550365763;43.57226129883671;48-station-meteo-toulouse-la-machine-af;La Machine Af
+1.478122452;43.59549387;49-station-meteo-toulouse-cote-pavee;Cote Pavee
+1.39933257;43.66132641;50-station-meteo-blagnac-quinze-sols;Quinze Sols
+1.378182243;43.58950885;51-station-meteo-toulouse-lardenne;Lardenne
+1.399229722;43.58541619;52-station-meteo-toulouse-cepiere;Cepiere
+1.452695968;43.56827514;53-station-meteo-toulouse-ponsan;Ponsan
+1.425674104;43.63381884;58-station-meteo-toulouse-fondeyre;Fondeyre
+1.397929291;43.63551395;61-station-meteo-blagnac-mairie;Mairie
+1.452503125;43.63158812;62-station-meteo-toulouse-parc-maourine;Parc Maourine
+1.440449656;43.58539848;63-station-meteo-toulouse-LIFE-debut-soufflot;Life Debut Soufflot
+1.439545447;43.58551107;63-station-meteo-toulouse-LIFE-marechal-juin;Life Marechal Juin
+1.441291712;43.58533929;63-station-meteo-toulouse-LIFE-soufflot;Life Soufflot
+1.43627445;43.58721072;64-station-meteo-toulouse-LIFE-nakache-parking;Life Nakache Parking
+1.432182269;43.59002335;65-station-meteo-toulouse-LIFE-bartheres;Life Bartheres
+1.432537468;43.58941217;65-station-meteo-toulouse-LIFE-garonne;Life Garonne
+1.432088253;43.58937464;65-station-meteo-toulouse-LIFE-gastou;Life Gastou
+1.431440256;43.58915507;65-station-meteo-toulouse-LIFE-rapas;Life Rapas
+1.436957904;43.58449979;66-station-meteo-toulouse-LIFE-coubertin;Life Coubertin
+1.436585221;43.58366122;66-station-meteo-toulouse-LIFE-est-stadium;Life Est Stadium
+1.437896292;43.58597953;66-station-meteo-toulouse-LIFE-nakache;Life Nakache

@@ -1,7 +1,7 @@
 import pandas as pd
 import requests
 
-from domain.entity import Station
+from domain.entities import Station
 
 
 class IDataExtractor:
