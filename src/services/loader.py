@@ -1,6 +1,6 @@
 import pandas as pd
-from entities.station import Station
-from entities.weather_report import WeatherReport
+from src.entities.station import Station
+from src.entities.weather_report import WeatherReport
 
 
 class DataLoader:
@@ -46,9 +46,9 @@ class DataLoader:
             WeatherReport: Initialized weather report object
         """
         return WeatherReport(
-            date=row['heure_de_paris'],
-            temperature=row['temperature_en_degre_c'],
-            humidity=row['humidite'],
-            pressure=row['pression'],
+            date=row['date'],
+            temperature=row['temperature'],
+            humidity=row['humidity'],
+            pressure=row['pressure'],
             display_date=row['display_date']
         )

@@ -1,5 +1,5 @@
 import pandas as pd
-from entities.weather_report import WeatherReport
+from src.entities.weather_report import WeatherReport
 
 class Station:
     def __init__(self, id: str, name: str, longitude: str, latitude: str, reports: list[WeatherReport] = []) -> None:

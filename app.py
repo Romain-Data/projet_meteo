@@ -1,11 +1,20 @@
+import logging
 import streamlit as st
 import pandas as pd
 from pathlib import Path
 
-from entities.station import Station
-from services.data_fetcher import DataFetcher
-from storage.parquet_handler import ParquetHandler
-from viz.charts import DataVizualiser
+from src.entities.station import Station
+from src.services.data_fetcher import DataFetcher
+from src.storage.parquet_handler import ParquetHandler
+from src.viz.charts import DataVizualiser
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    filename='weather_app.log'
+)
+
+logger = logging.getLogger(__name__)
 
 # Page setup
 st.set_page_config(
@@ -42,6 +51,8 @@ def load_stations():
 
 
 def main():
+    logger.info("Lancement de l'appli")
+
     parquet_handler, data_fetcher, weather_charts = init_services()
 
     # App title

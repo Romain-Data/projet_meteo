@@ -1,8 +1,8 @@
 import logging
 from pathlib import Path
 import pandas as pd
-from entities.station import Station
-from services.loader import DataLoader
+from src.entities.station import Station
+from src.services.loader import DataLoader
 
 logger = logging.getLogger(__name__)
 
@@ -12,11 +12,16 @@ class ParquetHandler:
     Manages the saving and loading of weather reports in Parquet format.
     """
     
-    def __init__(self, data_dir: Path = Path("data/parquet")):
+    def __init__(self, data_dir: Path | None = None):
         """
         Args:
             data_dir: Parquet file storage directory
         """
+        if data_dir is None:
+            # Remonter depuis src/services vers la racine, puis data/parquet
+            project_root = Path(__file__).parent.parent.parent
+            data_dir = project_root / "data" / "parquet"
+
         self.data_dir = data_dir
         self.data_dir.mkdir(parents=True, exist_ok=True)
         logger.info(f"ParquetHandler initialized with directory: {self.data_dir}")
@@ -120,5 +125,5 @@ class ParquetHandler:
             
         Returns:
             Path to the parquet file
-        """
+        """       
         return self.data_dir / f"station_{station.id}.parquet"

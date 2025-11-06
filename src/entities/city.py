@@ -1,4 +1,4 @@
-from entities.station import Station
+from src.entities.station import Station
 
 class City:
     def __init__(self, name: str, stations: list[Station]) -> None:

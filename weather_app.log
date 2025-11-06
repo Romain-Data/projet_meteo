@@ -1,0 +1,395 @@
+2025-11-06 23:14:22,119 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:14:22,164 - src.storage.parquet_handler - INFO - ParquetHandler initialized with directory: data/parquet
+2025-11-06 23:14:22,269 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-06 23:14:25,812 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:14:25,823 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Montaudran': KeyError - 'heure_de_paris'
+2025-11-06 23:23:36,401 - src.api.extractors - INFO - APIExtractor initialized with base_url: https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/
+2025-11-06 23:23:36,402 - src.processing.transformers - INFO - DataTransformer initialized with date_format: %d/%m/%Y %Hh
+2025-11-06 23:23:36,413 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:23:36,441 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Montaudran': KeyError - 'heure_de_paris'
+2025-11-06 23:23:39,463 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:23:39,468 - src.api.extractors - INFO - Fetching data for station 'Montaudran' (ID: 12-station-meteo-toulouse-montaudran) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/12-station-meteo-toulouse-montaudran/records
+2025-11-06 23:23:39,861 - src.api.extractors - INFO - Successfully fetched 96 records for station 'Montaudran'
+2025-11-06 23:23:39,866 - src.processing.transformers - INFO - Transforming DataFrame with 96 records
+2025-11-06 23:23:39,876 - src.processing.transformers - INFO - Successfully transformed 96 records
+2025-11-06 23:23:39,876 - src.processing.validators - INFO - Validating format for 96 records
+2025-11-06 23:23:39,876 - src.processing.validators - INFO - Format validation passed
+2025-11-06 23:23:39,877 - src.processing.validators - INFO - Validating values for 96 records
+2025-11-06 23:23:39,878 - src.processing.validators - INFO - Value validation passed
+2025-11-06 23:23:39,891 - src.storage.parquet_handler - INFO - Merged data for station 'Montaudran': 96 existing + 96 new = 107 total records
+2025-11-06 23:23:39,904 - src.storage.parquet_handler - INFO - Saved 107 reports for station 'Montaudran' to data/parquet/station_12-station-meteo-toulouse-montaudran.parquet
+2025-11-06 23:23:39,931 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:23:39,934 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Montaudran': KeyError - 'heure_de_paris'
+2025-11-06 23:25:39,194 - src.api.extractors - INFO - APIExtractor initialized with base_url: https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/
+2025-11-06 23:25:39,195 - src.processing.transformers - INFO - DataTransformer initialized with date_format: %d/%m/%Y %Hh
+2025-11-06 23:25:39,201 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:25:39,214 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Montaudran': KeyError - 'heure_de_paris'
+2025-11-06 23:25:42,519 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:25:42,527 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-06 23:25:53,781 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:25:53,789 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Montaudran': KeyError - 'heure_de_paris'
+2025-11-06 23:33:12,950 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:33:12,995 - src.storage.parquet_handler - INFO - ParquetHandler initialized with directory: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet
+2025-11-06 23:33:13,085 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-06 23:33:36,450 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:33:36,459 - src.api.extractors - INFO - Fetching data for station 'Soupetard' (ID: 11-station-meteo-toulouse-soupetard) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/11-station-meteo-toulouse-soupetard/records
+2025-11-06 23:33:36,756 - src.api.extractors - INFO - Successfully fetched 13 records for station 'Soupetard'
+2025-11-06 23:33:36,759 - src.processing.transformers - INFO - Transforming DataFrame with 13 records
+2025-11-06 23:33:36,767 - src.processing.transformers - INFO - Successfully transformed 13 records
+2025-11-06 23:33:36,768 - src.processing.validators - INFO - Validating format for 13 records
+2025-11-06 23:33:36,768 - src.processing.validators - INFO - Format validation passed
+2025-11-06 23:33:36,768 - src.processing.validators - INFO - Validating values for 13 records
+2025-11-06 23:33:36,769 - src.processing.validators - INFO - Value validation passed
+2025-11-06 23:33:36,781 - src.storage.parquet_handler - INFO - Merged data for station 'Soupetard': 14 existing + 13 new = 17 total records
+2025-11-06 23:33:36,796 - src.storage.parquet_handler - INFO - Saved 17 reports for station 'Soupetard' to /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-06 23:33:36,827 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:33:36,830 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-06 23:34:29,412 - src.api.extractors - INFO - APIExtractor initialized with base_url: https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/
+2025-11-06 23:34:29,412 - src.processing.transformers - INFO - DataTransformer initialized with date_format: %d/%m/%Y %Hh
+2025-11-06 23:34:29,419 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:34:29,465 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-06 23:34:46,317 - src.api.extractors - INFO - APIExtractor initialized with base_url: https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/
+2025-11-06 23:34:46,318 - src.processing.transformers - INFO - DataTransformer initialized with date_format: %d/%m/%Y %Hh
+2025-11-06 23:34:46,319 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:34:46,325 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-06 23:36:31,226 - src.api.extractors - INFO - APIExtractor initialized with base_url: https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/
+2025-11-06 23:36:31,227 - src.processing.transformers - INFO - DataTransformer initialized with date_format: %d/%m/%Y %Hh
+2025-11-06 23:36:31,235 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:36:31,258 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-06 23:36:37,349 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:36:37,359 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-06 23:38:00,919 - src.api.extractors - INFO - APIExtractor initialized with base_url: https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/
+2025-11-06 23:38:00,921 - src.processing.transformers - INFO - DataTransformer initialized with date_format: %d/%m/%Y %Hh
+2025-11-06 23:38:00,938 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:38:00,984 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-06 23:39:37,960 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:39:38,011 - src.storage.parquet_handler - INFO - ParquetHandler initialized with directory: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet
+2025-11-06 23:39:38,017 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-06 23:39:38,017 - src.storage.parquet_handler - INFO - 🔍 File exists: True
+2025-11-06 23:39:38,089 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-06 23:42:57,475 - src.api.extractors - INFO - APIExtractor initialized with base_url: https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/
+2025-11-06 23:42:57,476 - src.processing.transformers - INFO - DataTransformer initialized with date_format: %d/%m/%Y %Hh
+2025-11-06 23:42:57,485 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:42:57,492 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-06 23:42:57,492 - src.storage.parquet_handler - INFO - 🔍 File exists: True
+2025-11-06 23:42:57,507 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-06 23:42:58,820 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:42:58,822 - src.api.extractors - INFO - Fetching data for station 'Soupetard' (ID: 11-station-meteo-toulouse-soupetard) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/11-station-meteo-toulouse-soupetard/records
+2025-11-06 23:42:59,160 - src.api.extractors - INFO - Successfully fetched 13 records for station 'Soupetard'
+2025-11-06 23:42:59,164 - src.processing.transformers - INFO - Transforming DataFrame with 13 records
+2025-11-06 23:42:59,175 - src.processing.transformers - INFO - Successfully transformed 13 records
+2025-11-06 23:42:59,176 - src.processing.validators - INFO - Validating format for 13 records
+2025-11-06 23:42:59,176 - src.processing.validators - INFO - Format validation passed
+2025-11-06 23:42:59,176 - src.processing.validators - INFO - Validating values for 13 records
+2025-11-06 23:42:59,178 - src.processing.validators - INFO - Value validation passed
+2025-11-06 23:42:59,187 - src.storage.parquet_handler - INFO - Merged data for station 'Soupetard': 17 existing + 13 new = 17 total records
+2025-11-06 23:42:59,208 - src.storage.parquet_handler - INFO - Saved 17 reports for station 'Soupetard' to /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-06 23:42:59,238 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:42:59,239 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-06 23:42:59,239 - src.storage.parquet_handler - INFO - 🔍 File exists: True
+2025-11-06 23:42:59,241 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-06 23:45:24,280 - src.api.extractors - INFO - APIExtractor initialized with base_url: https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/
+2025-11-06 23:45:24,281 - src.processing.transformers - INFO - DataTransformer initialized with date_format: %d/%m/%Y %Hh
+2025-11-06 23:45:24,292 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:45:24,296 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-06 23:45:24,296 - src.storage.parquet_handler - INFO - 🔍 File exists: False
+2025-11-06 23:45:24,296 - src.storage.parquet_handler - WARNING - No parquet file found for station 'Soupetard' (ID: 11-station-meteo-toulouse-soupetard)
+2025-11-06 23:45:25,688 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:45:25,696 - src.api.extractors - INFO - Fetching data for station 'Soupetard' (ID: 11-station-meteo-toulouse-soupetard) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/11-station-meteo-toulouse-soupetard/records
+2025-11-06 23:45:26,019 - src.api.extractors - INFO - Successfully fetched 13 records for station 'Soupetard'
+2025-11-06 23:45:26,022 - src.processing.transformers - INFO - Transforming DataFrame with 13 records
+2025-11-06 23:45:26,027 - src.processing.transformers - INFO - Successfully transformed 13 records
+2025-11-06 23:45:26,027 - src.processing.validators - INFO - Validating format for 13 records
+2025-11-06 23:45:26,027 - src.processing.validators - INFO - Format validation passed
+2025-11-06 23:45:26,027 - src.processing.validators - INFO - Validating values for 13 records
+2025-11-06 23:45:26,028 - src.processing.validators - INFO - Value validation passed
+2025-11-06 23:45:26,030 - src.storage.parquet_handler - INFO - Creating new file for station 'Soupetard' with 13 records
+2025-11-06 23:45:26,033 - src.storage.parquet_handler - INFO - Saved 13 reports for station 'Soupetard' to /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-06 23:45:26,069 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:45:26,070 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-06 23:45:26,070 - src.storage.parquet_handler - INFO - 🔍 File exists: True
+2025-11-06 23:45:26,073 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-06 23:50:26,647 - src.api.extractors - INFO - APIExtractor initialized with base_url: https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/
+2025-11-06 23:50:26,648 - src.processing.transformers - INFO - DataTransformer initialized with date_format: %d/%m/%Y %Hh
+2025-11-06 23:50:26,662 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:50:26,671 - src.api.extractors - INFO - Fetching data for station 'Soupetard' (ID: 11-station-meteo-toulouse-soupetard) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/11-station-meteo-toulouse-soupetard/records
+2025-11-06 23:50:27,021 - src.api.extractors - INFO - Successfully fetched 13 records for station 'Soupetard'
+2025-11-06 23:50:27,024 - src.processing.transformers - INFO - Transforming DataFrame with 13 records
+2025-11-06 23:50:27,030 - src.processing.transformers - INFO - Successfully transformed 13 records
+2025-11-06 23:50:27,030 - src.processing.validators - INFO - Validating format for 13 records
+2025-11-06 23:50:27,030 - src.processing.validators - INFO - Format validation passed
+2025-11-06 23:50:27,030 - src.processing.validators - INFO - Validating values for 13 records
+2025-11-06 23:50:27,032 - src.processing.validators - INFO - Value validation passed
+2025-11-06 23:50:27,034 - src.storage.parquet_handler - INFO - Creating new file for station 'Soupetard' with 13 records
+2025-11-06 23:50:27,037 - src.storage.parquet_handler - INFO - Saved 13 reports for station 'Soupetard' to /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-06 23:50:27,094 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:50:27,095 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-06 23:50:27,095 - src.storage.parquet_handler - INFO - 🔍 File exists: True
+2025-11-06 23:50:27,098 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-06 23:57:39,656 - src.api.extractors - INFO - APIExtractor initialized with base_url: https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/
+2025-11-06 23:57:39,657 - src.processing.transformers - INFO - DataTransformer initialized with date_format: %d/%m/%Y %Hh
+2025-11-06 23:57:39,660 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:57:39,666 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-06 23:57:39,666 - src.storage.parquet_handler - INFO - 🔍 File exists: True
+2025-11-06 23:57:39,724 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-06 23:57:45,171 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:57:45,174 - src.api.extractors - INFO - Fetching data for station 'Soupetard' (ID: 11-station-meteo-toulouse-soupetard) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/11-station-meteo-toulouse-soupetard/records
+2025-11-06 23:57:45,435 - src.api.extractors - INFO - Successfully fetched 13 records for station 'Soupetard'
+2025-11-06 23:57:45,438 - src.processing.transformers - INFO - Transforming DataFrame with 13 records
+2025-11-06 23:57:45,440 - src.processing.transformers - INFO - Successfully transformed 13 records
+2025-11-06 23:57:45,441 - src.processing.validators - INFO - Validating format for 13 records
+2025-11-06 23:57:45,441 - src.processing.validators - INFO - Format validation passed
+2025-11-06 23:57:45,441 - src.processing.validators - INFO - Validating values for 13 records
+2025-11-06 23:57:45,442 - src.processing.validators - INFO - Value validation passed
+2025-11-06 23:57:45,443 - src.storage.parquet_handler - INFO - Creating new file for station 'Soupetard' with 13 records
+2025-11-06 23:57:45,445 - src.storage.parquet_handler - INFO - Saved 13 reports for station 'Soupetard' to /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-06 23:57:45,479 - __main__ - INFO - Lancement de l'appli
+2025-11-06 23:57:45,480 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-06 23:57:45,480 - src.storage.parquet_handler - INFO - 🔍 File exists: True
+2025-11-06 23:57:45,482 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-07 00:00:43,745 - src.api.extractors - INFO - APIExtractor initialized with base_url: https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/
+2025-11-07 00:00:43,745 - src.processing.transformers - INFO - DataTransformer initialized with date_format: %d/%m/%Y %Hh
+2025-11-07 00:00:43,749 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:00:43,751 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-07 00:00:43,751 - src.storage.parquet_handler - INFO - 🔍 File exists: True
+2025-11-07 00:00:43,754 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-07 00:00:45,162 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:00:45,171 - src.api.extractors - INFO - Fetching data for station 'Soupetard' (ID: 11-station-meteo-toulouse-soupetard) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/11-station-meteo-toulouse-soupetard/records
+2025-11-07 00:00:45,406 - src.api.extractors - INFO - Successfully fetched 13 records for station 'Soupetard'
+2025-11-07 00:00:45,409 - src.processing.transformers - INFO - Transforming DataFrame with 13 records
+2025-11-07 00:00:45,413 - src.processing.transformers - INFO - Successfully transformed 13 records
+2025-11-07 00:00:45,413 - src.processing.validators - INFO - Validating format for 13 records
+2025-11-07 00:00:45,413 - src.processing.validators - INFO - Format validation passed
+2025-11-07 00:00:45,413 - src.processing.validators - INFO - Validating values for 13 records
+2025-11-07 00:00:45,413 - src.processing.validators - INFO - Value validation passed
+2025-11-07 00:00:45,419 - src.storage.parquet_handler - INFO - Merged data for station 'Soupetard': 13 existing + 13 new = 13 total records
+2025-11-07 00:00:45,422 - src.storage.parquet_handler - INFO - Saved 13 reports for station 'Soupetard' to /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-07 00:00:45,460 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:00:45,461 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-07 00:00:45,461 - src.storage.parquet_handler - INFO - 🔍 File exists: True
+2025-11-07 00:00:45,463 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-07 00:01:27,721 - src.api.extractors - INFO - APIExtractor initialized with base_url: https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/
+2025-11-07 00:01:27,722 - src.processing.transformers - INFO - DataTransformer initialized with date_format: %d/%m/%Y %Hh
+2025-11-07 00:01:27,726 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:01:27,730 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-07 00:01:27,731 - src.storage.parquet_handler - INFO - 🔍 File exists: True
+2025-11-07 00:01:27,745 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-07 00:01:29,770 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:01:29,773 - src.api.extractors - INFO - Fetching data for station 'Soupetard' (ID: 11-station-meteo-toulouse-soupetard) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/11-station-meteo-toulouse-soupetard/records
+2025-11-07 00:01:30,288 - src.api.extractors - INFO - Successfully fetched 13 records for station 'Soupetard'
+2025-11-07 00:01:30,291 - src.processing.transformers - INFO - Transforming DataFrame with 13 records
+2025-11-07 00:01:30,295 - src.processing.transformers - INFO - Successfully transformed 13 records
+2025-11-07 00:01:30,296 - src.processing.validators - INFO - Validating format for 13 records
+2025-11-07 00:01:30,297 - src.processing.validators - INFO - Format validation passed
+2025-11-07 00:01:30,297 - src.processing.validators - INFO - Validating values for 13 records
+2025-11-07 00:01:30,298 - src.processing.validators - INFO - Value validation passed
+2025-11-07 00:01:30,305 - src.storage.parquet_handler - INFO - Merged data for station 'Soupetard': 13 existing + 13 new = 13 total records
+2025-11-07 00:01:30,309 - src.storage.parquet_handler - INFO - Saved 13 reports for station 'Soupetard' to /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-07 00:01:30,346 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:01:30,348 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-07 00:01:30,348 - src.storage.parquet_handler - INFO - 🔍 File exists: True
+2025-11-07 00:01:30,350 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-07 00:02:40,086 - src.api.extractors - INFO - APIExtractor initialized with base_url: https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/
+2025-11-07 00:02:40,086 - src.processing.transformers - INFO - DataTransformer initialized with date_format: %d/%m/%Y %Hh
+2025-11-07 00:02:40,089 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:02:40,092 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-07 00:02:40,092 - src.storage.parquet_handler - INFO - 🔍 File exists: True
+2025-11-07 00:02:40,100 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-07 00:02:42,055 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:02:42,059 - src.api.extractors - INFO - Fetching data for station 'Soupetard' (ID: 11-station-meteo-toulouse-soupetard) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/11-station-meteo-toulouse-soupetard/records
+2025-11-07 00:02:42,386 - src.api.extractors - INFO - Successfully fetched 13 records for station 'Soupetard'
+2025-11-07 00:02:42,390 - src.processing.transformers - INFO - Transforming DataFrame with 13 records
+2025-11-07 00:02:42,395 - src.processing.transformers - INFO - Successfully transformed 13 records
+2025-11-07 00:02:42,395 - src.processing.validators - INFO - Validating format for 13 records
+2025-11-07 00:02:42,395 - src.processing.validators - INFO - Format validation passed
+2025-11-07 00:02:42,395 - src.processing.validators - INFO - Validating values for 13 records
+2025-11-07 00:02:42,396 - src.processing.validators - INFO - Value validation passed
+2025-11-07 00:02:42,402 - src.storage.parquet_handler - INFO - Merged data for station 'Soupetard': 13 existing + 13 new = 13 total records
+2025-11-07 00:02:42,404 - src.storage.parquet_handler - INFO - Saved 13 reports for station 'Soupetard' to /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-07 00:02:42,440 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:02:42,441 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-07 00:02:42,441 - src.storage.parquet_handler - INFO - 🔍 File exists: True
+2025-11-07 00:02:42,443 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Soupetard': KeyError - 'heure_de_paris'
+2025-11-07 00:02:49,047 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:02:49,050 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_12-station-meteo-toulouse-montaudran.parquet
+2025-11-07 00:02:49,051 - src.storage.parquet_handler - INFO - 🔍 File exists: False
+2025-11-07 00:02:49,051 - src.storage.parquet_handler - WARNING - No parquet file found for station 'Montaudran' (ID: 12-station-meteo-toulouse-montaudran)
+2025-11-07 00:02:49,666 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:02:49,673 - src.api.extractors - INFO - Fetching data for station 'Montaudran' (ID: 12-station-meteo-toulouse-montaudran) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/12-station-meteo-toulouse-montaudran/records
+2025-11-07 00:02:50,004 - src.api.extractors - INFO - Successfully fetched 95 records for station 'Montaudran'
+2025-11-07 00:02:50,006 - src.processing.transformers - INFO - Transforming DataFrame with 95 records
+2025-11-07 00:02:50,010 - src.processing.transformers - INFO - Successfully transformed 95 records
+2025-11-07 00:02:50,010 - src.processing.validators - INFO - Validating format for 95 records
+2025-11-07 00:02:50,010 - src.processing.validators - INFO - Format validation passed
+2025-11-07 00:02:50,010 - src.processing.validators - INFO - Validating values for 95 records
+2025-11-07 00:02:50,011 - src.processing.validators - INFO - Value validation passed
+2025-11-07 00:02:50,015 - src.storage.parquet_handler - INFO - Creating new file for station 'Montaudran' with 95 records
+2025-11-07 00:02:50,017 - src.storage.parquet_handler - INFO - Saved 95 reports for station 'Montaudran' to /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_12-station-meteo-toulouse-montaudran.parquet
+2025-11-07 00:02:50,047 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:02:50,048 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_12-station-meteo-toulouse-montaudran.parquet
+2025-11-07 00:02:50,048 - src.storage.parquet_handler - INFO - 🔍 File exists: True
+2025-11-07 00:02:50,050 - src.storage.parquet_handler - ERROR - Failed to load reports for station 'Montaudran': KeyError - 'heure_de_paris'
+2025-11-07 00:04:31,942 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:04:31,987 - src.storage.parquet_handler - INFO - ParquetHandler initialized with directory: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet
+2025-11-07 00:04:31,991 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_11-station-meteo-toulouse-soupetard.parquet
+2025-11-07 00:04:31,991 - src.storage.parquet_handler - INFO - 🔍 File exists: True
+2025-11-07 00:04:32,046 - src.storage.parquet_handler - INFO - Loaded 13 reports for station 'Soupetard'
+2025-11-07 00:04:32,047 - src.viz.charts - INFO - Creating combined chart for 13 records
+2025-11-07 00:04:32,084 - src.viz.charts - INFO - Chart created successfully
+2025-11-07 00:04:34,642 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:04:34,653 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_12-station-meteo-toulouse-montaudran.parquet
+2025-11-07 00:04:34,653 - src.storage.parquet_handler - INFO - 🔍 File exists: True
+2025-11-07 00:04:34,663 - src.storage.parquet_handler - INFO - Loaded 95 reports for station 'Montaudran'
+2025-11-07 00:04:34,673 - src.viz.charts - INFO - Creating combined chart for 95 records
+2025-11-07 00:04:34,691 - src.viz.charts - INFO - Chart created successfully
+2025-11-07 00:04:36,705 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:04:36,707 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_13-station-meteo-toulouse-pech-david.parquet
+2025-11-07 00:04:36,708 - src.storage.parquet_handler - INFO - 🔍 File exists: False
+2025-11-07 00:04:36,708 - src.storage.parquet_handler - WARNING - No parquet file found for station 'Pech David' (ID: 13-station-meteo-toulouse-pech-david)
+2025-11-07 00:04:37,401 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:04:37,405 - src.api.extractors - INFO - Fetching data for station 'Pech David' (ID: 13-station-meteo-toulouse-pech-david) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/13-station-meteo-toulouse-pech-david/records
+2025-11-07 00:04:37,872 - src.api.extractors - INFO - Successfully fetched 78 records for station 'Pech David'
+2025-11-07 00:04:37,874 - src.processing.transformers - INFO - Transforming DataFrame with 78 records
+2025-11-07 00:04:37,882 - src.processing.transformers - INFO - Successfully transformed 78 records
+2025-11-07 00:04:37,883 - src.processing.validators - INFO - Validating format for 78 records
+2025-11-07 00:04:37,883 - src.processing.validators - ERROR - Missing required column: 'pression'
+2025-11-07 00:04:37,883 - src.storage.parquet_handler - WARNING - No reports to save for station 'Pech David' (ID: 13-station-meteo-toulouse-pech-david)
+2025-11-07 00:04:37,907 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:04:37,908 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_13-station-meteo-toulouse-pech-david.parquet
+2025-11-07 00:04:37,908 - src.storage.parquet_handler - INFO - 🔍 File exists: False
+2025-11-07 00:04:37,908 - src.storage.parquet_handler - WARNING - No parquet file found for station 'Pech David' (ID: 13-station-meteo-toulouse-pech-david)
+2025-11-07 00:04:40,451 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:04:40,460 - src.api.extractors - INFO - Fetching data for station 'Pech David' (ID: 13-station-meteo-toulouse-pech-david) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/13-station-meteo-toulouse-pech-david/records
+2025-11-07 00:04:40,823 - src.api.extractors - INFO - Successfully fetched 78 records for station 'Pech David'
+2025-11-07 00:04:40,826 - src.processing.transformers - INFO - Transforming DataFrame with 78 records
+2025-11-07 00:04:40,831 - src.processing.transformers - INFO - Successfully transformed 78 records
+2025-11-07 00:04:40,832 - src.processing.validators - INFO - Validating format for 78 records
+2025-11-07 00:04:40,832 - src.processing.validators - ERROR - Missing required column: 'pression'
+2025-11-07 00:04:40,832 - src.storage.parquet_handler - WARNING - No reports to save for station 'Pech David' (ID: 13-station-meteo-toulouse-pech-david)
+2025-11-07 00:04:40,871 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:04:40,872 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_13-station-meteo-toulouse-pech-david.parquet
+2025-11-07 00:04:40,873 - src.storage.parquet_handler - INFO - 🔍 File exists: False
+2025-11-07 00:04:40,873 - src.storage.parquet_handler - WARNING - No parquet file found for station 'Pech David' (ID: 13-station-meteo-toulouse-pech-david)
+2025-11-07 00:04:55,516 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:04:55,519 - src.api.extractors - INFO - Fetching data for station 'Pech David' (ID: 13-station-meteo-toulouse-pech-david) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/13-station-meteo-toulouse-pech-david/records
+2025-11-07 00:04:56,454 - src.api.extractors - INFO - Successfully fetched 78 records for station 'Pech David'
+2025-11-07 00:04:56,457 - src.processing.transformers - INFO - Transforming DataFrame with 78 records
+2025-11-07 00:04:56,461 - src.processing.transformers - INFO - Successfully transformed 78 records
+2025-11-07 00:04:56,462 - src.processing.validators - INFO - Validating format for 78 records
+2025-11-07 00:04:56,462 - src.processing.validators - ERROR - Missing required column: 'pression'
+2025-11-07 00:04:56,462 - src.storage.parquet_handler - WARNING - No reports to save for station 'Pech David' (ID: 13-station-meteo-toulouse-pech-david)
+2025-11-07 00:04:56,499 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:04:56,501 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_13-station-meteo-toulouse-pech-david.parquet
+2025-11-07 00:04:56,508 - src.storage.parquet_handler - INFO - 🔍 File exists: False
+2025-11-07 00:04:56,508 - src.storage.parquet_handler - WARNING - No parquet file found for station 'Pech David' (ID: 13-station-meteo-toulouse-pech-david)
+2025-11-07 00:07:02,752 - src.api.extractors - INFO - APIExtractor initialized with base_url: https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/
+2025-11-07 00:07:02,753 - src.processing.transformers - INFO - DataTransformer initialized with date_format: %d/%m/%Y %Hh
+2025-11-07 00:07:02,758 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:02,764 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_13-station-meteo-toulouse-pech-david.parquet
+2025-11-07 00:07:02,767 - src.storage.parquet_handler - INFO - 🔍 File exists: False
+2025-11-07 00:07:02,767 - src.storage.parquet_handler - WARNING - No parquet file found for station 'Pech David' (ID: 13-station-meteo-toulouse-pech-david)
+2025-11-07 00:07:04,736 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:04,745 - src.api.extractors - INFO - Fetching data for station 'Pech David' (ID: 13-station-meteo-toulouse-pech-david) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/13-station-meteo-toulouse-pech-david/records
+2025-11-07 00:07:05,141 - src.api.extractors - INFO - Successfully fetched 78 records for station 'Pech David'
+2025-11-07 00:07:05,144 - src.processing.transformers - INFO - Transforming DataFrame with 78 records
+2025-11-07 00:07:05,149 - src.processing.transformers - INFO - Successfully transformed 78 records
+2025-11-07 00:07:05,150 - src.processing.validators - INFO - Validating format for 78 records
+2025-11-07 00:07:05,150 - src.processing.validators - ERROR - Missing required column: 'pression'
+2025-11-07 00:07:05,150 - src.storage.parquet_handler - WARNING - No reports to save for station 'Pech David' (ID: 13-station-meteo-toulouse-pech-david)
+2025-11-07 00:07:05,188 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:05,189 - src.storage.parquet_handler - INFO - 🔍 Attempting to load: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_13-station-meteo-toulouse-pech-david.parquet
+2025-11-07 00:07:05,190 - src.storage.parquet_handler - INFO - 🔍 File exists: False
+2025-11-07 00:07:05,190 - src.storage.parquet_handler - WARNING - No parquet file found for station 'Pech David' (ID: 13-station-meteo-toulouse-pech-david)
+2025-11-07 00:07:18,880 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:18,927 - src.storage.parquet_handler - INFO - ParquetHandler initialized with directory: /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet
+2025-11-07 00:07:18,989 - src.storage.parquet_handler - INFO - Loaded 13 reports for station 'Soupetard'
+2025-11-07 00:07:18,990 - src.viz.charts - INFO - Creating combined chart for 13 records
+2025-11-07 00:07:19,026 - src.viz.charts - INFO - Chart created successfully
+2025-11-07 00:07:22,035 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:22,041 - src.storage.parquet_handler - WARNING - No parquet file found for station 'Pech David' (ID: 13-station-meteo-toulouse-pech-david)
+2025-11-07 00:07:22,900 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:22,904 - src.api.extractors - INFO - Fetching data for station 'Pech David' (ID: 13-station-meteo-toulouse-pech-david) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/13-station-meteo-toulouse-pech-david/records
+2025-11-07 00:07:23,292 - src.api.extractors - INFO - Successfully fetched 78 records for station 'Pech David'
+2025-11-07 00:07:23,296 - src.processing.transformers - INFO - Transforming DataFrame with 78 records
+2025-11-07 00:07:23,302 - src.processing.transformers - INFO - Successfully transformed 78 records
+2025-11-07 00:07:23,304 - src.processing.validators - INFO - Validating format for 78 records
+2025-11-07 00:07:23,304 - src.processing.validators - INFO - Format validation passed
+2025-11-07 00:07:23,304 - src.processing.validators - INFO - Validating values for 78 records
+2025-11-07 00:07:23,305 - src.processing.validators - INFO - Value validation passed
+2025-11-07 00:07:23,309 - src.storage.parquet_handler - INFO - Creating new file for station 'Pech David' with 78 records
+2025-11-07 00:07:23,316 - src.storage.parquet_handler - INFO - Saved 78 reports for station 'Pech David' to /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_13-station-meteo-toulouse-pech-david.parquet
+2025-11-07 00:07:23,349 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:23,354 - src.storage.parquet_handler - INFO - Loaded 78 reports for station 'Pech David'
+2025-11-07 00:07:23,356 - src.viz.charts - INFO - Creating combined chart for 78 records
+2025-11-07 00:07:23,369 - src.viz.charts - INFO - Chart created successfully
+2025-11-07 00:07:30,552 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:30,556 - src.storage.parquet_handler - WARNING - No parquet file found for station 'Station Epuration' (ID: 31-station-meteo-mons-station-epuration)
+2025-11-07 00:07:31,201 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:31,204 - src.api.extractors - INFO - Fetching data for station 'Station Epuration' (ID: 31-station-meteo-mons-station-epuration) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/31-station-meteo-mons-station-epuration/records
+2025-11-07 00:07:31,457 - src.api.extractors - INFO - Successfully fetched 4 records for station 'Station Epuration'
+2025-11-07 00:07:31,461 - src.processing.transformers - INFO - Transforming DataFrame with 4 records
+2025-11-07 00:07:31,463 - src.processing.transformers - INFO - Successfully transformed 4 records
+2025-11-07 00:07:31,464 - src.processing.validators - INFO - Validating format for 4 records
+2025-11-07 00:07:31,464 - src.processing.validators - INFO - Format validation passed
+2025-11-07 00:07:31,465 - src.processing.validators - INFO - Validating values for 4 records
+2025-11-07 00:07:31,465 - src.processing.validators - INFO - Value validation passed
+2025-11-07 00:07:31,466 - src.storage.parquet_handler - INFO - Creating new file for station 'Station Epuration' with 4 records
+2025-11-07 00:07:31,468 - src.storage.parquet_handler - INFO - Saved 4 reports for station 'Station Epuration' to /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_31-station-meteo-mons-station-epuration.parquet
+2025-11-07 00:07:31,508 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:31,512 - src.storage.parquet_handler - INFO - Loaded 4 reports for station 'Station Epuration'
+2025-11-07 00:07:31,514 - src.viz.charts - INFO - Creating combined chart for 4 records
+2025-11-07 00:07:31,525 - src.viz.charts - INFO - Chart created successfully
+2025-11-07 00:07:32,907 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:32,909 - src.storage.parquet_handler - WARNING - No parquet file found for station 'Jory Chapelle Beldou' (ID: 33-station-meteo-saint-jory-chapelle-beldou)
+2025-11-07 00:07:33,670 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:33,674 - src.api.extractors - INFO - Fetching data for station 'Jory Chapelle Beldou' (ID: 33-station-meteo-saint-jory-chapelle-beldou) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/33-station-meteo-saint-jory-chapelle-beldou/records
+2025-11-07 00:07:33,990 - src.api.extractors - WARNING - No data returned for station 'Jory Chapelle Beldou' (empty results)
+2025-11-07 00:07:33,997 - src.storage.parquet_handler - WARNING - No reports to save for station 'Jory Chapelle Beldou' (ID: 33-station-meteo-saint-jory-chapelle-beldou)
+2025-11-07 00:07:34,040 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:34,042 - src.storage.parquet_handler - WARNING - No parquet file found for station 'Jory Chapelle Beldou' (ID: 33-station-meteo-saint-jory-chapelle-beldou)
+2025-11-07 00:07:35,850 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:35,857 - src.api.extractors - INFO - Fetching data for station 'Jory Chapelle Beldou' (ID: 33-station-meteo-saint-jory-chapelle-beldou) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/33-station-meteo-saint-jory-chapelle-beldou/records
+2025-11-07 00:07:36,094 - src.api.extractors - WARNING - No data returned for station 'Jory Chapelle Beldou' (empty results)
+2025-11-07 00:07:36,097 - src.storage.parquet_handler - WARNING - No reports to save for station 'Jory Chapelle Beldou' (ID: 33-station-meteo-saint-jory-chapelle-beldou)
+2025-11-07 00:07:36,139 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:36,141 - src.storage.parquet_handler - WARNING - No parquet file found for station 'Jory Chapelle Beldou' (ID: 33-station-meteo-saint-jory-chapelle-beldou)
+2025-11-07 00:07:54,345 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:54,351 - src.api.extractors - INFO - Fetching data for station 'Jory Chapelle Beldou' (ID: 33-station-meteo-saint-jory-chapelle-beldou) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/33-station-meteo-saint-jory-chapelle-beldou/records
+2025-11-07 00:07:54,645 - src.api.extractors - WARNING - No data returned for station 'Jory Chapelle Beldou' (empty results)
+2025-11-07 00:07:54,650 - src.storage.parquet_handler - WARNING - No reports to save for station 'Jory Chapelle Beldou' (ID: 33-station-meteo-saint-jory-chapelle-beldou)
+2025-11-07 00:07:54,680 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:54,681 - src.storage.parquet_handler - WARNING - No parquet file found for station 'Jory Chapelle Beldou' (ID: 33-station-meteo-saint-jory-chapelle-beldou)
+2025-11-07 00:07:56,775 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:56,786 - src.storage.parquet_handler - WARNING - No parquet file found for station 'Parc Compans Cafarelli' (ID: 42-station-meteo-toulouse-parc-compans-cafarelli)
+2025-11-07 00:07:57,534 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:57,542 - src.api.extractors - INFO - Fetching data for station 'Parc Compans Cafarelli' (ID: 42-station-meteo-toulouse-parc-compans-cafarelli) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/42-station-meteo-toulouse-parc-compans-cafarelli/records
+2025-11-07 00:07:57,828 - src.api.extractors - INFO - Successfully fetched 96 records for station 'Parc Compans Cafarelli'
+2025-11-07 00:07:57,833 - src.processing.transformers - INFO - Transforming DataFrame with 96 records
+2025-11-07 00:07:57,837 - src.processing.transformers - INFO - Successfully transformed 96 records
+2025-11-07 00:07:57,838 - src.processing.validators - INFO - Validating format for 96 records
+2025-11-07 00:07:57,838 - src.processing.validators - INFO - Format validation passed
+2025-11-07 00:07:57,838 - src.processing.validators - INFO - Validating values for 96 records
+2025-11-07 00:07:57,839 - src.processing.validators - INFO - Value validation passed
+2025-11-07 00:07:57,845 - src.storage.parquet_handler - INFO - Creating new file for station 'Parc Compans Cafarelli' with 96 records
+2025-11-07 00:07:57,847 - src.storage.parquet_handler - INFO - Saved 96 reports for station 'Parc Compans Cafarelli' to /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_42-station-meteo-toulouse-parc-compans-cafarelli.parquet
+2025-11-07 00:07:57,881 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:57,886 - src.storage.parquet_handler - INFO - Loaded 96 reports for station 'Parc Compans Cafarelli'
+2025-11-07 00:07:57,888 - src.viz.charts - INFO - Creating combined chart for 96 records
+2025-11-07 00:07:57,909 - src.viz.charts - INFO - Chart created successfully
+2025-11-07 00:07:59,871 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:07:59,879 - src.storage.parquet_handler - WARNING - No parquet file found for station 'Parc Maourine' (ID: 62-station-meteo-toulouse-parc-maourine)
+2025-11-07 00:08:00,766 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:08:00,767 - src.api.extractors - INFO - Fetching data for station 'Parc Maourine' (ID: 62-station-meteo-toulouse-parc-maourine) from https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/62-station-meteo-toulouse-parc-maourine/records
+2025-11-07 00:08:01,063 - src.api.extractors - INFO - Successfully fetched 88 records for station 'Parc Maourine'
+2025-11-07 00:08:01,067 - src.processing.transformers - INFO - Transforming DataFrame with 88 records
+2025-11-07 00:08:01,072 - src.processing.transformers - INFO - Successfully transformed 88 records
+2025-11-07 00:08:01,073 - src.processing.validators - INFO - Validating format for 88 records
+2025-11-07 00:08:01,073 - src.processing.validators - INFO - Format validation passed
+2025-11-07 00:08:01,073 - src.processing.validators - INFO - Validating values for 88 records
+2025-11-07 00:08:01,074 - src.processing.validators - INFO - Value validation passed
+2025-11-07 00:08:01,080 - src.storage.parquet_handler - INFO - Creating new file for station 'Parc Maourine' with 88 records
+2025-11-07 00:08:01,082 - src.storage.parquet_handler - INFO - Saved 88 reports for station 'Parc Maourine' to /Users/romai/Desktop/Exo_WCS/projet_meteo/data/parquet/station_62-station-meteo-toulouse-parc-maourine.parquet
+2025-11-07 00:08:01,116 - __main__ - INFO - Lancement de l'appli
+2025-11-07 00:08:01,121 - src.storage.parquet_handler - INFO - Loaded 88 reports for station 'Parc Maourine'
+2025-11-07 00:08:01,123 - src.viz.charts - INFO - Creating combined chart for 88 records
+2025-11-07 00:08:01,141 - src.viz.charts - INFO - Chart created successfully

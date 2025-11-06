@@ -6,16 +6,16 @@ logger = logging.getLogger(__name__)
 
 class DataValidator:
     REQUIRED_COLUMNS = {
-        'pression': np.int64,
-        'humidite': np.int64,
-        'temperature_en_degre_c': np.float64,
-        'heure_de_paris': 'datetime64'
+        'pressure': np.int64,
+        'humidity': np.int64,
+        'temperature': np.float64,
+        'date': 'datetime64'
     }
     
     VALUE_RANGES = {
-        'temperature_en_degre_c': (-20, 50),
-        'humidite': (0, 100),
-        'pression': (95000, 105000)
+        'temperature': (-20, 50),
+        'humidity': (0, 100),
+        'pressure': (95000, 105000)
     }
     
     def is_format_correct(self, data: pd.DataFrame) -> bool:

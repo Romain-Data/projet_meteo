@@ -13,7 +13,10 @@ Pitch client : société météo
 
 # A faire
 
-- Gestions des erreurs
-- Tests unitaires
-- Affichage de la station sur une carte
-- *possibilité de sélectionner une station depuis une carte ?*
+[] Logging plutôt que print
+[] Gestions des erreurs
+    > reste fichiers de services et app
+[] Tests unitaires
+[] Affichage de la station sur une carte
+[] Compléter Read me
+[] *possibilité de sélectionner une station depuis une carte ?*

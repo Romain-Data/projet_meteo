@@ -1,8 +1,8 @@
-from api.extractors import APIExtractor
-from entities.station import Station
-from processing.transformers import DataTransformer
-from processing.validators import DataValidator
-from services.loader import DataLoader
+from src.api.extractors import APIExtractor
+from src.entities.station import Station
+from src.processing.transformers import DataTransformer
+from src.processing.validators import DataValidator
+from src.services.loader import DataLoader
 
 
 class DataFetcher:
@@ -28,6 +28,7 @@ class DataFetcher:
         self.validator = validator
         self.loader = loader
     
+
     def fetch_and_load(self, station: Station) -> bool:
         """
         Fetch weather data for a station and load it into the entity.
@@ -47,6 +48,8 @@ class DataFetcher:
         
         # 2. Transform
         formatted_data = self.transformer.format_data(raw_data)
+        formatted_data = self.transformer.normalize_columns(formatted_data)
+        print(formatted_data.columns)
         
         # 3. Validate
         if not self.validator.is_format_correct(formatted_data):

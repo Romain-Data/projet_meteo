@@ -54,3 +54,32 @@ class DataTransformer:
         except Exception as e:
             logger.error(f"Transformation failed: {type(e).__name__} - {str(e)}")
             return pd.DataFrame()
+
+
+    def normalize_columns(self, data: pd.DataFrame)-> pd.DataFrame:
+            """
+            Normalize column names to internal format.
+            
+            Handles both API format (FR) and Parquet format (EN).
+            """
+            df = data.copy()
+            
+            # Mapping: API/Parquet -> Internal
+            column_mapping = {
+                'heure_de_paris': 'date',
+                'temperature_en_degre_c': 'temperature',
+                'humidite': 'humidity',
+                'pression': 'pressure'
+            }
+            
+            # Renomme seulement les colonnes qui existent
+            df = df.rename(columns={
+                k: v for k, v in column_mapping.items() 
+                if k in df.columns
+            })
+            
+            # Génère display_date si absent
+            if 'display_date' not in df.columns:
+                df['display_date'] = df['date'].dt.strftime('%Y-%m-%d %H:%M:%S')
+            
+            return df

@@ -3,7 +3,7 @@ import logging
 import pandas as pd
 import requests
 from typing import Optional, Dict, Any
-from entities.station import Station
+from src.entities.station import Station
 
 logger = logging.getLogger(__name__)
 
