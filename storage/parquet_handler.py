@@ -1,7 +1,10 @@
+import logging
 from pathlib import Path
 import pandas as pd
 from entities.station import Station
 from services.loader import DataLoader
+
+logger = logging.getLogger(__name__)
 
 
 class ParquetHandler:
@@ -16,7 +19,9 @@ class ParquetHandler:
         """
         self.data_dir = data_dir
         self.data_dir.mkdir(parents=True, exist_ok=True)
+        logger.info(f"ParquetHandler initialized with directory: {self.data_dir}")
     
+
     def save_station_reports(self, station: Station) -> None:
         """
         Saves weather reports from a station in Parquet.
@@ -24,40 +29,45 @@ class ParquetHandler:
         Args:
             station: Station with its weather reports
         """
-        filepath = self.data_dir / f"station_{station.id}.parquet"
-    
-        # Créer DataFrame des nouveaux reports
-        new_df = station.get_all_reports()
+        if not station.reports:
+            logger.warning(f"No reports to save for station '{station.name}' (ID: {station.id})")
+            return
         
-        # Si le fichier existe, charger et fusionner
+        filepath = self._get_filepath(station)
+        new_df = station.get_all_reports()
+
+        # Merge with existing data if file exists
         if filepath.exists():
             try:
                 existing_df = pd.read_parquet(filepath, engine='pyarrow')
                 existing_df['date'] = pd.to_datetime(existing_df['date'])
-                
-                # Concatenate old and new data
+
                 df = pd.concat([existing_df, new_df], ignore_index=True)
-                
-                # Remove duplicates keeping the most recent (last)
+
                 df = df.drop_duplicates(subset=['date'], keep='last')
-                
-                # Sort by date
+
                 df = df.sort_values('date').reset_index(drop=True)
-                
-                print(f"Merged data: {len(existing_df)} existing + {len(new_df)} new = {len(df)} total records")
+
+                logger.info(f"Merged data for station '{station.name}': {len(existing_df)} existing + {len(new_df)} new = {len(df)} total records")
+            
             except Exception as e:
-                print(f"Error reading existing file, creating new: {e}")
+                logger.error(f"Failed to read existing file for station '{station.name}': {type(e).__name__} - {str(e)}. Creating new file.")
                 df = new_df
         else:
             df = new_df
-            print(f"Creating new file with {len(df)} records")
+            logger.info(f"Creating new file for station '{station.name}' with {len(df)} records")
         
         # Save to Parquet
-        df.to_parquet(filepath, engine='pyarrow', compression='snappy', index=False)
-        print(f"Saved to {filepath}")
+        try:
+            df.to_parquet(filepath, engine='pyarrow', compression='snappy', index=False)
+            logger.info(f"Saved {len(df)} reports for station '{station.name}' to {filepath}")
+        
+        except Exception as e:
+            logger.error(f"Failed to save reports for station '{station.name}': {type(e).__name__} - {str(e)}")
+            raise
     
 
-    def load_station_reports(self, station: Station, loader: DataLoader = DataLoader()) -> None:
+    def load_station_reports(self, station: Station, loader: DataLoader | None = None) -> None:
         """
         Loads weather reports from a station from Parquet.
         
@@ -65,21 +75,24 @@ class ParquetHandler:
             station: Station to be filled with reports (modifies station.reports)
             loader: DataLoader instance to handle report conversion (default: new DataLoader)
         """
-        filepath = self.data_dir / f"station_{station.id}.parquet"
+        if loader is None:
+            loader = DataLoader()
+
+        filepath = self._get_filepath(station)
         
         if not filepath.exists():
-            print(f"⚠️  No parquet file found for station '{station.name}' (ID: {station.id})")
+            logger.warning(f"No parquet file found for station '{station.name}' (ID: {station.id})")
             station.reports = []
-            return
+            return 
         
-        # Read Parquet
-        df = pd.read_parquet(filepath, engine='pyarrow')
+        try:
+            df = pd.read_parquet(filepath, engine='pyarrow')
+            loader.load_reports(station, df)
+            logger.info(f"Loaded {len(station.reports)} reports for station '{station.name}'")
         
-        # Convert DataFrame to WeatherReport
-        loader = DataLoader()
-        loader.load_reports(station, df)
-        
-        print(f"✅ Loaded {len(df)} reports for station '{station.name}'")
+        except Exception as e:
+            logger.error(f"Failed to load reports for station '{station.name}': {type(e).__name__} - {str(e)}")
+            station.reports = []
     
 
     def station_file_exists(self, station: Station) -> bool:
@@ -90,7 +103,22 @@ class ParquetHandler:
             station: Station to check
             
         Returns:
-            bool: True if the file exists
+            bool: True if the file exists, False otherwise
         """
-        filepath = self.data_dir / f"station_{station.id}.parquet"
-        return filepath.exists()
+        filepath = self._get_filepath(station)
+        exists = filepath.exists()
+        logger.debug(f"File check for station {station.name}: {exists}")
+        return exists
+    
+
+    def _get_filepath(self, station: Station) -> Path:
+        """
+        Get the parquet filepath for a station.
+        
+        Args:
+            station: Station to get filepath for
+            
+        Returns:
+            Path to the parquet file
+        """
+        return self.data_dir / f"station_{station.id}.parquet"

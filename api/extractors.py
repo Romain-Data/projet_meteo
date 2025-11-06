@@ -14,6 +14,7 @@ class IDataExtractor(ABC):
     def extract():
         pass
 
+
 class APIExtractor(IDataExtractor):
 
     def __init__(
