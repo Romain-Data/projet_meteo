@@ -1,6 +1,9 @@
 matplotlib
 numpy
 pandas
+pathlib
 plotly.graph_objects
+pyarrow
 requests
 seaborn
+streamilt

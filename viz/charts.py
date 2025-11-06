@@ -1,0 +1,161 @@
+import pandas as pd
+import plotly.graph_objects as go
+
+class DataVizualiser:
+    
+    def plot_temperature(self, reports: pd.DataFrame) -> go.Figure:
+        """
+        Create an interactive line plot of temperature over time.
+        
+        Args:
+            reports: DataFrame with 'date' (datetime) and 'temperature' (float) columns
+            
+        Returns:
+            go.Figure: Plotly figure object with temperature timeline
+        """
+        # Créer la figure
+        fig = go.Figure()
+
+        # Ajouter la ligne de température
+        fig.add_trace(go.Scatter(
+            x=reports['date'],
+            y=reports['temperature'],
+            mode='lines+markers',
+            name='Temperature',
+            line=dict(color='#FB8500', width=2),
+            marker=dict(size=6, color='#FB8500')
+        ))
+
+        # Détecter les changements de jour et créer les annotations
+        annotations = []
+        for i in range(1, len(reports)):
+            if reports['date'].dt.date.iloc[i] != reports['date'].dt.date.iloc[i-1]:
+                date_change = reports['date'].iloc[i]
+                annotations.append(
+                    dict(
+                        x=date_change,
+                        y=0,  # Position relative (sera ajustée avec yref)
+                        yref="paper", 
+                        yshift=-50,  # Décalage en pixels vers le bas
+                        text=date_change.strftime('%d %B'),
+                        showarrow=False,
+                        font=dict(size=12, color='black'),
+                        bgcolor='rgba(255, 255, 255, 0.7)',
+                        borderpad=4,
+                        xanchor='left'
+                    )
+                )
+
+        # Configuration de la mise en page
+        fig.update_layout(
+            title=dict(
+                text="Temperature Over Time",
+                x=0.5,
+                xanchor='center',
+                font=dict(size=16)
+            ),
+            xaxis=dict(
+                title=dict(
+                    text="Hour",
+                    standoff=25 
+                ),
+                tickformat='%Hh',  # Format des heures
+                dtick=6*60*60*1000,  # Intervalle de 6 heures
+                tickmode='linear',
+                gridcolor='rgba(128, 128, 128, 0.3)',
+                showgrid=True,
+                tickangle=45
+            ),
+            yaxis=dict(
+                title="Temperature (°C)",
+                gridcolor='rgba(128, 128, 128, 0.3)',
+                showgrid=True
+            ),
+            annotations=annotations,
+            hovermode='x unified',
+            plot_bgcolor='white',
+            width=1200,
+            height=600,
+            margin=dict(b=100, t=80, l=60, r=40)
+        )
+
+        return fig
+    
+
+    def plot_humidity(self, reports: pd.DataFrame) -> go.Figure:
+        """
+        Create an interactive line plot of humidity over time.
+
+        Args:
+            reports: DataFrame with 'date' (datetime) and 'humidity' (int) columns
+
+        Returns:
+            go.Figure: Plotly figure object with humidity timeline
+        """
+        # Créer la figure
+        fig = go.Figure()
+
+        # Ajouter la ligne d'humidité
+        fig.add_trace(go.Scatter(
+            x=reports['date'],
+            y=reports['humidity'],
+            mode='lines+markers',
+            name='Humidity',
+            line=dict(color='#1f77b4', width=2),
+            marker=dict(size=6, color='#1f77b4')
+        ))
+
+        # Détecter les changements de jour et créer les annotations
+        annotations = []
+        for i in range(1, len(reports)):
+            if reports['date'].dt.date.iloc[i] != reports['date'].dt.date.iloc[i-1]:
+                date_change = reports['date'].iloc[i]
+                annotations.append(
+                    dict(
+                        x=date_change,
+                        y=0,
+                        yref="paper", 
+                        yshift=-50,
+                        text=date_change.strftime('%d %B'),
+                        showarrow=False,
+                        font=dict(size=12, color='black'),
+                        bgcolor='rgba(255, 255, 255, 0.7)',
+                        borderpad=4,
+                        xanchor='left'
+                    )
+                )
+
+        # Configuration de la mise en page
+        fig.update_layout(
+            title=dict(
+                text="Humidity Over Time",
+                x=0.5,
+                xanchor='center',
+                font=dict(size=16)
+            ),
+            xaxis=dict(
+                title=dict(
+                    text="Hour",
+                    standoff=25
+                ),
+                tickformat='%Hh',
+                dtick=6*60*60*1000,
+                tickmode='linear',
+                gridcolor='rgba(128, 128, 128, 0.3)',
+                showgrid=True,
+                tickangle=45
+            ),
+            yaxis=dict(
+                title="Humidity (%)",
+                gridcolor='rgba(128, 128, 128, 0.3)',
+                showgrid=True
+            ),
+            annotations=annotations,
+            hovermode='x unified',
+            plot_bgcolor='white',
+            width=1200,
+            height=600,
+            margin=dict(b=100, t=80, l=60, r=40)
+        )
+
+        return fig
