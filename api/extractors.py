@@ -1,13 +1,38 @@
+from abc import ABC, abstractmethod
+import logging
 import pandas as pd
 import requests
+from typing import Optional, Dict, Any
 from entities.station import Station
 
+logger = logging.getLogger(__name__)
 
-class IDataExtractor:
-    def extract(self):
+
+class IDataExtractor(ABC):
+
+    @abstractmethod
+    def extract():
         pass
 
 class APIExtractor(IDataExtractor):
+
+    def __init__(
+            self, 
+            base_url: str = "https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/", 
+            timeout: int = 10
+        ):
+        """
+        Initialize the API extractor.
+        
+        Args:
+            base_url: Base URL of the API
+            timeout: Request timeout in seconds (default: 10)
+        """
+        super().__init__()
+        self.base_url = base_url
+        self.timeout = timeout
+        logger.info(f"APIExtractor initialized with base_url: {base_url}")
+        
 
     def extract(
                 self,
@@ -40,7 +65,7 @@ class APIExtractor(IDataExtractor):
                 - Humidity: 50% to 99%
             - Limit: 100 most recent records matching criteria
             """
-
+        station_name = station.name
         station_id = station.id
         url_final = f"{url_base + station_id}/records"
         param = {
@@ -55,5 +80,35 @@ class APIExtractor(IDataExtractor):
             'limit':'100'
         }
         
-        data = requests.get(url_final, params=param)
-        return pd.DataFrame(data.json()['results'])
+        try:
+            logger.info(f"Fetching data for station '{station_name}' (ID: {station_id}) from {url_final}")
+            logger.debug(f"Query parameters: {param}")
+            
+            response = requests.get(url_final, params=param, timeout=self.timeout)
+            
+            # Check HTTP status
+            response.raise_for_status()
+            
+            # Parse JSON response
+            json_data = response.json()
+            
+            # Extract results
+            if 'results' not in json_data:
+                logger.warning(f"No 'results' key in API response for station '{station_name}'")
+                return pd.DataFrame()
+            
+            results = json_data['results']
+            
+            if not results:
+                logger.warning(f"No data returned for station '{station_name}' (empty results)")
+                return pd.DataFrame()
+            
+            df = pd.DataFrame(results)
+            logger.info(f"Successfully fetched {len(df)} records for station '{station_name}'")
+            logger.debug(f"DataFrame columns: {df.columns.tolist()}")
+            
+            return df
+            
+        except requests.exceptions.RequestException as errex:
+            logger.error(f"Exception request: {errex}")
+            return pd.DataFrame()
