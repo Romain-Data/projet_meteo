@@ -1,10 +1,8 @@
-
 from api.extractors import APIExtractor
+from entities.station import Station
 from processing.transformers import DataTransformer
 from processing.validators import DataValidator
-from services.loaders import DataLoader
-from domain.entities import Station
-import pandas as pd
+from services.loader import DataLoader
 
 
 class DataFetcher:

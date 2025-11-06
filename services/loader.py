@@ -1,6 +1,6 @@
 import pandas as pd
-
-from domain.entities import Station, WeatherReport
+from entities.station import Station
+from entities.weather_report import WeatherReport
 
 
 class DataLoader:
@@ -34,6 +34,7 @@ class DataLoader:
         
         station.reports = reports
     
+
     def _create_report(self, row: pd.Series) -> WeatherReport:
         """
         Create a single WeatherReport from a DataFrame row.

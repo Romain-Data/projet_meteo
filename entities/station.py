@@ -1,15 +1,5 @@
-from datetime import datetime
 import pandas as pd
-
-
-class WeatherReport:
-    def __init__(self, date: datetime, temperature: float, humidity: int, pressure: int, display_date: str) -> None:
-        self.date: datetime = date
-        self.temperature : float = temperature
-        self.humidity: int = humidity
-        self.pressure: int = pressure
-        self.display_date: str = display_date
-
+from entities.weather_report import WeatherReport
 
 class Station:
     def __init__(self, id: str, name: str, longitude: str, latitude: str, reports: list[WeatherReport] = []) -> None:
@@ -18,6 +8,7 @@ class Station:
         self.longitude = longitude
         self.latitude = latitude
         self.reports: list[WeatherReport] = reports
+
 
     def get_all_reports(self)-> pd.DataFrame:
         """
@@ -51,13 +42,3 @@ class Station:
             None: If no reports are available.
         """
         return max(self.reports, key=lambda report: report.date, default=None)
-
-
-
-class City:
-    def __init__(self, name: str, stations: list[Station]) -> None:
-        self.name: str = name
-        self.stations: list[Station] = stations
-
-    
-

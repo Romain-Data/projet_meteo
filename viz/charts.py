@@ -36,7 +36,7 @@ class DataVizualiser:
                         x=date_change,
                         y=0,  # Position relative (sera ajustée avec yref)
                         yref="paper", 
-                        yshift=-50,  # Décalage en pixels vers le bas
+                        yshift=-60,  # Décalage en pixels vers le bas
                         text=date_change.strftime('%d %B'),
                         showarrow=False,
                         font=dict(size=12, color='black'),
