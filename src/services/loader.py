@@ -1,15 +1,22 @@
+import logging
 import pandas as pd
 from src.entities.station import Station
 from src.entities.weather_report import WeatherReport
+
+logger = logging.getLogger(__name__)
+
+
+class DataLoaderError(Exception):
+    """Exception raised for any DataLoader error."""
+    pass
 
 
 class DataLoader:
     """
     Loads validated weather data into Station entities.
-    
-    Single Responsibility: Convert DataFrame rows to WeatherReport objects
-    and attach them to a Station.
     """
+
+    REQUIRED_COLUMNS = {'date', 'temperature', 'humidity', 'pressure'}
     
     def load_reports(self, station: Station, data: pd.DataFrame) -> None:
         """
@@ -27,12 +34,45 @@ class DataLoader:
         Side Effects:
             Replaces station.reports with new list of WeatherReport objects
         """
-        reports = [
-            self._create_report(row)
-            for _, row in data.iterrows()
-        ]
+        try:
+            if data.empty:
+                raise DataLoaderError(f"Cannot load reports from empty DataFrame for station '{station.name}'")
+            
+            self._validate_columns(data, station.name)
+            logger.debug(f"Validated {len(data)} rows for station '{station.name}'")
+            
+            reports = [
+                self._create_report(row)
+                for _, row in data.iterrows()
+            ]
+            
+            station.reports = reports
+            logger.info(f"✅ Loaded {len(reports)} reports for station '{station.name}'")
+            
+        except DataLoaderError:
+            raise
+        except Exception as e:
+            logger.error(f"Failed to load reports for station '{station.name}': {e}", exc_info=True)
+            raise DataLoaderError(f"Failed to load reports for station '{station.name}': {e}") from e
+
+
+    def _validate_columns(self, data: pd.DataFrame, station_name: str) -> None:
+        """
+        Validate that all required columns exist.
         
-        station.reports = reports
+        Args:
+            data: DataFrame (expected to be already normalized)
+            station_name: Name of station (for error messages)
+            
+        Raises:
+            DataLoaderError: If required columns are missing
+        """
+        missing = self.REQUIRED_COLUMNS - set(data.columns)
+        
+        if missing:
+            raise DataLoaderError(
+                f"Missing required columns for station '{station_name}': {missing}. "
+                f"Data must be transformed by DataTransformer before loading.")
     
 
     def _create_report(self, row: pd.Series) -> WeatherReport:

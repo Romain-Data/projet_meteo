@@ -1,2 +1,4 @@
 .DS*
 test.ipynb
+env/
+*.log
