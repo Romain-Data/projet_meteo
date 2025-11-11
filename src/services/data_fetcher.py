@@ -1,9 +1,12 @@
-from src.api.extractors import APIExtractor
+import logging
+from src.api.extractor import APIExtractor
 from src.entities.station import Station
-from src.processing.transformers import DataTransformer
-from src.processing.validators import DataValidator
+from src.processing.transformer import DataTransformer
+from src.processing.validator import DataValidator
 from src.services.loader import DataLoader
 
+
+logger = logging.getLogger(__name__)
 
 class DataFetcher:
     """
@@ -18,15 +21,15 @@ class DataFetcher:
     
     def __init__(
         self,
-        extractor: APIExtractor = APIExtractor(),
-        transformer: DataTransformer = DataTransformer(),
-        validator: DataValidator = DataValidator(),
-        loader: DataLoader = DataLoader()
+        extractor: APIExtractor | None = None,
+        transformer: DataTransformer | None = None,
+        validator: DataValidator | None = None,
+        loader: DataLoader | None = None
     ):
-        self.extractor = extractor
-        self.transformer = transformer
-        self.validator = validator
-        self.loader = loader
+        self.extractor = extractor or APIExtractor()
+        self.transformer = transformer or DataTransformer()
+        self.validator = validator or DataValidator()
+        self.loader = loader or DataLoader()
     
 
     def fetch_and_load(self, station: Station) -> bool:
@@ -43,25 +46,23 @@ class DataFetcher:
         raw_data = self.extractor.extract(station)
         
         if raw_data.empty:
-            print(f"No data retrieved for station {station.name}")
+            logger.warning(f"Aucune donnée récupérée pour la station {station.name}")
             return False
         
         # 2. Transform
         formatted_data = self.transformer.format_data(raw_data)
         formatted_data = self.transformer.normalize_columns(formatted_data)
-        print(formatted_data.columns)
         
         # 3. Validate
         if not self.validator.is_format_correct(formatted_data):
-            print(f"Invalid data format for station {station.name}")
+            logger.error(f"Format de données invalide pour la station {station.name}")
             return False
         
         if not self.validator.are_values_valid(formatted_data):
-            print(f"Invalid data values for station {station.name}")
+            logger.warning(f"Valeurs de données invalides détectées pour la station {station.name}")
             return False
         
         # 4. Load
         self.loader.load_reports(station, formatted_data)
-        
-        print(f"Successfully loaded {len(formatted_data)} reports for {station.name}")
+        logger.info(f"Chargement réussi de {len(formatted_data)} relevés pour {station.name}")
         return True

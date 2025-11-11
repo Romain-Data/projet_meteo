@@ -33,7 +33,7 @@ class Station:
         return pd.DataFrame(data)
     
 
-    def get_latest_report(self) -> WeatherReport|None:
+    def get_latest_report(self) -> WeatherReport:
         """
         Returns the most recent WeatherReport from the station's reports.
 
@@ -41,4 +41,4 @@ class Station:
             WeatherReport: The report with the latest datetime.
             None: If no reports are available.
         """
-        return max(self.reports, key=lambda report: report.date, default=None)
+        return max(self.reports, key=lambda report: report.date)

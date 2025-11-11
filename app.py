@@ -1,153 +1,70 @@
 import logging
 import streamlit as st
-import pandas as pd
-from pathlib import Path
 
-from src.entities.station import Station
-from src.services.data_fetcher import DataFetcher
-from src.storage.parquet_handler import ParquetHandler
-from src.viz.charts import DataVizualiser
-
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    filename='weather_app.log'
-)
+from app_init import AppInitializer
+from config.config_loader import get_config
+from components.sidebar import Sidebar
+from components.metrics_display import MetricsDisplay
 
 logger = logging.getLogger(__name__)
 
-# Page setup
-st.set_page_config(
-    page_title="Weather Station Dashboard",
-    page_icon="🌡️",
-    layout="wide"
-)
-
-# Initialization of services
-@st.cache_resource
-def init_services():
-    parquet_handler = ParquetHandler()
-    data_fetcher = DataFetcher()
-    weather_charts = DataVizualiser()
-    return parquet_handler, data_fetcher, weather_charts
-
-
-@st.cache_data
-def load_stations():
-    csv_path = Path("data/stations/stations_meteo_transformees.csv")
-    df = pd.read_csv(csv_path, sep=';')
-
-    stations = []
-    for _, row in df.iterrows():
-        station = Station(
-            id=row['id_nom'],
-            name=row['nom'],
-            longitude=row['longitude'],
-            latitude=row['latitude']
-        )
-        stations.append(station)
-
-    return stations
-
 
 def main():
+    # --- Application Setup ---
+    # 1. Load configuration and setup logging first
+    config = get_config()
+    AppInitializer.setup_logging()
+    
+    # 2. Configure Streamlit page
+    AppInitializer.configure_page()
+    
     logger.info("Lancement de l'appli")
-
-    parquet_handler, data_fetcher, weather_charts = init_services()
-
-    # App title
-    st.title("🌡️ Weather Station Dashboard")
+    
+    # 3. Initialize services (cached) and data loader
+    initializer = AppInitializer(config)
+    parquet_handler, data_fetcher, weather_charts = AppInitializer.init_services()
+    
+    # --- Main Application Logic ---
+    stations = initializer.load_stations()
+    station_lookup = initializer.create_station_lookup(stations)
+    st.title(config.get('app.page_title', "🌡️ Weather Station Dashboard"))
     st.markdown("---")
-
-    # Loading stations
-    stations = load_stations()
-    station_names = {station.name: station for station in stations}
-
-    # Sidebar pour la sélection
-    with st.sidebar:
-        st.header("⚙️ Configuration")
-
-        # Station selection
-        selected_name = st.selectbox(
-            "Choose a station",
-            options=list(station_names.keys()),
-            index=0
-        )
-
-        selected_station = station_names[selected_name]
-
-        st.markdown("---")
-
-        # Refresh button
-        if st.button("🔄 Refresh Data", use_container_width=True):
-            with st.spinner("Fetching new data..."):
-                # Fetch the data via the API
-                data_fetcher.fetch_and_load(selected_station)
-                # Save Parquet
-                parquet_handler.save_station_reports(selected_station)
-                st.success("Data refreshed!")
-                st.rerun()
-
-    # Loading station data from Parquet
+    
+    # Render sidebar and get selected station
+    sidebar = Sidebar(parquet_handler, data_fetcher)
+    selected_station = sidebar.render(station_lookup)
+    
+    # Load station data
     parquet_handler.load_station_reports(selected_station)
-
+    
+    # Check if data exists
     if not selected_station.reports:
         st.warning(f"No data available for station '{selected_station.name}'")
         st.info("Click 'Refresh Data' to fetch initial data")
         return
-
-    # Retrieving the latest report
+    
+    # Get latest report
     latest_report = selected_station.get_latest_report()
-
-    # Current metrics section
-    st.header(f"📍 {selected_station.name}")
-    st.caption(f"Last update: {latest_report.display_date}")
-
-    col1, col2, col3 = st.columns(3)
-
-    with col1:
-        st.metric(
-            label="🌡️ Temperature",
-            value=f"{latest_report.temperature}°C"
-        )
-
-    with col2:
-        st.metric(
-            label="💧 Humidity",
-            value=f"{latest_report.humidity}%"
-        )
-
-    with col3:
-        st.metric(
-            label="🔽 Pressure",
-            value=f"{latest_report.pressure} Pa"
-        )
-
+    
+    # Display metrics
+    metrics_display = MetricsDisplay()
+    metrics_display.render_header(selected_station, latest_report.display_date)
+    metrics_display.render_current_metrics(
+        latest_report.temperature,
+        latest_report.humidity,
+        latest_report.pressure
+    )
+    
     st.markdown("---")
-
-    # Graph section
+    
+    # Display temperature chart
     st.header("📊 Temperature Timeline")
-
     df_reports = selected_station.get_all_reports()
-
-    # Displaying the temperature graph
+    
     if not df_reports.empty:
         fig_temp = weather_charts.plot_temperature(df_reports)
         st.plotly_chart(fig_temp, use_container_width=True)
-
-        # Additional stats
-        with st.expander("📈 Statistics"):
-            col1, col2, col3 = st.columns(3)
-
-            with col1:
-                st.metric(
-                    "Min Temperature",
-                    f"{df_reports['temperature'].min()}°C",
-                    delta=-1)
-            with col2:
-                st.metric("Max Temperature", f"{df_reports['temperature'].max()}°C")
-            with col3:
-                st.metric("Avg Temperature", f"{df_reports['temperature'].mean():.1f}°C")
+        metrics_display.render_statistics(df_reports)
     else:
         st.info("Not enough data to display chart")
 

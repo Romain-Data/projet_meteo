@@ -1,0 +1,48 @@
+# Configuration de l'application Weather Station
+# Modifiable sans toucher au code
+
+api:
+  timeout: 30
+  retry_attempts: 3
+  retry_delay: 1  # secondes
+
+storage:
+  data_path: "data/weather"
+  stations_csv: "data/stations/stations_meteo_transformees.csv"
+  parquet_compression: "snappy"
+  create_dirs: true
+
+app:
+  page_title: "Weather Station Dashboard"
+  page_icon: "🌡️"
+  layout: "wide"
+  cache_ttl: 3600  # secondes
+
+visualization:
+  chart_width: 1200
+  chart_height: 600
+  date_format: "%d %B"
+  time_format: "%Hh"
+  tick_interval_hours: 6
+  colors:
+    temperature: "#FF6B6B"
+    humidity: "#4ECDC4"
+    pressure: "#45B7D1"
+
+validation:
+  temperature:
+    min: -50
+    max: 60
+    unit: "celsius"
+  humidity:
+    min: 0
+    max: 100
+    unit: "percent"
+  pressure:
+    min: 800
+    max: 1100
+    unit: "Pa"
+
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

@@ -11,12 +11,17 @@ class DataValidator:
         'temperature': np.float64,
         'date': 'datetime64'
     }
-    
-    VALUE_RANGES = {
-        'temperature': (-20, 50),
-        'humidity': (0, 100),
-        'pressure': (95000, 105000)
-    }
+
+    def __init__(self, rules: dict):
+        """
+        Initialise le validateur avec un ensemble de règles.
+
+        Args:
+            rules (dict): Dictionnary of rules set in config.yaml
+        """
+        self.rules = rules
+        logger.info(f"DataValidator initialized with rules: {rules}")
+
     
     def is_format_correct(self, data: pd.DataFrame) -> bool:
         """
@@ -78,24 +83,19 @@ class DataValidator:
             
             logger.info(f"Validating values for {len(data)} records")
             
-            for column, (min_val, max_val) in self.VALUE_RANGES.items():
+            for column, rule_details in self.rules.items():
                 if column not in data.columns:
-                    logger.error(f"Missing column for value validation: '{column}'")
-                    return False
-                
-                is_valid = data[column].between(min_val, max_val, inclusive='both').all()
-                
+                    continue
+            
+                min_val = rule_details.get('min')
+                max_val = rule_details.get('max')
+
+                is_valid = data[column].between(min_val, max_val).all()
+            
                 if not is_valid:
-                    invalid_count = (~data[column].between(min_val, max_val, inclusive='both')).sum()
-                    min_found = data[column].min()
-                    max_found = data[column].max()
-                    
-                    logger.error(
-                        f"Invalid values in '{column}': {invalid_count} records out of range "
-                        f"[{min_val}, {max_val}]. Found range: [{min_found}, {max_found}]"
-                    )
+                    logger.error(f"Valeurs invalides dans '{column}' hors de l'intervalle [{min_val}, {max_val}]")
                     return False
-                
+            
                 logger.debug(f"✓ '{column}' values in valid range [{min_val}, {max_val}]")
             
             logger.info("Value validation passed")
