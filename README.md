@@ -13,9 +13,9 @@ Pitch client : société météo
 
 # A faire
 
-- [ ] Logging plutôt que print
+- [X] Logging plutôt que print
 - [ ] Gestions des erreurs
-    > reste fichiers de services et app
+    > reste fichier app
 - [ ] Tests unitaires
 - [ ] Affichage de la station sur une carte
 - [ ] Compléter Read me
@@ -24,9 +24,12 @@ Pitch client : société météo
 
 ```text
 ./
+├── components/        # Composants de l'application 
+│   
 ├── data/
 │   ├── parquet/        # Données météos sauvegardées
 │   └── stations/       # Stations disponibles
+│
 ├── src/
 │   ├── api/            # Requête données météo
 │   ├── entities/       # Classes métier
@@ -34,6 +37,7 @@ Pitch client : société météo
 │   ├── services/       # Logique métier et services
 │   ├── storage/        # Gestion du stockage et persistance
 │   └── viz/            # Visualisations et graphiques
+│
 ├── README.md
 ├── app.py              # Point d'entrée de l'application
 └── requirements        # Dépendances Python (pip)
