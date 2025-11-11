@@ -1,9 +1,11 @@
+from dataclasses import dataclass
 from datetime import datetime
 
+# Dataclass découvert via le youtuber ArjanCodes
+@dataclass
 class WeatherReport:
-    def __init__(self, date: datetime, temperature: float, humidity: int, pressure: int, display_date: str) -> None:
-        self.date: datetime = date
-        self.temperature : float = temperature
-        self.humidity: int = humidity
-        self.pressure: int = pressure
-        self.display_date: str = display_date
+    date: datetime
+    temperature: float
+    humidity: int
+    pressure: int
+    display_date: str
