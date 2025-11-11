@@ -20,7 +20,7 @@ class APIExtractor(IDataExtractor):
     def __init__(
             self, 
             base_url: str = "https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/", 
-            timeout: int = 10
+            timeout: int = 30
         ):
         """
         Initialize the API extractor.

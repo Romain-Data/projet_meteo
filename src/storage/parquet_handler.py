@@ -1,6 +1,8 @@
 import logging
 from pathlib import Path
 import pandas as pd
+from typing import Optional
+
 from src.entities.station import Station
 from src.services.loader import DataLoader
 
@@ -12,7 +14,7 @@ class ParquetHandler:
     Manages the saving and loading of weather reports in Parquet format.
     """
     
-    def __init__(self, data_dir: Path | None = None):
+    def __init__(self, data_dir: Path | None = None, compression: Optional[str] = 'snappy'):
         """
         Args:
             data_dir: Parquet file storage directory
@@ -24,6 +26,7 @@ class ParquetHandler:
 
         self.data_dir = data_dir
         self.data_dir.mkdir(parents=True, exist_ok=True)
+        self.compression = compression
         logger.info(f"ParquetHandler initialized with directory: {self.data_dir}")
     
 

@@ -32,8 +32,9 @@ class AppInitializer:
         """
         self.config = config
     
-    @st.cache_data(show_spinner=False)
-    def load_stations(_self) -> List[Station]:
+
+    @st.cache_data()
+    def load_stations(self) -> List[Station]:
         """
         Load weather stations from CSV file.
         
@@ -43,7 +44,7 @@ class AppInitializer:
         Returns:
             List[Station]: List of Station objects with id, name, and coordinates
         """
-        stations_csv_path_str = _self.config.get("storage.stations_csv")
+        stations_csv_path_str = self.config.get("storage.stations_csv")
         stations_csv_path = Path(stations_csv_path_str)
         logger.info(f"Loading stations from {stations_csv_path}")
         
@@ -65,6 +66,7 @@ class AppInitializer:
         
         logger.info(f"Loaded {len(stations)} stations")
         return stations
+    
     
     def create_station_lookup(self, stations: List[Station]) -> Dict[str, Station]:
         """
@@ -95,19 +97,14 @@ class AppInitializer:
         config = get_config()
 
         # --- Build low-level services from config ---
-        api_config = config.get_section('api')
-        # Note: Assumes APIExtractor constructor accepts these arguments
-        extractor = APIExtractor(base_url=api_config.get('url_base'), timeout=api_config.get('timeout'))
+        extractor = APIExtractor(base_url=config.get_required('api.url_base'), timeout=config.get_required('timeout'))
 
         validation_rules = config.get_section('validation')
-        # Note: Assumes DataValidator constructor accepts rules
         validator = DataValidator(rules=validation_rules)
 
-        storage_config = config.get_section('storage')
-        # Note: Assumes ParquetHandler constructor accepts these arguments
         parquet_handler = ParquetHandler(
-            base_path=storage_config.get('data_path'),
-            compression=storage_config.get('parquet_compression')
+            data_dir = Path(config.get_required('storage.data_path')),
+            compression = config.get_required('storage.parquet_compression')
         )
 
         # --- Build high-level services by injecting dependencies ---
@@ -115,7 +112,7 @@ class AppInitializer:
             extractor=extractor,
             transformer=DataTransformer(), # Assuming no config needed
             validator=validator,
-            loader=DataLoader(parquet_handler) # Loader might need the handler
+            loader=DataLoader() # Loader might need the handler
         )
 
         weather_charts = DataVizualiser() # Assuming no config needed

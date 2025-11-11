@@ -17,6 +17,7 @@ class ConfigLoader:
     def __init__(self):
         self._config: Dict[str, Any] | None = None
 
+
     def load(self, config_path: str) -> None:
         """
         Loads the configuration from a YAML file.
@@ -37,6 +38,7 @@ class ConfigLoader:
             self._config = yaml.safe_load(file)
 
         logger.info(f"Configuration chargée depuis {config_path}")
+
 
     def get(self, key_path: str, default: Any = None) -> Any:
         """
@@ -64,6 +66,19 @@ class ConfigLoader:
                 logger.debug(f"Clé '{key_path}' non trouvée. Retour de la valeur par défaut.")
                 return default
 
+        return value
+    
+
+    def get_required(self, key_path: str) -> Any:
+        """
+        Retrieves a required value from the configuration.
+        
+        Raises:
+            ValueError: If the key is not found.
+        """
+        value = self.get(key_path)
+        if value is None:
+            raise ValueError(f"Configuration requise manquante: '{key_path}'")
         return value
 
 

@@ -21,15 +21,15 @@ class DataFetcher:
     
     def __init__(
         self,
-        extractor: APIExtractor | None = None,
-        transformer: DataTransformer | None = None,
-        validator: DataValidator | None = None,
-        loader: DataLoader | None = None
+        extractor: APIExtractor,
+        transformer: DataTransformer,
+        validator: DataValidator,
+        loader: DataLoader
     ):
-        self.extractor = extractor or APIExtractor()
-        self.transformer = transformer or DataTransformer()
-        self.validator = validator or DataValidator()
-        self.loader = loader or DataLoader()
+        self.extractor = extractor
+        self.transformer = transformer
+        self.validator = validator
+        self.loader = loader
     
 
     def fetch_and_load(self, station: Station) -> bool:
