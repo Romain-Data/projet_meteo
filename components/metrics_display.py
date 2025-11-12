@@ -3,6 +3,7 @@ import pandas as pd
 from typing import Tuple
 
 from src.entities.station import Station
+from src.entities.weather_report import WeatherReport
 
 
 class MetricsDisplay:
@@ -21,7 +22,7 @@ class MetricsDisplay:
         st.caption(f"Last update: {latest_date}")
     
     @staticmethod
-    def render_current_metrics(temperature: float, humidity: int, pressure: int):
+    def render_current_metrics(weather_report: WeatherReport):
         """
         Render current weather metrics in three columns.
         
@@ -35,19 +36,19 @@ class MetricsDisplay:
         with col1:
             st.metric(
                 label="🌡️ Temperature",
-                value=f"{temperature}°C"
+                value=f"{weather_report.temperature}°C"
             )
         
         with col2:
             st.metric(
                 label="💧 Humidity",
-                value=f"{humidity}%"
+                value=f"{weather_report.humidity}%"
             )
         
         with col3:
             st.metric(
                 label="🔽 Pressure",
-                value=f"{pressure} Pa"
+                value=f"{weather_report.pressure} Pa"
             )
     
     @staticmethod
