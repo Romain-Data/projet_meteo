@@ -12,18 +12,14 @@ logger = logging.getLogger(__name__)
 def main():
     try:
         # --- Application Setup ---
-        # 1. Load configuration and setup logging first
         config = get_config()
         AppInitializer.setup_logging()
-        
-        # 2. Configure Streamlit page
         AppInitializer.configure_page()
         
-        logger.info("Lancement de l'appli")
-        
-        # 3. Initialize services (cached) and data loader
         initializer = AppInitializer(config)
         parquet_handler, data_fetcher, weather_charts = AppInitializer.init_services()
+
+        logger.info("Lancement de l'appli")
         
         # --- Main Application Logic ---
         stations = initializer.load_stations()
@@ -38,16 +34,13 @@ def main():
         # Load station data
         parquet_handler.load_station_reports(selected_station)
         
-        # Check if data exists
         if not selected_station.reports:
             st.warning(f"No data available for station '{selected_station.name}'")
             st.info("Click 'Refresh Data' to fetch initial data")
             return
         
-        # Get latest report
-        latest_report = selected_station.get_latest_report()
-        
         # Display metrics
+        latest_report = selected_station.get_latest_report()
         metrics_display = MetricsDisplay()
         metrics_display.render_header(selected_station, latest_report.display_date)
         metrics_display.render_current_metrics(latest_report)
