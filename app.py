@@ -15,42 +15,42 @@ def main():
         config = get_config()
         AppInitializer.setup_logging()
         AppInitializer.configure_page()
-        
-        initializer = AppInitializer(config)
-        parquet_handler, data_fetcher, weather_charts = AppInitializer.init_services()
 
+        init = AppInitializer(config)
+        parquet_handler, data_fetcher, weather_charts = init.init_services()
         logger.info("Lancement de l'appli")
-        
+
         # --- Main Application Logic ---
-        stations = initializer.load_stations()
-        station_lookup = initializer.create_station_lookup(stations)
+        stations = init.load_stations()
+        station_lookup = init.create_station_lookup(stations)
         st.title(config.get('app.page_title', "🌡️ Weather Station Dashboard"))
         st.markdown("---")
-        
+
         # Render sidebar and get selected station
         sidebar = Sidebar(parquet_handler, data_fetcher)
         selected_station = sidebar.render(station_lookup)
-        
+
         # Load station data
         parquet_handler.load_station_reports(selected_station)
-        
+
         if not selected_station.reports:
-            st.warning(f"No data available for station '{selected_station.name}'")
+            st.warning(f"No data available for '{selected_station.name}'")
             st.info("Click 'Refresh Data' to fetch initial data")
             return
-        
+
         # Display metrics
         latest_report = selected_station.get_latest_report()
         metrics_display = MetricsDisplay()
-        metrics_display.render_header(selected_station, latest_report.display_date)
+        metrics_display.render_header(selected_station,
+                                      latest_report.display_date)
         metrics_display.render_current_metrics(latest_report)
-        
+
         st.markdown("---")
-        
+
         # Display temperature chart
         st.header("📊 Temperature Timeline")
         df_reports = selected_station.get_all_reports()
-        
+
         if not df_reports.empty:
             fig_temp = weather_charts.plot_temperature(df_reports)
             st.plotly_chart(fig_temp, use_container_width=True)

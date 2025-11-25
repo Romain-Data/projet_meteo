@@ -14,8 +14,7 @@ Pitch client : société météo
 # A faire
 
 - [X] Logging plutôt que print
-- [ ] Gestions des erreurs
-    > reste fichier app
+- [X] Gestions des erreurs
 - [ ] Tests unitaires
 - [ ] Affichage de la station sur une carte
 - [ ] Compléter Read me
