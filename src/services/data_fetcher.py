@@ -8,6 +8,7 @@ from src.services.loader import DataLoader
 
 logger = logging.getLogger(__name__)
 
+
 class DataFetcher:
     """
     Service orchestrating the complete data pipeline for weather stations.
