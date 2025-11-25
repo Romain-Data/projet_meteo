@@ -1,8 +1,8 @@
+import json
 import logging
 from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict
-import yaml
 
 logger = logging.getLogger(__name__)
 
@@ -17,10 +17,9 @@ class ConfigLoader:
     def __init__(self):
         self._config: Dict[str, Any] | None = None
 
-
     def load(self, config_path: str) -> None:
         """
-        Loads the configuration from a YAML file.
+        Loads the configuration from a config python file.
 
         Args:
             config_path (str): The path to the YAML configuration file.
@@ -35,10 +34,9 @@ class ConfigLoader:
             raise FileNotFoundError(f"Config not found: {config_path}")
 
         with open(path, 'r', encoding='utf-8') as file:
-            self._config = yaml.safe_load(file)
+            self._config = json.load(file)
 
         logger.info(f"Configuration chargée depuis {config_path}")
-
 
     def get(self, key_path: str, default: Any = None) -> Any:
         """
@@ -47,7 +45,7 @@ class ConfigLoader:
         Args:
             key_path (str): A string representing the nested key (e.g., 'api.base_url').
             default (Any, optional): The default value to return if the key is not found.
-                                     Defaults to None.
+                                    Defaults to None.
 
         Returns:
             Any: The requested configuration value, or the default value if not found.
@@ -67,12 +65,11 @@ class ConfigLoader:
                 return default
 
         return value
-    
 
     def get_required(self, key_path: str) -> Any:
         """
         Retrieves a required value from the configuration.
-        
+
         Raises:
             ValueError: If the key is not found.
         """
@@ -80,7 +77,6 @@ class ConfigLoader:
         if value is None:
             raise ValueError(f"Configuration requise manquante: '{key_path}'")
         return value
-
 
     def get_section(self, section: str) -> Dict[str, Any]:
         """
@@ -98,7 +94,7 @@ class ConfigLoader:
 
 @lru_cache(maxsize=1)
 # J'ai découvert lru_cache avec Claude qui ne laisse exister qu'une seule instance de ConfigLoader
-def get_config(config_path: str = "config/config.yaml") -> ConfigLoader:
+def get_config(config_path: str = "config/config.py") -> ConfigLoader:
     """
     Factory function to get the singleton instance of ConfigLoader.
 

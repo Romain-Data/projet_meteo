@@ -1,0 +1,33 @@
+{
+  "api": {
+    "url_base": "https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/",
+    "timeout": 30
+  },
+  "storage": {
+    "data_path": "data/parquet",
+    "stations_csv": "data/stations/stations_meteo_transformees.csv",
+    "parquet_compression": "snappy",
+    "create_dirs": true
+  },
+  "validation": {
+    "temperature": {
+      "min": -50,
+      "max": 60,
+      "unit": "celsius"
+    },
+    "humidity": {
+      "min": 0,
+      "max": 100,
+      "unit": "percent"
+    },
+    "pressure": {
+      "min": 800,
+      "max": 1100,
+      "unit": "Pa"
+    }
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  }
+}

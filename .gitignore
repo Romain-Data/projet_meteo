@@ -1,5 +1,6 @@
 .DS*
 test.ipynb
+test*
 env/
 *.log
 __pycache__/
