@@ -1,0 +1,10 @@
+matplotlib
+numpy
+pandas
+pathlib
+plotly
+pyarrow
+requests
+seaborn
+streamlit
+yaml

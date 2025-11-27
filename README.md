@@ -12,13 +12,10 @@ Pitch client : société météo
 - création d'un dashboard **simple**
 
 # A faire
-
-- [X] Logging plutôt que print
-- [X] Gestions des erreurs
-- [ ] Tests unitaires
-- [ ] Affichage de la station sur une carte
-- [ ] Compléter Read me
-- [ ] *possibilité de sélectionner une station depuis une carte ?*
+[x] Structurer le code python (main, init, sous-dossier)
+[x] Implémenter une liste chaînée pour l'affichage station par station
+[ ] Implémenter une file pour les extractions
+[x] Implémenter un dictionnaire pour la configuration
 
 
 ```text

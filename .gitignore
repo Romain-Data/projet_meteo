@@ -1,8 +1,11 @@
 .DS*
 test.ipynb
+test*
 env/
+logs/
 *.log
 __pycache__/
 **/__pycache__/
 *.py[cod]
 *$py.class
+.flake8
