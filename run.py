@@ -1,109 +1,162 @@
-#!/usr/bin/env python3
-"""Script de gestion du projet compatible Mac/Windows/Linux"""
-
 import os
 import sys
-import shutil
 import subprocess
 from pathlib import Path
 
 
 def run():
     """Lance l'application Streamlit"""
-    # Chemins absolus
-    script_dir = Path(__file__).parent.absolute()
-    app_path = script_dir / "projet" / "app.py"
+    app_path = Path(__file__).parent / "projet" / "app.py"
 
-    # Changer vers le répertoire racine
-    os.chdir(script_dir)
+    if not app_path.exists():
+        print(f"❌ Erreur: {app_path} n'existe pas")
+        sys.exit(1)
 
-    # Configurer l'environnement PYTHONPATH
-    env = os.environ.copy()
-    pythonpath = env.get("PYTHONPATH", "")
-    env["PYTHONPATH"] = f"{script_dir}{os.pathsep}{pythonpath}"
+    # Configuration de l'environnement
+    env = {
+        **dict(os.environ),
+        "PYTHONPATH": str(Path(__file__).parent)
+    }
 
-    # Lancer Streamlit
-    print("🚀 Lancement de l'application...")
-    print(f"📁 Répertoire: {script_dir}")
-    print(f"📄 App: {app_path}")
-
-    subprocess.run([sys.executable, "-m", "streamlit", "run", str(app_path)], env=env)
-
-
-def install():
-    """Installe les dépendances"""
-    print("📦 Installation des dépendances...")
-    subprocess.run([sys.executable, "-m", "pip", "install", "-r", "requirements.txt"])
-    print("✓ Installation terminée")
-
-
-def clean():
-    """Nettoie les fichiers cache"""
-    project_root = Path(".")
-
-    print("🧹 Nettoyage en cours...")
-
-    # Supprime __pycache__
-    for pycache in project_root.rglob("__pycache__"):
-        shutil.rmtree(pycache, ignore_errors=True)
-        print(f"✓ Supprimé {pycache}")
-
-    # Supprime .pyc
-    for pyc in project_root.rglob("*.pyc"):
-        pyc.unlink(missing_ok=True)
-
-    # Supprime .log
-    for log in project_root.rglob("*.log"):
-        log.unlink(missing_ok=True)
-        print(f"✓ Supprimé {log}")
-
-    print("✓ Nettoyage terminé")
+    try:
+        print("🚀 Démarrage de l'application Streamlit...")
+        subprocess.run(
+            [sys.executable, "-m", "streamlit", "run", str(app_path)],
+            env=env,
+            check=True  # Lève une exception si le code de retour n'est pas 0
+        )
+    except KeyboardInterrupt:
+        print("\n\n🛑 Arrêt de l'application demandé...")
+        print("✅ Application arrêtée proprement")
+        sys.exit(0)
+    except subprocess.CalledProcessError as e:
+        print(f"\n❌ Erreur lors de l'exécution: {e}")
+        sys.exit(1)
+    except Exception as e:
+        print(f"\n❌ Erreur inattendue: {e}")
+        sys.exit(1)
 
 
 def test():
     """Lance les tests"""
-    print("🧪 Lancement des tests...")
+    try:
+        print("🧪 Lancement des tests...")
+        result = subprocess.run(
+            [sys.executable, "-m", "pytest", "tests/", "-v"],
+            check=False
+        )
+        sys.exit(result.returncode)
+    except KeyboardInterrupt:
+        print("\n\n🛑 Tests interrompus")
+        sys.exit(130)  # Code standard pour interruption
 
-    # Ajouter la racine au PYTHONPATH pour les tests aussi
-    script_dir = Path(__file__).parent.absolute()
-    env = os.environ.copy()
-    pythonpath = env.get("PYTHONPATH", "")
-    env["PYTHONPATH"] = f"{script_dir}{os.pathsep}{pythonpath}"
 
-    subprocess.run([sys.executable, "-m", "pytest", "tests/", "-v"], env=env)
+def install():
+    """Installe les dépendances"""
+    try:
+        print("📦 Installation des dépendances...")
+        subprocess.run(
+            [sys.executable, "-m", "pip", "install", "-r", "requirements.txt"],
+            check=True
+        )
+        print("✅ Dépendances installées avec succès")
+    except KeyboardInterrupt:
+        print("\n\n🛑 Installation interrompue")
+        sys.exit(130)
+    except subprocess.CalledProcessError:
+        print("❌ Erreur lors de l'installation")
+        sys.exit(1)
 
 
-def help_menu():
+def clean():
+    """Nettoie les fichiers temporaires"""
+    import shutil
+
+    print("🧹 Nettoyage des fichiers temporaires...")
+
+    patterns_to_clean = [
+        "__pycache__",
+        "*.pyc",
+        ".pytest_cache",
+        ".coverage",
+        "htmlcov",
+        "*.egg-info"
+    ]
+
+    cleaned = 0
+    root = Path(__file__).parent
+
+    for pattern in patterns_to_clean:
+        if "*" in pattern:
+            # Fichiers avec wildcard
+            for file in root.rglob(pattern):
+                try:
+                    file.unlink()
+                    cleaned += 1
+                    print(f"  🗑️  {file.relative_to(root)}")
+                except Exception as e:
+                    print(f"  ⚠️  Impossible de supprimer {file}: {e}")
+        else:
+            # Dossiers
+            for folder in root.rglob(pattern):
+                try:
+                    shutil.rmtree(folder)
+                    cleaned += 1
+                    print(f"  🗑️  {folder.relative_to(root)}/")
+                except Exception as e:
+                    print(f"  ⚠️  Impossible de supprimer {folder}: {e}")
+
+    print(f"✅ Nettoyage terminé ({cleaned} éléments supprimés)")
+
+
+def help_cmd():
     """Affiche l'aide"""
     print("""
-╔═══════════════════════════════════════════════════════════╗
-║          Gestionnaire de projet Weather App              ║
-╚═══════════════════════════════════════════════════════════╝
+╔══════════════════════════════════════════════════════════════╗
+║           🌡️  PROJET MÉTÉO - COMMANDES DISPONIBLES          ║
+╚══════════════════════════════════════════════════════════════╝
 
-Commandes disponibles:
-  python run.py install  - Installe les dépendances
-  python run.py run      - Lance l'application Streamlit
-  python run.py clean    - Nettoie les fichiers temporaires
-  python run.py test     - Lance les tests avec pytest
-  python run.py help     - Affiche cette aide
+📌 Commandes principales:
 
-Exemples:
-  python run.py install && python run.py run
-  python run.py clean && python run.py test
-    """)
+    python run.py run        🚀 Lance l'application Streamlit
+    python run.py test       🧪 Lance les tests avec pytest
+    python run.py install    📦 Installe les dépendances
+    python run.py clean      🧹 Nettoie les fichiers temporaires
+    python run.py help       ❓ Affiche cette aide
+
+💡 Exemples:
+
+    python run.py run                    # Lance l'app
+    python run.py test                   # Lance tous les tests
+    python run.py clean && python run.py run   # Nettoie puis lance
+
+🛑 Pour arrêter l'application: Ctrl+C (ou Cmd+C sur Mac)
+""")
+
+
+# Mapping des commandes
+commands = {
+    "run": run,
+    "test": test,
+    "install": install,
+    "clean": clean,
+    "help": help_cmd,
+}
 
 
 if __name__ == "__main__":
-    commands = {
-        "run": run,
-        "install": install,
-        "clean": clean,
-        "test": test,
-        "help": help_menu,
-    }
-
     if len(sys.argv) < 2 or sys.argv[1] not in commands:
-        help_menu()
+        print("❌ Commande invalide\n")
+        help_cmd()
         sys.exit(1)
-    else:
+
+    try:
         commands[sys.argv[1]]()
+    except KeyboardInterrupt:
+        print("\n\n🛑 Commande interrompue par l'utilisateur")
+        sys.exit(130)
+    except Exception as e:
+        print(f"\n❌ Erreur fatale: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
