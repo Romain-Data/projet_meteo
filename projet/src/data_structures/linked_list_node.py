@@ -1,5 +1,7 @@
+from __future__ import annotations
 from dataclasses import dataclass
-from src.entities.station import Station
+
+from projet.src.entities.station import Station
 
 
 @dataclass
@@ -9,5 +11,5 @@ class StationNode:
     Each node contains a station and references to previous/next nodes.
     """
     station: Station
-    next: 'StationNode' | None = None
-    previous: 'StationNode' | None = None
+    next: StationNode | None = None
+    previous: StationNode | None = None

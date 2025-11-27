@@ -1,6 +1,6 @@
-from src.entities.station import Station
-from src.data_structures.linked_list_node import StationNode
-from src.interfaces.station_navigator import IStationNavigator
+from projet.src.entities.station import Station
+from projet.src.data_structures.linked_list_node import StationNode
+from projet.src.interfaces.station_navigator import IStationNavigator
 
 
 class LinkedListNavigator(IStationNavigator):
@@ -118,3 +118,29 @@ class LinkedListNavigator(IStationNavigator):
             current_node = current_node.next
 
         raise ValueError("Station not found in navigator")
+
+    def get_all_stations(self) -> list[Station]:
+        """
+        Returns all stations in the navigator as a list.
+
+        Returns:
+            List of all Station objects in navigation order
+
+        Note:
+            For an empty list, returns an empty list.
+            For a circular list, returns stations starting from head.
+        """
+        if self._head is None:
+            return []
+
+        stations = []
+        current = self._head
+
+        # Traverse the circular list once
+        while True:
+            stations.append(current.station)
+            current = current.next
+            if current == self._head:
+                break
+
+        return stations

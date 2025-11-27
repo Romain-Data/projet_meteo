@@ -13,7 +13,7 @@ Pitch client : société météo
 
 # A faire
 [x] Structurer le code python (main, init, sous-dossier)
-[ ] Implémenter une liste chaînée pour l'affichage station par station
+[x] Implémenter une liste chaînée pour l'affichage station par station
 [ ] Implémenter une file pour les extractions
 [x] Implémenter un dictionnaire pour la configuration
 

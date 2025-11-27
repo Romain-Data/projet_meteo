@@ -2,7 +2,7 @@ matplotlib
 numpy
 pandas
 pathlib
-plotly.graph_objects
+plotly
 pyarrow
 requests
 seaborn
