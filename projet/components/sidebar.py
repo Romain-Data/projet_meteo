@@ -49,7 +49,7 @@ class Sidebar:
 
     def _render_refresh_button(self, station: Station):
         """Render and handle refresh data button."""
-        if st.button("🔄 Refresh Data", use_container_width=True):
+        if st.button("🔄 Refresh Data", width='stretch'):
             with st.spinner("Fetching new data..."):
                 self.data_fetcher.fetch_and_load(station)
                 self.parquet_handler.save_station_reports(station)
