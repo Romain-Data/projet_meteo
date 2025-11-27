@@ -12,8 +12,7 @@ class Station:
             name (str): nom de la station
             longitude (float)
             latitude (float)
-            reports (list[WeatherReport], optional): 
-                liste des rapports météo liés à la station. 
+            reports (list[WeatherReport], optional): liste des rapports météo liés à la station.
                 Defaults to [].
         """
         self.id: str = id
@@ -43,7 +42,7 @@ class Station:
         } for report in self.reports]
 
         return pd.DataFrame(data)
-    
+
     def get_latest_report(self) -> WeatherReport:
         """
         Returns the most recent WeatherReport from the station's reports.

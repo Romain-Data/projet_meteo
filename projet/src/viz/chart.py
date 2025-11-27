@@ -39,7 +39,7 @@ class DataVizualiser:
             # Detect changes in the day and create annotations
             annotations = []
             for i in range(1, len(reports)):
-                if reports['date'].dt.date.iloc[i] != reports['date'].dt.date.iloc[i-1]:
+                if reports['date'].dt.date.iloc[i] != reports['date'].dt.date.iloc[i - 1]:
                     date_change = reports['date'].iloc[i]
                     annotations.append(
                         dict(
@@ -70,7 +70,7 @@ class DataVizualiser:
                         standoff=25
                     ),
                     tickformat='%Hh',
-                    dtick=6*60*60*1000,  # 6-hour interval
+                    dtick=6 * 60 * 60 * 1000,  # 6-hour interval
                     tickmode='linear',
                     gridcolor='rgba(128, 128, 128, 0.3)',
                     showgrid=True,
@@ -122,7 +122,7 @@ class DataVizualiser:
         # Détecter les changements de jour et créer les annotations
         annotations = []
         for i in range(1, len(reports)):
-            if reports['date'].dt.date.iloc[i] != reports['date'].dt.date.iloc[i-1]:
+            if reports['date'].dt.date.iloc[i] != reports['date'].dt.date.iloc[i - 1]:
                 date_change = reports['date'].iloc[i]
                 annotations.append(
                     dict(
@@ -153,7 +153,7 @@ class DataVizualiser:
                     standoff=25
                 ),
                 tickformat='%Hh',
-                dtick=6*60*60*1000,
+                dtick=6 * 60 * 60 * 1000,
                 tickmode='linear',
                 gridcolor='rgba(128, 128, 128, 0.3)',
                 showgrid=True,

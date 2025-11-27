@@ -8,7 +8,7 @@ from src.storage.parquet_handler import ParquetHandler
 
 class Sidebar:
     """Handles sidebar UI and interactions."""
-    
+
     def __init__(
         self,
         parquet_handler: ParquetHandler,
@@ -16,28 +16,25 @@ class Sidebar:
     ):
         self.parquet_handler = parquet_handler
         self.data_fetcher = data_fetcher
-    
+
     def render(self, station_lookup: Dict[str, Station]) -> Station:
         """
         Render sidebar with station selection and refresh button.
-        
+
         Args:
             station_lookup: Dictionary mapping station names to Station objects
-            
+
         Returns:
             Station: The selected station
         """
         with st.sidebar:
             st.header("⚙️ Configuration")
-            
             selected_station = self._render_station_selector(station_lookup)
-            
             st.markdown("---")
-            
             self._render_refresh_button(selected_station)
-            
+
             return selected_station
-    
+
     def _render_station_selector(
         self,
         station_lookup: Dict[str, Station]
@@ -49,7 +46,7 @@ class Sidebar:
             index=0
         )
         return station_lookup[selected_name]
-    
+
     def _render_refresh_button(self, station: Station):
         """Render and handle refresh data button."""
         if st.button("🔄 Refresh Data", use_container_width=True):

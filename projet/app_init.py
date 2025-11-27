@@ -4,15 +4,15 @@ from pathlib import Path
 from typing import List, Dict, Tuple
 import streamlit as st
 
-from config.config_loader import ConfigLoader, get_config
-from src.api.extractor import APIExtractor
-from src.entities.station import Station
-from src.processing.transformer import DataTransformer
-from src.processing.validator import DataValidator
-from src.services.data_fetcher import DataFetcher
-from src.services.loader import DataLoader
-from src.storage.parquet_handler import ParquetHandler
-from src.viz.chart import DataVizualiser
+from projet.config.config_loader import ConfigLoader, get_config
+from projet.src.api.extractor import APIExtractor
+from projet.src.entities.station import Station
+from projet.src.processing.transformer import DataTransformer
+from projet.src.processing.validator import DataValidator
+from projet.src.services.data_fetcher import DataFetcher
+from projet.src.services.loader import DataLoader
+from projet.src.storage.parquet_handler import ParquetHandler
+from projet.src.viz.chart import DataVizualiser
 
 logger = logging.getLogger(__name__)
 
@@ -31,7 +31,6 @@ class AppInitializer:
             config (ConfigLoader): The application configuration loader.
         """
         self.config = config
-
 
     @st.cache_data()
     def load_stations(_self) -> List[Station]:
@@ -78,7 +77,6 @@ class AppInitializer:
             Dict[str, Station]: Dictionary with station names as keys
         """
         return {station.name: station for station in stations}
-
 
     @staticmethod
     @st.cache_resource(show_spinner=False)

@@ -1,9 +1,8 @@
 import streamlit as st
 import pandas as pd
-from typing import Tuple
 
-from src.entities.station import Station
-from src.entities.weather_report import WeatherReport
+from projet.src.entities.station import Station
+from projet.src.entities.weather_report import WeatherReport
 
 
 class MetricsDisplay:

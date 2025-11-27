@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from src.entities.station import Station
+
+from projet.src.entities.station import Station
 
 
 class IStationNavigator(ABC):

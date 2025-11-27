@@ -96,7 +96,7 @@ class ConfigLoader:
 @lru_cache(maxsize=1)
 # J'ai découvert lru_cache avec Claude qui ne laisse exister
 # qu'une seule instance de ConfigLoader
-def get_config(config_path: str = "config/config.py") -> ConfigLoader:
+def get_config(config_path: str = "projet/config/config.json") -> ConfigLoader:
     """
     Factory function to get the singleton instance of ConfigLoader.
 

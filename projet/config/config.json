@@ -4,8 +4,8 @@
     "timeout": 30
   },
   "storage": {
-    "data_path": "data/parquet",
-    "stations_csv": "data/stations/stations_meteo_transformees.csv",
+    "data_path": "projet/data/parquet",
+    "stations_csv": "projet/data/stations/stations_meteo_transformees.csv",
     "parquet_compression": "snappy",
     "create_dirs": true
   },

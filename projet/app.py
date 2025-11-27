@@ -1,10 +1,13 @@
 import logging
 import streamlit as st
 
-from app_init import AppInitializer
-from config.config_loader import get_config
-from components.sidebar import Sidebar
-from components.metrics_display import MetricsDisplay
+from projet.app_init import AppInitializer
+from projet.config.config_loader import get_config
+from projet.config.logging_config import setup_logging
+from projet.components.sidebar import Sidebar
+from projet.components.metrics_display import MetricsDisplay
+
+setup_logging(log_level="INFO", log_file="weather_app.log")
 
 logger = logging.getLogger(__name__)
 
