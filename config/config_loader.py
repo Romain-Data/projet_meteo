@@ -25,7 +25,8 @@ class ConfigLoader:
             config_path (str): The path to the YAML configuration file.
 
         Raises:
-            FileNotFoundError: If the configuration file is not found at the specified path.
+            FileNotFoundError: If the configuration file is not found
+            at the specified path.
         """
         path = Path(config_path)
 
@@ -93,7 +94,8 @@ class ConfigLoader:
 
 
 @lru_cache(maxsize=1)
-# J'ai découvert lru_cache avec Claude qui ne laisse exister qu'une seule instance de ConfigLoader
+# J'ai découvert lru_cache avec Claude qui ne laisse exister
+# qu'une seule instance de ConfigLoader
 def get_config(config_path: str = "config/config.py") -> ConfigLoader:
     """
     Factory function to get the singleton instance of ConfigLoader.

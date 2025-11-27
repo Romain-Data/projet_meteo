@@ -1,25 +1,26 @@
-import logging 
+import logging
 import pandas as pd
 import plotly.graph_objects as go
 
 logger = logging.getLogger(__name__)
 
+
 class DataVizualiser:
-    
+
     def plot_temperature(self, reports: pd.DataFrame) -> go.Figure:
         """
         Create an interactive line plot of temperature over time.
-        
+
         Args:
             reports: DataFrame with 'date' (datetime) and 'temperature' (float) columns
-            
+
         Returns:
             go.Figure: Plotly figure object with temperature timeline
         """
         if reports.empty:
             logger.warning("Cannot create chart: empty DataFrame")
             return go.Figure()
-        
+
         logger.info(f"Creating combined chart for {len(reports)} records")
 
         try:
@@ -44,7 +45,7 @@ class DataVizualiser:
                         dict(
                             x=date_change,
                             y=0,  # Relative position
-                            yref="paper", 
+                            yref="paper",
                             yshift=-60,  # Downward pixel offset
                             text=date_change.strftime('%d %B'),
                             showarrow=False,
@@ -66,9 +67,9 @@ class DataVizualiser:
                 xaxis=dict(
                     title=dict(
                         text="Hour",
-                        standoff=25 
+                        standoff=25
                     ),
-                    tickformat='%Hh', 
+                    tickformat='%Hh',
                     dtick=6*60*60*1000,  # 6-hour interval
                     tickmode='linear',
                     gridcolor='rgba(128, 128, 128, 0.3)',
@@ -90,11 +91,10 @@ class DataVizualiser:
 
             logger.info("Chart created successfully")
             return fig
-    
+
         except Exception as e:
             logger.error(f"Chart creation failed: {type(e).__name__} - {str(e)}")
             return go.Figure()
-    
 
     def plot_humidity(self, reports: pd.DataFrame) -> go.Figure:
         """
@@ -128,7 +128,7 @@ class DataVizualiser:
                     dict(
                         x=date_change,
                         y=0,
-                        yref="paper", 
+                        yref="paper",
                         yshift=-50,
                         text=date_change.strftime('%d %B'),
                         showarrow=False,

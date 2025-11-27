@@ -67,14 +67,13 @@ class AppInitializer:
         logger.info(f"Loaded {len(stations)} stations")
         return stations
 
-
     def create_station_lookup(self, stations: List[Station]) -> Dict[str, Station]:
         """
         Create a dictionary mapping station names to Station objects.
 
         Args:
             stations: List of Station objects
-  
+
         Returns:
             Dict[str, Station]: Dictionary with station names as keys
         """

@@ -6,5 +6,5 @@ plotly.graph_objects
 pyarrow
 requests
 seaborn
-streamilt
+streamlit
 yaml

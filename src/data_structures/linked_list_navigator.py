@@ -27,6 +27,8 @@ class LinkedListNavigator(IStationNavigator):
                 self._head = new_node
             previous_node = new_node
         self._tail = previous_node
+
+        # Create circular links (works even with single node)
         self._tail.next = self._head
         self._head.previous = self._tail
 
@@ -100,14 +102,14 @@ class LinkedListNavigator(IStationNavigator):
             raise ValueError("Station list is empty")
 
         current_node = self._head
-        
+
         # Première itération : vérifier _head
         if current_node.station == station:
             self._current = current_node
             return
-        
+
         current_node = current_node.next
-        
+
         # Parcourir jusqu'à revenir à _head
         while current_node != self._head:
             if current_node.station == station:
