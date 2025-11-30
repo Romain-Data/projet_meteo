@@ -109,7 +109,8 @@ class AppInitializer:
             extractor=extractor,
             transformer=DataTransformer(),
             validator=validator,
-            loader=DataLoader()
+            loader=DataLoader(),
+            parquet_handler=parquet_handler  # Injection de la dépendance
         )
 
         weather_charts = DataVizualiser()

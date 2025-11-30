@@ -2,12 +2,13 @@ import streamlit as st
 from projet.src.data_structures.linked_list_navigator import LinkedListNavigator
 from projet.src.services.data_fetcher import DataFetcher
 from projet.src.storage.parquet_handler import ParquetHandler
+from projet.src.api.request_queue import ApiRequestQueue
 
 
 class Sidebar:
     """Handles sidebar UI and interactions."""
 
-    def __init__(self, parquet_handler: ParquetHandler, data_fetcher: DataFetcher):
+    def __init__(self, parquet_handler: ParquetHandler, data_fetcher: DataFetcher, api_queue: ApiRequestQueue):
         """
         Initialize Sidebar with required services.
 
@@ -17,6 +18,7 @@ class Sidebar:
         """
         self.parquet_handler = parquet_handler
         self.data_fetcher = data_fetcher
+        self.api_queue = api_queue
 
     def render(self, navigator: 'LinkedListNavigator'):
         """
@@ -70,6 +72,7 @@ class Sidebar:
                 if selected_station:
                     navigator.set_current(selected_station)
                     st.session_state.selected_station_id = selected_station.id
+                    self.api_queue.add_task(self.data_fetcher.fetch_and_load, selected_station)
                     st.rerun()
 
             st.markdown("---")
@@ -85,8 +88,9 @@ class Sidebar:
             station: Station object to refresh data for
         """
         if st.button("🔄 Refresh Data", width='stretch'):
-            with st.spinner("Fetching new data..."):
-                self.data_fetcher.fetch_and_load(station)
-                self.parquet_handler.save_station_reports(station)
-                st.success("Data refreshed!")
-                st.rerun()
+            st.toast(f"Adding refresh task for {station.name} to the queue...")
+            self.api_queue.add_task(
+                self.data_fetcher.refresh_and_save_station_data,
+                station=station
+            )
+            st.info("Refresh is running in the background.")
