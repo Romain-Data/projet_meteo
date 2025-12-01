@@ -72,7 +72,11 @@ class Sidebar:
                 if selected_station:
                     navigator.set_current(selected_station)
                     st.session_state.selected_station_id = selected_station.id
-                    self.api_queue.add_task(self.data_fetcher.fetch_and_load, selected_station)
+                    self.api_queue.add_task(
+                        self.data_fetcher.refresh_and_save_station_data,
+                        station=selected_station,
+                        on_complete=lambda: st.session_state.task_status.update({"refresh_needed": True})
+                    )
                     st.rerun()
 
             st.markdown("---")
@@ -91,6 +95,7 @@ class Sidebar:
             st.toast(f"Adding refresh task for {station.name} to the queue...")
             self.api_queue.add_task(
                 self.data_fetcher.refresh_and_save_station_data,
-                station=station
+                station=station,
+                on_complete=lambda: st.session_state.task_status.update({"refresh_needed": True})
             )
             st.info("Refresh is running in the background.")
