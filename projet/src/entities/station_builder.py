@@ -31,8 +31,8 @@ class StationBuilder:
 
     def build(self):
         return Station(
-            self.id,
             self.nom,
+            self.id,
             self.longitude,
             self.latitude,
             self.reports
