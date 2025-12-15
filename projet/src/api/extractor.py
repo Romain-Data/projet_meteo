@@ -70,12 +70,7 @@ class APIExtractor(IDataExtractor):
         url_final = f"{url_base + station_id}/records"
         param = {
             'select': select,
-            'where': """heure_de_paris >= now(days=-4)
-                and minute(heure_de_paris) = 0
-                and temperature_en_degre_c <= 50
-                and temperature_en_degre_c >= -10
-                and humidite >= 50
-                and humidite < 100""",
+            'where': 'heure_de_paris >= now(days=-7) and minute(heure_de_paris) = 0',
             'order_by': 'heure_de_paris desc',
             'limit': '100'
         }

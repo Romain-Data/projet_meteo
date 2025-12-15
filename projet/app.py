@@ -1,4 +1,5 @@
 import logging
+import time
 import streamlit as st
 
 from projet.app_init import AppInitializer
@@ -28,14 +29,20 @@ def main():
         # Initialiser et démarrer la file d'attente une seule fois par session
         if 'api_queue' not in st.session_state:
             logger.info("Creating and starting a new ApiRequestQueue instance.")
-            st.session_state.api_queue = ApiRequestQueue()
-            st.session_state.api_queue.start()
             st.session_state.task_status = {"refresh_needed": False}
+            st.session_state.api_queue = ApiRequestQueue(task_status=st.session_state.task_status)
+            st.session_state.api_queue.start()
 
         # Vérifie si un rafraîchissement est nécessaire après une tâche de fond
         if st.session_state.task_status.get("refresh_needed", False):
             st.session_state.task_status["refresh_needed"] = False
             st.rerun()
+
+        # Affiche un spinner et recharge tant que la file d'attente travaille
+        if st.session_state.api_queue.is_working:
+            with st.spinner("Mise à jour des données en cours..."):
+                time.sleep(0.5)
+                st.rerun()
 
         # 2. NAVIGATION INITIALIZATION
         if 'navigator' not in st.session_state:

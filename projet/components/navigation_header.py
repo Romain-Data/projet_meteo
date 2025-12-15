@@ -30,8 +30,7 @@ class NavigationHeader:
                     st.session_state.selected_station_id = previous_station.id
                     api_queue.add_task(
                         data_fetcher.refresh_and_save_station_data,
-                        station=previous_station,
-                        on_complete=lambda: st.session_state.task_status.update({"refresh_needed": True})
+                        station=previous_station
                     )
                     st.rerun()
 
@@ -45,7 +44,6 @@ class NavigationHeader:
                     st.session_state.selected_station_id = next_station.id
                     api_queue.add_task(
                         data_fetcher.refresh_and_save_station_data,
-                        station=next_station,
-                        on_complete=lambda: st.session_state.task_status.update({"refresh_needed": True})
+                        station=next_station
                     )
                     st.rerun()

@@ -21,8 +21,8 @@
       "unit": "percent"
     },
     "pressure": {
-      "min": 800,
-      "max": 1100,
+      "min": 80000,
+      "max": 110000,
       "unit": "Pa"
     }
   },

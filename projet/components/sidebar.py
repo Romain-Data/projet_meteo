@@ -74,8 +74,7 @@ class Sidebar:
                     st.session_state.selected_station_id = selected_station.id
                     self.api_queue.add_task(
                         self.data_fetcher.refresh_and_save_station_data,
-                        station=selected_station,
-                        on_complete=lambda: st.session_state.task_status.update({"refresh_needed": True})
+                        station=selected_station
                     )
                     st.rerun()
 
@@ -96,6 +95,6 @@ class Sidebar:
             self.api_queue.add_task(
                 self.data_fetcher.refresh_and_save_station_data,
                 station=station,
-                on_complete=lambda: st.session_state.task_status.update({"refresh_needed": True})
             )
             st.info("Refresh is running in the background.")
+            st.rerun()
