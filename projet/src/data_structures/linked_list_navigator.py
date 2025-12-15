@@ -111,7 +111,7 @@ class LinkedListNavigator(IStationNavigator):
         current_node = current_node.next
 
         # Parcourir jusqu'à revenir à _head
-        while current_node is not self._head:
+        while current_node is not None and current_node is not self._head:
             if current_node.station == station:
                 self._current = current_node
                 return

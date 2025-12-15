@@ -100,23 +100,3 @@ class ConfigLoader:
                             or an empty dictionary if the section is not found.
         """
         return self.get(section, {})
-
-
-# def get_config(config_path: str = "projet/config/config.json") -> ConfigLoader:
-#     """
-#     Factory function to get the singleton instance of ConfigLoader.
-
-#     This function ensures that the configuration is loaded only once. On the first call,
-#     it creates a `ConfigLoader` instance, loads the configuration file, and caches it.
-#     Subsequent calls return the cached instance.
-
-#     Args:
-#         config_path (str, optional): The path to the configuration file.
-#                                      Defaults to "config/config.yaml".
-
-#     Returns:
-#         ConfigLoader: The singleton instance of the configuration loader.
-#     """
-#     config_loader = ConfigLoader()
-#     config_loader.load(config_path)
-#     return config_loader

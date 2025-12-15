@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 class TemperatureVizualizer:
 
-    def plot_temperature(self, reports: pd.DataFrame) -> go.Figure:
+    def plot(self, reports: pd.DataFrame) -> go.Figure:
         """
         Create an interactive line plot of temperature over time.
 

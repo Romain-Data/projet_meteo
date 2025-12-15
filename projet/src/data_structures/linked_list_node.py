@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from projet.src.entities.station import Station
 
 
-@dataclass
+@dataclass(eq=False)
 class StationNode:
     """
     Node in a doubly linked list of weather stations.

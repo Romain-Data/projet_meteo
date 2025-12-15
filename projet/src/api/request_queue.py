@@ -22,14 +22,15 @@ class ApiRequestQueue:
 
     def _worker(self):
         while not self._stop_event.is_set():
-            task, args, kwargs, on_complete = self._tasks.get(timeout=1)
             try:
+                task, args, kwargs, on_complete = self._tasks.get(timeout=1)
                 logger.info(f"Executing task '{task.__name__}'...")
                 task(*args, **kwargs)
                 self._tasks.task_done()
                 logger.info(f"Task '{task.__name__}' finished.")
                 if on_complete:
                     on_complete()
+                    
             except queue.Empty:
                 continue
             except Exception as e:
