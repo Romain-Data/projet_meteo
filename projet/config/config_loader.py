@@ -1,6 +1,5 @@
 import json
 import logging
-from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict
 
@@ -14,7 +13,14 @@ class ConfigLoader:
     This class is intended to be used as a singleton, managed by the
     `get_config` factory function.
     """
-    def __init__(self):
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(ConfigLoader, cls).__new__(cls)
+            cls._instance._config = None
+        return cls._instance
+
+    def __init__(self, config_path: str = "projet/config/config.json"):
         self._config: Dict[str, Any] | None = None
 
     def load(self, config_path: str) -> None:
@@ -93,24 +99,21 @@ class ConfigLoader:
         return self.get(section, {})
 
 
-@lru_cache(maxsize=1)
-# J'ai découvert lru_cache avec Claude qui ne laisse exister
-# qu'une seule instance de ConfigLoader
-def get_config(config_path: str = "projet/config/config.json") -> ConfigLoader:
-    """
-    Factory function to get the singleton instance of ConfigLoader.
+# def get_config(config_path: str = "projet/config/config.json") -> ConfigLoader:
+#     """
+#     Factory function to get the singleton instance of ConfigLoader.
 
-    This function ensures that the configuration is loaded only once. On the first call,
-    it creates a `ConfigLoader` instance, loads the configuration file, and caches it.
-    Subsequent calls return the cached instance.
+#     This function ensures that the configuration is loaded only once. On the first call,
+#     it creates a `ConfigLoader` instance, loads the configuration file, and caches it.
+#     Subsequent calls return the cached instance.
 
-    Args:
-        config_path (str, optional): The path to the configuration file.
-                                     Defaults to "config/config.yaml".
+#     Args:
+#         config_path (str, optional): The path to the configuration file.
+#                                      Defaults to "config/config.yaml".
 
-    Returns:
-        ConfigLoader: The singleton instance of the configuration loader.
-    """
-    config_loader = ConfigLoader()
-    config_loader.load(config_path)
-    return config_loader
+#     Returns:
+#         ConfigLoader: The singleton instance of the configuration loader.
+#     """
+#     config_loader = ConfigLoader()
+#     config_loader.load(config_path)
+#     return config_loader
