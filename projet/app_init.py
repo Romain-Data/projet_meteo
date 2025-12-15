@@ -55,29 +55,12 @@ class AppInitializer:
         df = pd.read_csv(stations_csv_path, sep=';')
 
         stations = [
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-            Station(
-                StationBuilder()
-                .set_id(row['id_nom'])
-                .set_nom(row['nom'])
-                .set_longitude(row['longitude'])
-                .set_latitude(row['latitude'])
-                .build()
-            )
-=======
-=======
->>>>>>> Stashed changes
             StationBuilder()
             .set_id(row['id_nom'])
             .set_nom(row['nom'])
             .set_longitude(row['longitude'])
             .set_latitude(row['latitude'])
             .build()
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
             for _, row in df.iterrows()
         ]
 
