@@ -16,6 +16,7 @@ Pitch client : société météo
 [x] Implémenter une liste chaînée pour l'affichage station par station
 [ ] Implémenter une file pour les extractions
 [x] Implémenter un dictionnaire pour la configuration
+[ ] Créer une interface pour la gestion des Listes chaînée et de la file
 
 
 ```text

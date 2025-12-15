@@ -1,6 +1,7 @@
 import logging
 
 from projet.src.api.extractor import APIExtractor
+from projet.src.storage.parquet_handler import ParquetHandler
 from projet.src.entities.station import Station
 from projet.src.processing.transformer import DataTransformer
 from projet.src.processing.validator import DataValidator
@@ -25,12 +26,14 @@ class DataFetcher:
         extractor: APIExtractor,
         transformer: DataTransformer,
         validator: DataValidator,
-        loader: DataLoader
+        loader: DataLoader,
+        parquet_handler: ParquetHandler  # Ajout de la dépendance
     ):
         self.extractor = extractor
         self.transformer = transformer
         self.validator = validator
         self.loader = loader
+        self.parquet_handler = parquet_handler  # Stockage de la dépendance
 
     def fetch_and_load(self, station: Station) -> bool:
         """
@@ -66,3 +69,20 @@ class DataFetcher:
         self.loader.load_reports(station, formatted_data)
         logger.info(f"Chargement réussi de {len(formatted_data)} relevés pour {station.name}")
         return True
+
+    def refresh_and_save_station_data(self, station: Station) -> bool:
+        """
+        Orchestrates the full refresh and save pipeline for a single station.
+
+        Args:
+            station: The Station entity to refresh and save.
+
+        Returns:
+            bool: True if the entire process was successful, False otherwise.
+        """
+        logger.info(f"Starting full refresh and save for station {station.name}.")
+        # On exécute la première partie du processus
+        if self.fetch_and_load(station):
+            # Si elle réussit, on exécute la sauvegarde
+            return self.parquet_handler.save_station_reports(station)
+        return False

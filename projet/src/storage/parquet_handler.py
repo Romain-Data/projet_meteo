@@ -55,10 +55,15 @@ class ParquetHandler:
 
                 df = df.sort_values('date').reset_index(drop=True)
 
-                logger.info(f"Merged data for station '{station.name}': {len(existing_df)} existing + {len(new_df)} new = {len(df)} total records")
+                logger.info(f"Merged data for station '{station.name}': "
+                            f"{len(existing_df)} existing + {len(new_df)} new = {len(df)} total records"
+                            )
 
             except Exception as e:
-                logger.error(f"Failed to read existing file for station '{station.name}': {type(e).__name__} - {str(e)}. Creating new file.")
+                logger.error(f"Failed to read existing file for station '{station.name}': "
+                             f"{type(e).__name__} - {str(e)}. Creating new file."
+                             )
+
                 df = new_df
         else:
             df = new_df
