@@ -8,6 +8,7 @@ from projet.components.navigation_header import NavigationHeader
 from projet.config.config_loader import ConfigLoader
 from projet.config.logging_config import setup_logging
 from projet.src.data_structures.linked_list_navigator import LinkedListNavigator
+from projet.src.api.request_queue import ApiRequestQueue
 
 setup_logging(log_level="INFO", log_file="weather_app.log")
 logger = logging.getLogger(__name__)
@@ -23,6 +24,18 @@ def main():
         init = AppInitializer(config)
         parquet_handler, data_fetcher, weather_charts = init.init_services()
         logger.info("Lancement de l'appli")
+
+        # Initialiser et démarrer la file d'attente une seule fois par session
+        if 'api_queue' not in st.session_state:
+            logger.info("Creating and starting a new ApiRequestQueue instance.")
+            st.session_state.api_queue = ApiRequestQueue()
+            st.session_state.api_queue.start()
+            st.session_state.task_status = {"refresh_needed": False}
+
+        # Vérifie si un rafraîchissement est nécessaire après une tâche de fond
+        if st.session_state.task_status.get("refresh_needed", False):
+            st.session_state.task_status["refresh_needed"] = False
+            st.rerun()
 
         # 2. NAVIGATION INITIALIZATION
         if 'navigator' not in st.session_state:
@@ -40,10 +53,17 @@ def main():
         st.markdown("---")
 
         # 4. NAVIGATION CONTROLS
-        NavigationHeader.render(st.session_state.navigator)
+        NavigationHeader.render(
+            navigator=st.session_state.navigator,
+            api_queue=st.session_state.api_queue,
+            data_fetcher=data_fetcher
+        )
 
         # 5. SIDEBAR (with station selector)
-        sidebar = Sidebar(parquet_handler, data_fetcher)
+        sidebar = Sidebar(
+            parquet_handler=parquet_handler,
+            data_fetcher=data_fetcher,
+            api_queue=st.session_state.api_queue)
         sidebar.render(st.session_state.navigator)
 
         # 6. GET CURRENT STATION (source of truth)

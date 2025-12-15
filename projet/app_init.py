@@ -4,9 +4,10 @@ from pathlib import Path
 from typing import List, Dict, Tuple
 import streamlit as st
 
-from projet.config.config_loader import ConfigLoader, get_config
+from projet.config.config_loader import ConfigLoader
 from projet.src.api.extractor import APIExtractor
 from projet.src.entities.station import Station
+from projet.src.entities.station_builder import StationBuilder
 from projet.src.processing.transformer import DataTransformer
 from projet.src.processing.validator import DataValidator
 from projet.src.services.data_fetcher import DataFetcher
@@ -56,10 +57,12 @@ class AppInitializer:
         stations = [
 <<<<<<< Updated upstream
             Station(
-                id=row['id_nom'],
-                name=row['nom'],
-                longitude=row['longitude'],
-                latitude=row['latitude']
+                StationBuilder()
+                .set_id(row['id_nom'])
+                .set_nom(row['nom'])
+                .set_longitude(row['longitude'])
+                .set_latitude(row['latitude'])
+                .build()
             )
 =======
             StationBuilder()
@@ -100,7 +103,7 @@ class AppInitializer:
             Tuple of (ParquetHandler, DataFetcher, DataVizualiser)
         """
         logger.info("Initializing services from configuration...")
-        config = get_config()
+        config = ConfigLoader()
 
         # --- Build low-level services from config ---
         extractor = APIExtractor(base_url=config.get_required('api.url_base'),
@@ -118,7 +121,8 @@ class AppInitializer:
             extractor=extractor,
             transformer=DataTransformer(),
             validator=validator,
-            loader=DataLoader()
+            loader=DataLoader(),
+            parquet_handler=parquet_handler  # Injection de la dépendance
         )
 
         weather_charts = DataVizualiserFactory()
@@ -128,7 +132,7 @@ class AppInitializer:
     @staticmethod
     def configure_page():
         """Configure Streamlit page settings."""
-        config = get_config()
+        config = ConfigLoader()
         app_config = config.get_section('app')
         st.set_page_config(
             page_title=app_config.get('page_title', "Weather Dashboard"),
@@ -139,7 +143,7 @@ class AppInitializer:
     @staticmethod
     def setup_logging():
         """Setup application logging based on the configuration file."""
-        config = get_config()
+        config = ConfigLoader()
         log_config = config.get_section('logging')
         logging.basicConfig(
             level=log_config.get('level', 'INFO').upper(),
