@@ -14,21 +14,24 @@ class ConfigLoader:
     `get_config` factory function.
     """
 
-    def __new__(cls):
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
         if cls._instance is None:
             cls._instance = super(ConfigLoader, cls).__new__(cls)
             cls._instance._config = None
         return cls._instance
 
     def __init__(self, config_path: str = "projet/config/config.json"):
-        self._config: Dict[str, Any] | None = None
+        if self._config is None:
+            self._load(config_path)
 
-    def load(self, config_path: str) -> None:
+    def _load(self, config_path: str) -> None:
         """
-        Loads the configuration from a config python file.
+        Loads the configuration from a JSON configuration file.
 
         Args:
-            config_path (str): The path to the YAML configuration file.
+            config_path (str): The path to the JSON configuration file.
 
         Raises:
             FileNotFoundError: If the configuration file is not found

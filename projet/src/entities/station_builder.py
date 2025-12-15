@@ -1,3 +1,6 @@
+from src.entities.station import Station
+
+
 class StationBuilder:
     def __init__(self):
         self.nom = ""
@@ -27,4 +30,10 @@ class StationBuilder:
         return self
 
     def build(self):
-        return
+        return Station(
+            self.nom,
+            self.id,
+            self.longitude,
+            self.latitude,
+            self.reports
+        )
