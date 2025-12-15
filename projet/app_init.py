@@ -12,7 +12,7 @@ from projet.src.processing.validator import DataValidator
 from projet.src.services.data_fetcher import DataFetcher
 from projet.src.services.loader import DataLoader
 from projet.src.storage.parquet_handler import ParquetHandler
-from projet.src.viz.chart import DataVizualiser
+from projet.src.viz.data_vizualizer_factory import DataVizualiserFactory
 
 logger = logging.getLogger(__name__)
 
@@ -54,12 +54,21 @@ class AppInitializer:
         df = pd.read_csv(stations_csv_path, sep=';')
 
         stations = [
+<<<<<<< Updated upstream
             Station(
                 id=row['id_nom'],
                 name=row['nom'],
                 longitude=row['longitude'],
                 latitude=row['latitude']
             )
+=======
+            StationBuilder()
+            .set_id(row['id_nom'])
+            .set_nom(row['nom'])
+            .set_longitude(row['longitude'])
+            .set_latitude(row['latitude'])
+            .build()
+>>>>>>> Stashed changes
             for _, row in df.iterrows()
         ]
 
@@ -80,7 +89,7 @@ class AppInitializer:
 
     @staticmethod
     @st.cache_resource(show_spinner=False)
-    def init_services() -> Tuple[ParquetHandler, DataFetcher, DataVizualiser]:
+    def init_services() -> Tuple[ParquetHandler, DataFetcher, DataVizualiserFactory]:
         """
         Initialize and cache all application services using settings from the config file.
 
@@ -112,7 +121,7 @@ class AppInitializer:
             loader=DataLoader()
         )
 
-        weather_charts = DataVizualiser()
+        weather_charts = DataVizualiserFactory()
 
         return parquet_handler, data_fetcher, weather_charts
 

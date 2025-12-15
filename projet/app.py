@@ -5,7 +5,7 @@ from projet.app_init import AppInitializer
 from projet.components.sidebar import Sidebar
 from projet.components.metrics_display import MetricsDisplay
 from projet.components.navigation_header import NavigationHeader
-from projet.config.config_loader import get_config
+from projet.config.config_loader import ConfigLoader
 from projet.config.logging_config import setup_logging
 from projet.src.data_structures.linked_list_navigator import LinkedListNavigator
 
@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 def main():
     try:
         # 1. APPLICATION SETUP
-        config = get_config()
+        config = ConfigLoader()
         AppInitializer.setup_logging()
         AppInitializer.configure_page()
 
@@ -71,7 +71,7 @@ def main():
         df_reports = current_station.get_all_reports()
 
         if not df_reports.empty:
-            fig_temp = weather_charts.plot_temperature(df_reports)
+            fig_temp = weather_charts.plot("temperature", df_reports)
             st.plotly_chart(fig_temp, width='stretch')
 
             # Display statistics

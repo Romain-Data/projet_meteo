@@ -14,15 +14,30 @@ class ConfigLoader:
     This class is intended to be used as a singleton, managed by the
     `get_config` factory function.
     """
+<<<<<<< Updated upstream
     def __init__(self):
         self._config: Dict[str, Any] | None = None
+=======
 
-    def load(self, config_path: str) -> None:
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super(ConfigLoader, cls).__new__(cls)
+            cls._instance._config = None
+        return cls._instance
+
+    def __init__(self, config_path: str = "projet/config/config.json"):
+        if self._config is None:
+            self._load(config_path)
+>>>>>>> Stashed changes
+
+    def _load(self, config_path: str) -> None:
         """
-        Loads the configuration from a config python file.
+        Loads the configuration from a JSON configuration file.
 
         Args:
-            config_path (str): The path to the YAML configuration file.
+            config_path (str): The path to the JSON configuration file.
 
         Raises:
             FileNotFoundError: If the configuration file is not found
