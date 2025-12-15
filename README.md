@@ -13,15 +13,15 @@ Pitch client : société météo
 
 
 # Design patterns implémentés
-[x] Singleton sur [config_loader.py](projet/config/config_loader.py)
-[x] Builder sur [station_buider.py](projet/src/entities/station_builder.py)
-[x] Factory sur [data_vizualizer.py](projet/src/viz/data_vizualizer.py)
+[x] Singleton sur [config_loader.py](projet/config/config_loader.py)\
+[x] Builder sur [station_buider.py](projet/src/entities/station_builder.py)\
+[x] Factory sur [data_vizualizer.py](projet/src/viz/data_vizualizer.py)\
 
 # Installation et Lancement
 
 ## 1. Cloner le dépôt
 ```bash
-git clone <url_du_repo>
+git clone https://github.com/Romain-Data/projet_meteo.git
 cd projet_meteo
 ```
 
@@ -35,7 +35,7 @@ pip install -r requirements.txt
 python run.py run
 ```
 
-
+# Architecture de fichiers
 ```text
 .
 ├── projet
