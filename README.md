@@ -16,6 +16,8 @@ Pitch client : société météo
 - [x] Singleton sur [config_loader.py](projet/config/config_loader.py)
 - [x] Builder sur [station_buider.py](projet/src/entities/station_builder.py)
 - [x] Factory sur [data_vizualizer.py](projet/src/viz/data_vizualizer.py)
+- [x] Decorator [station_display_decorator.py](projet/src/components/station_display_decorator.py)
+
 
 # Installation et Lancement
 
