@@ -21,6 +21,10 @@ Pitch client : société météo
 
 # Installation et Lancement
 
+````
+Python 3.12.4
+```
+
 ## 1. Cloner le dépôt
 ```bash
 git clone https://github.com/Romain-Data/projet_meteo.git
