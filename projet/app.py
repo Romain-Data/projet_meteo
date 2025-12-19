@@ -96,21 +96,29 @@ def main():
         # 9. DISPLAY CHARTS AND METRICS
         st.header("📊 Weather Timeline")
 
-        metric_options = {"Temperature": "temperature", "Humidity": "humidity", "Pressure": "pressure"}
+        metric_options = {
+            "Temperature": "temperature",
+            "Humidity": "humidity",
+            "Pressure": "pressure",
+            "Surprise 🎁": "surprise"
+        }
         selected_metric_label = st.selectbox("Select metric:", list(metric_options.keys()))
         selected_metric = metric_options[selected_metric_label]
 
-        df_reports = current_station.get_all_reports()
-
-        if not df_reports.empty:
-            fig = weather_charts.plot(selected_metric, df_reports)
-            st.plotly_chart(fig, width='stretch')
-
-            # Display statistics
-            metrics_display = MetricsDisplay()
-            metrics_display.render_statistics(df_reports)
+        if selected_metric == "surprise":
+            st.video("https://www.youtube.com/watch?v=dQw4w9WgXcQ", autoplay=True)
         else:
-            st.info("Not enough data to display chart")
+            df_reports = current_station.get_all_reports()
+
+            if not df_reports.empty:
+                fig = weather_charts.plot(selected_metric, df_reports)
+                st.plotly_chart(fig, width='stretch')
+
+                # Display statistics
+                metrics_display = MetricsDisplay()
+                metrics_display.render_statistics(df_reports)
+            else:
+                st.info("Not enough data to display chart")
 
     except Exception as e:
         logger.critical(f"Erreur fatale: {e}", exc_info=True)
