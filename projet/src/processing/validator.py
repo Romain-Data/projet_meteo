@@ -15,7 +15,7 @@ class DataValidator:
 
     def __init__(self, rules: dict):
         """
-        Initialise le validateur avec un ensemble de règles.
+        Initializes the validator with a set of rules.
 
         Args:
             rules (dict): Dictionnary of rules set in config.yaml

@@ -17,10 +17,8 @@ class PressureVizualizer:
         Returns:
             go.Figure: Plotly figure object with pressure timeline
         """
-        # Créer la figure
         fig = go.Figure()
 
-        # Ajouter la ligne de pression
         fig.add_trace(go.Scatter(
             x=reports['date'],
             y=reports['pressure'],
@@ -30,7 +28,6 @@ class PressureVizualizer:
             marker=dict(size=6, color='#2ca02c')
         ))
 
-        # Détecter les changements de jour et créer les annotations
         annotations = []
         for i in range(1, len(reports)):
             if reports['date'].dt.date.iloc[i] != reports['date'].dt.date.iloc[i - 1]:
@@ -50,7 +47,6 @@ class PressureVizualizer:
                     )
                 )
 
-        # Configuration de la mise en page
         fig.update_layout(
             title=dict(
                 text="Humidity Over Time",

@@ -103,14 +103,14 @@ class LinkedListNavigator(IStationNavigator):
 
         current_node = self._head
 
-        # Première itération : vérifier _head
+        # First itération : check _head
         if current_node.station == station:
             self._current = current_node
             return
 
         current_node = current_node.next
 
-        # Parcourir jusqu'à revenir à _head
+        # Navigate back to _head
         while current_node is not None and current_node is not self._head:
             if current_node.station == station:
                 self._current = current_node

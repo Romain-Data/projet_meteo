@@ -5,14 +5,14 @@ from src.entities.weather_report import WeatherReport
 class Station:
     def __init__(self, id: str, name: str, longitude: float, latitude: float,
                  reports: list[WeatherReport] = []) -> None:
-        """Instantcie la classe Station
+        """Instantiate the Station class
 
         Args:
-            id (str): identitiant de la station
-            name (str): nom de la station
+            id (str): Station identifier
+            name (str): Station name
             longitude (float)
             latitude (float)
-            reports (list[WeatherReport], optional): liste des rapports météo liés à la station.
+            reports (list[WeatherReport], optional): List of weather reports linked to the station.
                 Defaults to [].
         """
         self.id: str = id
@@ -26,7 +26,7 @@ class Station:
         Get all weather reports into one dataframe
 
         Returns:
-            pd.DataFrame: pd.DataFrame: DataFrame avec les colonnes:
+            pd.DataFrame: DataFrame with columns:
                 - date (datetime)
                 - temperature (float)
                 - humidity (int)

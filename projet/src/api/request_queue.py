@@ -9,8 +9,8 @@ logger = logging.getLogger(__name__)
 
 class ApiRequestQueue:
     """
-    Gère une file d'attente pour exécuter des tâches (comme des requêtes API)
-    en arrière-plan pour ne pas bloquer l'application principale.
+    Manages a queue to execute tasks (such as API requests)
+    in the background to avoid blocking the main application.
     """
     def __init__(self, task_status: dict | None = None):
         self._task_status = task_status
@@ -34,8 +34,8 @@ class ApiRequestQueue:
                 try:
                     logger.info(f"Executing task '{task.__name__}'...")
                     task(*args, **kwargs)
-                    
-                    # Mise à jour directe du statut partagé (thread-safe pour les dicts)
+
+                    # Direct update of shared status (thread-safe for dicts)
                     if self._task_status is not None:
                         self._task_status["refresh_needed"] = True
 

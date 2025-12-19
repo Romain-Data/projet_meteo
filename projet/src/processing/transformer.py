@@ -30,7 +30,7 @@ class DataTransformer:
 
         Returns:
             pd.DataFrame: Transformed DataFrame with additional 'display_date' column.
-                         Returns empty DataFrame if transformation fails.
+                        Returns empty DataFrame if transformation fails.
         """
         try:
             if data.empty:
@@ -64,7 +64,7 @@ class DataTransformer:
         """
         df = data.copy()
 
-        # Mapping: API/Parquet -> Internal
+        # Mapping: API/Parquet
         column_mapping = {
             'heure_de_paris': 'date',
             'temperature_en_degre_c': 'temperature',
@@ -72,13 +72,13 @@ class DataTransformer:
             'pression': 'pressure'
         }
 
-        # Renomme seulement les colonnes qui existent
+        # Rename only the columns that exist
         df = df.rename(columns={
-            k: v for k, v in column_mapping.items() 
+            k: v for k, v in column_mapping.items()
             if k in df.columns
         })
 
-        # Génère display_date si absent
+        # Generates display_date if absent
         if 'display_date' not in df.columns:
             df['display_date'] = df['date'].dt.strftime('%Y-%m-%d %H:%M:%S')
 

@@ -19,7 +19,7 @@ class APIExtractor(IDataExtractor):
 
     def __init__(
             self,
-            base_url: str = "https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/", 
+            base_url: str = "https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/",
             timeout: int = 30
     ):
         """
@@ -58,11 +58,8 @@ class APIExtractor(IDataExtractor):
                 Returns empty DataFrame if no records match the criteria.
 
         API Query Details:
-            - Time range: Last 4 days (heure_de_paris >= now(days=-4))
+            - Time range: Last 7 days (heure_de_paris >= now(days=-7))
             - Temporal resolution: Hourly data (minute(heure_de_paris) = 0)
-            - Data quality filters:
-                - Temperature: -10°C to 50°C
-                - Humidity: 50% to 99%
             - Limit: 100 most recent records matching criteria
             """
         station_name = station.name
@@ -81,13 +78,10 @@ class APIExtractor(IDataExtractor):
 
             response = requests.get(url_final, params=param, timeout=self.timeout)
 
-            # Check HTTP status
             response.raise_for_status()
 
-            # Parse JSON response
             json_data = response.json()
 
-            # Extract results
             if 'results' not in json_data:
                 logger.warning(f"No 'results' key in API response for station '{station_name}'")
                 return pd.DataFrame()

@@ -26,7 +26,6 @@ class TemperatureVizualizer:
         try:
             fig = go.Figure()
 
-            # Add temperature line
             fig.add_trace(go.Scatter(
                 x=reports['date'],
                 y=reports['temperature'],
@@ -36,7 +35,6 @@ class TemperatureVizualizer:
                 marker=dict(size=6, color='#FB8500')
             ))
 
-            # Detect changes in the day and create annotations
             annotations = []
             for i in range(1, len(reports)):
                 if reports['date'].dt.date.iloc[i] != reports['date'].dt.date.iloc[i - 1]:
@@ -56,7 +54,6 @@ class TemperatureVizualizer:
                         )
                     )
 
-            # Page layout configuration
             fig.update_layout(
                 title=dict(
                     text="Temperature Over Time",
@@ -70,7 +67,7 @@ class TemperatureVizualizer:
                         standoff=25
                     ),
                     tickformat='%Hh',
-                    dtick=6 * 60 * 60 * 1000,  # 6-hour interval
+                    dtick=6 * 60 * 60 * 1000,
                     tickmode='linear',
                     gridcolor='rgba(128, 128, 128, 0.3)',
                     showgrid=True,

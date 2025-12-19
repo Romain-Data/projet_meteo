@@ -17,10 +17,8 @@ class HumidityVizualizer:
         Returns:
             go.Figure: Plotly figure object with humidity timeline
         """
-        # Créer la figure
         fig = go.Figure()
 
-        # Ajouter la ligne d'humidité
         fig.add_trace(go.Scatter(
             x=reports['date'],
             y=reports['humidity'],
@@ -30,7 +28,6 @@ class HumidityVizualizer:
             marker=dict(size=6, color='#1f77b4')
         ))
 
-        # Détecter les changements de jour et créer les annotations
         annotations = []
         for i in range(1, len(reports)):
             if reports['date'].dt.date.iloc[i] != reports['date'].dt.date.iloc[i - 1]:
@@ -50,7 +47,6 @@ class HumidityVizualizer:
                     )
                 )
 
-        # Configuration de la mise en page
         fig.update_layout(
             title=dict(
                 text="Humidity Over Time",

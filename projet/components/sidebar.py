@@ -53,7 +53,7 @@ class Sidebar:
                 current_index = 0
                 st.session_state.selected_station_id = station_ids[0]
 
-            # Station selector (jump to functionality)
+            # Station selector (jump to)
             selected_id = st.selectbox(
                 "Choose a station",
                 options=station_ids,
@@ -66,7 +66,7 @@ class Sidebar:
             if selected_id != current_id:
                 # Find the selected station object
                 selected_station = next(
-                    (s for s in all_stations if s.id == selected_id),
+                    (station for station in all_stations if station.id == selected_id),
                     None
                 )
                 if selected_station:

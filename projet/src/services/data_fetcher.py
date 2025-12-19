@@ -27,13 +27,13 @@ class DataFetcher:
         transformer: DataTransformer,
         validator: DataValidator,
         loader: DataLoader,
-        parquet_handler: ParquetHandler  # Ajout de la dépendance
+        parquet_handler: ParquetHandler
     ):
         self.extractor = extractor
         self.transformer = transformer
         self.validator = validator
         self.loader = loader
-        self.parquet_handler = parquet_handler  # Stockage de la dépendance
+        self.parquet_handler = parquet_handler
 
     def fetch_and_load(self, station: Station) -> bool:
         """
@@ -81,8 +81,6 @@ class DataFetcher:
             bool: True if the entire process was successful, False otherwise.
         """
         logger.info(f"Starting full refresh and save for station {station.name}.")
-        # On exécute la première partie du processus
         if self.fetch_and_load(station):
-            # Si elle réussit, on exécute la sauvegarde
             return self.parquet_handler.save_station_reports(station)
         return False

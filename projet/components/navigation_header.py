@@ -19,7 +19,6 @@ class NavigationHeader:
             api_queue: The background task queue.
             data_fetcher: The service for fetching data.
         """
-        # Create 3 columns with empty middle column for spacing
         col1, col2, col3 = st.columns([1, 2, 1])
 
         with col1:
@@ -34,7 +33,7 @@ class NavigationHeader:
                     )
                     st.rerun()
 
-        # col2 is intentionally left empty for spacing
+        # col2 left empty for spacing
 
         with col3:
             if st.button("Suivant →", key="btn_next", width='stretch'):

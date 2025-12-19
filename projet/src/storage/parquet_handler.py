@@ -20,7 +20,6 @@ class ParquetHandler:
             data_dir: Parquet file storage directory
         """
         if data_dir is None:
-            # Remonter depuis src/services vers la racine, puis data/parquet
             project_root = Path(__file__).parent.parent.parent
             data_dir = project_root / "data" / "parquet"
 
