@@ -94,7 +94,7 @@ class AppInitializer:
         logger.info("Initializing services from configuration...")
         config = ConfigLoader()
 
-        # --- Build low-level services from config ---
+        # Build low-level services from config
         extractor = APIExtractor(base_url=config.get_required('api.url_base'),
                                  timeout=config.get_required('api.timeout'))
 
@@ -105,13 +105,13 @@ class AppInitializer:
                                          compression=config.get_required('storage.parquet_compression')
                                          )
 
-        # --- Build high-level services by injecting dependencies ---
+        # Build high-level services by injecting dependencies
         data_fetcher = DataFetcher(
             extractor=extractor,
             transformer=DataTransformer(),
             validator=validator,
             loader=DataLoader(),
-            parquet_handler=parquet_handler  # Injection de la dépendance
+            parquet_handler=parquet_handler
         )
 
         weather_charts = DataVizualiserFactory()
