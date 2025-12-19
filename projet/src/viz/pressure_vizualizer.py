@@ -49,7 +49,7 @@ class PressureVizualizer:
 
         fig.update_layout(
             title=dict(
-                text="Humidity Over Time",
+                text="Pressure Over Time",
                 x=0.5,
                 xanchor='center',
                 font=dict(size=16)
@@ -67,7 +67,7 @@ class PressureVizualizer:
                 tickangle=45
             ),
             yaxis=dict(
-                title="Humidity (%)",
+                title="Pressure (Pa)",
                 gridcolor='rgba(128, 128, 128, 0.3)',
                 showgrid=True
             ),

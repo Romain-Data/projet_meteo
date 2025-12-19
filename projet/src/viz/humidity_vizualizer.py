@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 class HumidityVizualizer:
 
-    def plot_humidity(self, reports: pd.DataFrame) -> go.Figure:
+    def plot(self, reports: pd.DataFrame) -> go.Figure:
         """
         Create an interactive line plot of humidity over time.
 

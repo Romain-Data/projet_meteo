@@ -94,12 +94,17 @@ def main():
         st.markdown("---")
 
         # 9. DISPLAY CHARTS AND METRICS
-        st.header("📊 Temperature Timeline")
+        st.header("📊 Weather Timeline")
+
+        metric_options = {"Temperature": "temperature", "Humidity": "humidity", "Pressure": "pressure"}
+        selected_metric_label = st.selectbox("Select metric:", list(metric_options.keys()))
+        selected_metric = metric_options[selected_metric_label]
+
         df_reports = current_station.get_all_reports()
 
         if not df_reports.empty:
-            fig_temp = weather_charts.plot("temperature", df_reports)
-            st.plotly_chart(fig_temp, width='stretch')
+            fig = weather_charts.plot(selected_metric, df_reports)
+            st.plotly_chart(fig, width='stretch')
 
             # Display statistics
             metrics_display = MetricsDisplay()
