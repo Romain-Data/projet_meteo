@@ -1,3 +1,7 @@
+"""
+ConfigLoader class for loading and providing access to the application configuration.
+"""
+
 import json
 import logging
 from pathlib import Path
@@ -37,13 +41,19 @@ class ConfigLoader:
         path = Path(fichier_config)
 
         if not path.exists():
-            logger.error(f"Le fichier de configuration n'a pas été trouvé : {fichier_config}")
+            logger.error(
+                "Le fichier de configuration n'a pas été trouvé : %s",
+                fichier_config
+            )
             raise FileNotFoundError(f"Config not found: {fichier_config}")
 
         with open(path, 'r', encoding='utf-8') as file:
             self._config = json.load(file)
 
-        logger.info(f"Configuration chargée depuis {fichier_config}")
+        logger.info(
+            "Configuration chargée depuis %s",
+            fichier_config
+        )
 
     def get(self, key: str, default: Any = None) -> Any:
         """
@@ -51,23 +61,29 @@ class ConfigLoader:
 
         Args:
             key (str): A string representing the nested key (e.g., 'api.base_url').
-            default (Any, optional): The default value to return if the key is not found. Defaults to None.
+            default (Any, optional):
+                The default value to return if the key is not found. Defaults to None.
 
         Returns:
             Any: The requested configuration value, or the default value if not found.
         """
         if self._config is None:
-            logger.warning("La configuration n'a pas été chargée. Appel de .get() sur une config vide.")
+            logger.warning(
+                "La configuration n'a pas été chargée. Appel de .get() sur une config vide."
+            )
             return default
 
         keys = key.split('.')
         value = self._config
 
-        for key in keys:
-            if isinstance(value, dict) and key in value:
-                value = value[key]
+        for sub_key in keys:
+            if isinstance(value, dict) and sub_key in value:
+                value = value[sub_key]
             else:
-                logger.debug(f"Clé '{key}' non trouvée. Retour de la valeur par défaut.")
+                logger.debug(
+                    "Clé '%s' non trouvée. Retour de la valeur par défaut.",
+                    sub_key
+                )
                 return default
 
         return value

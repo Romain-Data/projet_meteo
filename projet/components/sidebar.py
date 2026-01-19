@@ -1,3 +1,8 @@
+"""
+Sidebar component for Streamlit application.
+Handles station selection and data refresh.
+"""
+
 import streamlit as st
 from projet.src.data_structures.linked_list_navigator import LinkedListNavigator
 from projet.src.services.data_fetcher import DataFetcher
@@ -6,9 +11,17 @@ from projet.src.api.request_queue import ApiRequestQueue
 
 
 class Sidebar:
-    """Handles sidebar UI and interactions."""
+    """
+    Handles sidebar UI and interactions.
+    """
+    # pylint: disable=too-few-public-methods
 
-    def __init__(self, parquet_handler: ParquetHandler, data_fetcher: DataFetcher, api_queue: ApiRequestQueue):
+    def __init__(
+        self,
+        parquet_handler: ParquetHandler,
+        data_fetcher: DataFetcher,
+        api_queue: ApiRequestQueue
+    ):
         """
         Initialize Sidebar with required services.
 

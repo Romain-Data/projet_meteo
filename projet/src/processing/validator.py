@@ -1,3 +1,7 @@
+"""
+Data validation module for weather data.
+"""
+
 import logging
 import numpy as np
 import pandas as pd
@@ -6,6 +10,10 @@ logger = logging.getLogger(__name__)
 
 
 class DataValidator:
+    """
+    Validator class for weather data.
+    """
+
     REQUIRED_COLUMNS = {
         'pressure': np.int64,
         'humidity': np.int64,
@@ -21,7 +29,7 @@ class DataValidator:
             rules (dict): Dictionnary of rules set in config.yaml
         """
         self.rules = rules
-        logger.info(f"DataValidator initialized with rules: {rules}")
+        logger.info("DataValidator initialized with rules: %s", rules)
 
     def is_format_correct(self, data: pd.DataFrame) -> bool:
         """
@@ -38,11 +46,11 @@ class DataValidator:
                 logger.warning("Empty DataFrame provided for format validation")
                 return False
 
-            logger.info(f"Validating format for {len(data)} records")
+            logger.info("Validating format for %s records", len(data))
 
             for column, expected_dtype in self.REQUIRED_COLUMNS.items():
                 if column not in data.columns:
-                    logger.error(f"Missing required column: '{column}'")
+                    logger.error("Missing required column: %s", column)
                     return False
 
                 actual_dtype = data[column].dtype
@@ -53,16 +61,21 @@ class DataValidator:
                     is_valid = actual_dtype == expected_dtype
 
                 if not is_valid:
-                    logger.error(f"Invalid type for '{column}': expected {expected_dtype}, got {actual_dtype}")
+                    logger.error(
+                        "Invalid type for %s: expected %s, got %s",
+                        column,
+                        expected_dtype,
+                        actual_dtype
+                    )
                     return False
 
-                logger.debug(f"✓ '{column}' has correct type: {actual_dtype}")
+                logger.debug("✓ %s has correct type: %s", column, actual_dtype)
 
             logger.info("Format validation passed")
             return True
 
-        except Exception as e:
-            logger.error(f"Format validation failed: {type(e).__name__} - {str(e)}")
+        except Exception as e:  # pylint: disable=broad-exception-caught
+            logger.error("Format validation failed: %s - %s", type(e).__name__, str(e))
             return False
 
     def are_values_valid(self, data: pd.DataFrame) -> bool:
@@ -80,7 +93,7 @@ class DataValidator:
                 logger.warning("Empty DataFrame provided for value validation")
                 return False
 
-            logger.info(f"Validating values for {len(data)} records")
+            logger.info("Validating values for %s records", len(data))
 
             for column, rule_details in self.rules.items():
                 if column not in data.columns:
@@ -92,14 +105,19 @@ class DataValidator:
                 is_valid = data[column].between(min_val, max_val).all()
 
                 if not is_valid:
-                    logger.error(f"Valeurs invalides dans '{column}' hors de l'intervalle [{min_val}, {max_val}]")
+                    logger.error(
+                        "Valeurs invalides dans %s hors de l'intervalle [%s, %s]",
+                        column,
+                        min_val,
+                        max_val
+                    )
                     return False
 
-                logger.debug(f"✓ '{column}' values in valid range [{min_val}, {max_val}]")
+                logger.debug("✓ %s values in valid range [%s, %s]", column, min_val, max_val)
 
             logger.info("Value validation passed")
             return True
 
-        except Exception as e:
-            logger.error(f"Value validation failed: {type(e).__name__} - {str(e)}")
+        except Exception as e:  # pylint: disable=broad-exception-caught
+            logger.error("Value validation failed: %s - %s", type(e).__name__, str(e))
             return False

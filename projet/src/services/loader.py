@@ -1,3 +1,7 @@
+"""
+Module for loading validated weather data into Station entities.
+"""
+
 import logging
 import pandas as pd
 from projet.src.entities.station import Station
@@ -8,13 +12,13 @@ logger = logging.getLogger(__name__)
 
 class DataLoaderError(Exception):
     """Exception raised for any DataLoader error."""
-    pass
 
 
 class DataLoader:
     """
     Loads validated weather data into Station entities.
     """
+    # pylint: disable=too-few-public-methods
 
     REQUIRED_COLUMNS = {'date', 'temperature', 'humidity', 'pressure'}
 
@@ -36,10 +40,16 @@ class DataLoader:
         """
         try:
             if data.empty:
-                raise DataLoaderError(f"Cannot load reports from empty DataFrame for station '{station.name}'")
+                raise DataLoaderError(
+                    f"Cannot load reports from empty DataFrame for station {station.name}"
+                )
 
             self._validate_columns(data, station.name)
-            logger.debug(f"Validated {len(data)} rows for station '{station.name}'")
+            logger.debug(
+                "Validated %d rows for station %s",
+                len(data),
+                station.name
+            )
 
             reports = [
                 self._create_report(row)
@@ -47,13 +57,24 @@ class DataLoader:
             ]
 
             station.reports = reports
-            logger.info(f"✅ Loaded {len(reports)} reports for station '{station.name}'")
+            logger.info(
+                "Loaded %d reports for station %s",
+                len(reports),
+                station.name
+            )
 
         except DataLoaderError:
             raise
         except Exception as e:
-            logger.error(f"Failed to load reports for station '{station.name}': {e}", exc_info=True)
-            raise DataLoaderError(f"Failed to load reports for station '{station.name}': {e}") from e
+            logger.error(
+                "Failed to load reports for station %s: %s",
+                station.name,
+                e,
+                exc_info=True
+            )
+            raise DataLoaderError(
+                f"Failed to load reports for station {station.name}: {e}"
+            ) from e
 
     def _validate_columns(self, data: pd.DataFrame, station_name: str) -> None:
         """
@@ -70,8 +91,9 @@ class DataLoader:
 
         if missing:
             raise DataLoaderError(
-                f"Missing required columns for station '{station_name}': {missing}. "
-                f"Data must be transformed by DataTransformer before loading.")
+                f"Missing required columns for station {station_name}: {missing}. "
+                "Data must be transformed by DataTransformer before loading."
+            )
 
     def _create_report(self, row: pd.Series) -> WeatherReport:
         """

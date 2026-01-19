@@ -1,7 +1,12 @@
-import logging
-import pandas as pd
+"""
+Module ensuring the initialization of the application.
+It handles configuration loading, service dependencies injection, and Streamlit setup.
+"""
 from pathlib import Path
 from typing import List, Dict, Tuple
+
+import logging
+import pandas as pd
 import streamlit as st
 
 from projet.config.config_loader import ConfigLoader
@@ -34,22 +39,19 @@ class AppInitializer:
         self.config = config
 
     @st.cache_data()
-    def load_stations(_self) -> List[Station]:
+    def load_stations(_self) -> List[Station]:  # pylint: disable=no-self-argument
         """
         Load weather stations from CSV file.
-
-        The '_self' parameter is used because this method is cached by Streamlit,
-        and caching works better with instance methods.
 
         Returns:
             List[Station]: List of Station objects with id, name, and coordinates
         """
         stations_csv_path_str = _self.config.get("storage.stations_csv")
         stations_csv_path = Path(stations_csv_path_str)
-        logger.info(f"Loading stations from {stations_csv_path}")
+        logger.info("Loading stations from %s", stations_csv_path)
 
         if not stations_csv_path.exists():
-            logger.error(f"Stations file not found: {stations_csv_path}")
+            logger.error("Stations file not found: %s", stations_csv_path)
             raise FileNotFoundError(f"Stations file not found: {stations_csv_path}")
 
         df = pd.read_csv(stations_csv_path, sep=';')
@@ -64,7 +66,7 @@ class AppInitializer:
             for _, row in df.iterrows()
         ]
 
-        logger.info(f"Loaded {len(stations)} stations")
+        logger.info("Loaded %d stations", len(stations))
         return stations
 
     def create_station_lookup(self, stations: List[Station]) -> Dict[str, Station]:
@@ -102,7 +104,7 @@ class AppInitializer:
         validator = DataValidator(rules=validation_rules)
 
         parquet_handler = ParquetHandler(data_dir=Path(config.get_required('storage.data_path')),
-                                         compression=config.get_required('storage.parquet_compression')
+                                    compression=config.get_required('storage.parquet_compression')
                                          )
 
         # Build high-level services by injecting dependencies

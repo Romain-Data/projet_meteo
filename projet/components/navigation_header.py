@@ -1,3 +1,8 @@
+"""
+Navigation header component for Streamlit application.
+Handles station navigation buttons.
+"""
+
 import streamlit as st
 
 from projet.src.api.request_queue import ApiRequestQueue
@@ -6,10 +11,15 @@ from projet.src.services.data_fetcher import DataFetcher
 
 
 class NavigationHeader:
-    """Handles station navigation display in the main area."""
+    """Handles station navigation buttons display in the main area."""
+    # pylint: disable=too-few-public-methods
 
     @staticmethod
-    def render(navigator: LinkedListNavigator, api_queue: ApiRequestQueue, data_fetcher: DataFetcher):
+    def render(
+        navigator: LinkedListNavigator,
+        api_queue: ApiRequestQueue,
+        data_fetcher: DataFetcher
+    ):
         """
         Render navigation buttons above the station header.
         Synchronizes session state when navigation occurs.
@@ -19,10 +29,10 @@ class NavigationHeader:
             api_queue: The background task queue.
             data_fetcher: The service for fetching data.
         """
-        col1, col2, col3 = st.columns([1, 2, 1])
+        col1, _, col3 = st.columns([1, 2, 1])
 
         with col1:
-            if st.button("← Précédent", key="btn_previous", width='stretch'):
+            if st.button("← Previous", key="btn_previous", width='stretch'):
                 previous_station = navigator.get_previous()
                 if previous_station:
                     # Synchronize session state
@@ -36,7 +46,7 @@ class NavigationHeader:
         # col2 left empty for spacing
 
         with col3:
-            if st.button("Suivant →", key="btn_next", width='stretch'):
+            if st.button("Next →", key="btn_next", width='stretch'):
                 next_station = navigator.get_next()
                 if next_station:
                     # Synchronize session state

@@ -1,9 +1,15 @@
+"""
+Metrics display component for Streamlit application.
+Handles display of current weather metrics.
+"""
+
 import streamlit as st
 import pandas as pd
 
 
 class MetricsDisplay:
     """Handles display of current weather metrics."""
+    # pylint: disable=too-few-public-methods
 
     @staticmethod
     def render_statistics(df_reports: pd.DataFrame):

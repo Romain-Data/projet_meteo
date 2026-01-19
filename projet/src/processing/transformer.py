@@ -1,3 +1,7 @@
+"""
+Module for transforming weather data.
+"""
+
 import logging
 import numpy as np
 import pandas as pd
@@ -6,6 +10,9 @@ logger = logging.getLogger(__name__)
 
 
 class DataTransformer:
+    """
+    Class for transforming weather data.
+    """
 
     DATE_COLUMN = 'heure_de_paris'
     DISPLAY_DATE_COLUMN = 'display_date'
@@ -19,7 +26,7 @@ class DataTransformer:
                 Default: "%d/%m/%Y %Hh"
         """
         self.date_format = date_format
-        logger.info(f"DataTransformer initialized with date_format: {date_format}")
+        logger.info("DataTransformer initialized with date_format: %s", date_format)
 
     def format_data(self, data: pd.DataFrame) -> pd.DataFrame:
         """
@@ -38,10 +45,10 @@ class DataTransformer:
                 return pd.DataFrame()
 
             if self.DATE_COLUMN not in data.columns:
-                logger.error(f"Missing required column '{self.DATE_COLUMN}'")
+                logger.error("Missing required column '%s'", self.DATE_COLUMN)
                 return pd.DataFrame()
 
-            logger.info(f"Transforming DataFrame with {len(data)} records")
+            logger.info("Transforming DataFrame with %s records", len(data))
 
             data['heure_de_paris'] = pd.to_datetime(data['heure_de_paris'])
             data['display_date'] = data['heure_de_paris'].dt.strftime('%Y-%m-%d %H:%M')
@@ -49,11 +56,11 @@ class DataTransformer:
             data['humidite'] = data['humidite'].astype(np.int64)
             data['pression'] = data['pression'].astype(np.int64)
 
-            logger.info(f"Successfully transformed {len(data)} records")
+            logger.info("Successfully transformed %s records", len(data))
             return data
 
-        except Exception as e:
-            logger.error(f"Transformation failed: {type(e).__name__} - {str(e)}")
+        except Exception as e:  # pylint: disable=broad-exception-caught
+            logger.error("Transformation failed: %s - %s", type(e).__name__, str(e))
             return pd.DataFrame()
 
     def normalize_columns(self, data: pd.DataFrame) -> pd.DataFrame:

@@ -1,3 +1,7 @@
+"""
+Linked list navigator implementation for station navigation.
+"""
+
 from projet.src.entities.station import Station
 from projet.src.data_structures.linked_list_node import StationNode
 from projet.src.interfaces.station_navigator import IStationNavigator

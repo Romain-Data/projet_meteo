@@ -51,6 +51,9 @@ def setup_logging(log_level: str = "INFO", log_file: str = "app.log"):
     root_logger.addHandler(console_handler)
 
     # Confirmation log
-    logging.info(f"📝 Logging configuré - Fichier: {log_path}")
+    logging.info(
+        "📝 Logging configuré - Fichier: %s",
+        log_path
+    )
 
     return log_path

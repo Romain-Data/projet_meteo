@@ -1,3 +1,10 @@
+"""
+Main entry point for the Weather Dashboard application.
+
+This module sets up the Streamlit interface, initializes the application components
+(navigator, sidebar, service), and handles the main event loop for user interactions.
+"""
+
 import logging
 import time
 import streamlit as st
@@ -16,6 +23,7 @@ logger = logging.getLogger(__name__)
 
 
 def main():
+    """ Main function to run the weather application. """
     try:
         # 1. APPLICATION SETUP
         config = ConfigLoader()
@@ -53,7 +61,7 @@ def main():
             first_station = st.session_state.navigator.get_current()
             st.session_state.selected_station_id = first_station.id
 
-            logger.info(f"Navigator initialized with {len(stations)} stations")
+            logger.info("Navigator initialized with %d stations", len(stations))
 
         # 3. PAGE TITLE
         st.title(config.get('app.page_title', "🌡️ Weather Station Dashboard"))
@@ -76,7 +84,7 @@ def main():
         # 6. GET CURRENT STATION (source of truth)
         current_station = st.session_state.navigator.get_current()
 
-        logger.info(f"Displaying data for station: {current_station.name}")
+        logger.info("Displaying data for station: %s", current_station.name)
 
         # 7. LOAD STATION DATA
         parquet_handler.load_station_reports(current_station)
@@ -86,43 +94,51 @@ def main():
             st.info("Click 'Refresh Data' to fetch initial data")
             return
 
-        # 8. DISPLAY STATION INFO
-        latest_report = current_station.get_latest_report()
+        _render_dashboard(current_station, weather_charts)
 
-        st.header(f"📍 {current_station.name}")
-        st.caption(f"Last update: {latest_report.display_date}")
-        st.markdown("---")
-
-        # 9. DISPLAY CHARTS AND METRICS
-        st.header("📊 Weather Timeline")
-
-        metric_options = {
-            "Temperature": "temperature",
-            "Humidity": "humidity",
-            "Pressure": "pressure",
-            "Surprise 🎁": "surprise"
-        }
-        selected_metric_label = st.selectbox("Select metric:", list(metric_options.keys()))
-        selected_metric = metric_options[selected_metric_label]
-
-        if selected_metric == "surprise":
-            st.video("https://www.youtube.com/watch?v=dQw4w9WgXcQ", autoplay=True)
-        else:
-            df_reports = current_station.get_all_reports()
-
-            if not df_reports.empty:
-                fig = weather_charts.plot(selected_metric, df_reports)
-                st.plotly_chart(fig, width='stretch')
-
-                # Display statistics
-                metrics_display = MetricsDisplay()
-                metrics_display.render_statistics(df_reports)
-            else:
-                st.info("Not enough data to display chart")
-
-    except Exception as e:
-        logger.critical(f"Erreur fatale: {e}", exc_info=True)
+    except Exception as e:  # pylint: disable=broad-exception-caught
+        logger.critical("Erreur fatale: %s", e, exc_info=True)
         st.error(f"An application error occurred: {e}")
+
+
+def _render_dashboard(current_station, weather_charts):
+    """
+    Helper function to render the station dashboard (info, charts, metrics).
+    Extracted from main() to reduce local variable count.
+    """
+    # 8. DISPLAY STATION INFO
+    latest_report = current_station.get_latest_report()
+
+    st.header(f"📍 {current_station.name}")
+    st.caption(f"Last update: {latest_report.display_date}")
+    st.markdown("---")
+
+    # 9. DISPLAY CHARTS AND METRICS
+    st.header("📊 Weather Timeline")
+
+    metric_options = {
+        "Temperature": "temperature",
+        "Humidity": "humidity",
+        "Pressure": "pressure",
+        "Surprise 🎁": "surprise"
+    }
+    selected_metric_label = st.selectbox("Select metric:", list(metric_options.keys()))
+    selected_metric = metric_options[selected_metric_label]
+
+    if selected_metric == "surprise":
+        st.video("https://www.youtube.com/watch?v=dQw4w9WgXcQ", autoplay=True)
+    else:
+        df_reports = current_station.get_all_reports()
+
+        if not df_reports.empty:
+            fig = weather_charts.plot(selected_metric, df_reports)
+            st.plotly_chart(fig, width='stretch')
+
+            # Display statistics
+            metrics_display = MetricsDisplay()
+            metrics_display.render_statistics(df_reports)
+        else:
+            st.info("Not enough data to display chart")
 
 
 if __name__ == "__main__":

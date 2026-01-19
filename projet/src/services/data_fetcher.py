@@ -1,3 +1,7 @@
+"""
+Module for fetching and loading weather data into Station entities.
+"""
+
 import logging
 
 from projet.src.api.extractor import APIExtractor
@@ -29,6 +33,7 @@ class DataFetcher:
         loader: DataLoader,
         parquet_handler: ParquetHandler
     ):
+        # pylint: disable=too-many-arguments, too-many-positional-arguments
         self.extractor = extractor
         self.transformer = transformer
         self.validator = validator
@@ -49,7 +54,7 @@ class DataFetcher:
         raw_data = self.extractor.extract(station)
 
         if raw_data.empty:
-            logger.warning(f"Aucune donnée récupérée pour la station {station.name}")
+            logger.warning("Aucune donnée récupérée pour la station %s", station.name)
             return False
 
         # 2. Transform
@@ -58,16 +63,19 @@ class DataFetcher:
 
         # 3. Validate
         if not self.validator.is_format_correct(formatted_data):
-            logger.error(f"Format de données invalide pour la station {station.name}")
+            logger.error("Format de données invalide pour la station %s", station.name)
             return False
 
         if not self.validator.are_values_valid(formatted_data):
-            logger.warning(f"Valeurs de données invalides détectées pour la station {station.name}")
+            logger.warning(
+                "Valeurs de données invalides détectées pour la station %s",
+                station.name
+            )
             return False
 
         # 4. Load
         self.loader.load_reports(station, formatted_data)
-        logger.info(f"Chargement réussi de {len(formatted_data)} relevés pour {station.name}")
+        logger.info("Chargement réussi de %d relevés pour %s", len(formatted_data), station.name)
         return True
 
     def refresh_and_save_station_data(self, station: Station) -> bool:
@@ -80,7 +88,7 @@ class DataFetcher:
         Returns:
             bool: True if the entire process was successful, False otherwise.
         """
-        logger.info(f"Starting full refresh and save for station {station.name}.")
+        logger.info("Starting full refresh and save for station %s", station.name)
         if self.fetch_and_load(station):
             return self.parquet_handler.save_station_reports(station)
         return False

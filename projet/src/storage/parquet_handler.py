@@ -1,7 +1,11 @@
+"""
+Module for handling Parquet files.
+"""
+
 import logging
 from pathlib import Path
-import pandas as pd
 from typing import Optional
+import pandas as pd
 
 from projet.src.entities.station import Station
 from projet.src.services.loader import DataLoader
@@ -26,7 +30,7 @@ class ParquetHandler:
         self.data_dir = data_dir
         self.data_dir.mkdir(parents=True, exist_ok=True)
         self.compression = compression
-        logger.info(f"ParquetHandler initialized with directory: {self.data_dir}")
+        logger.info("ParquetHandler initialized with directory: %s", self.data_dir)
 
     def save_station_reports(self, station: Station) -> None:
         """
@@ -36,7 +40,7 @@ class ParquetHandler:
             station: Station with its weather reports
         """
         if not station.reports:
-            logger.warning(f"No reports to save for station '{station.name}' (ID: {station.id})")
+            logger.warning("No reports to save for station '%s' (ID: %s)", station.name, station.id)
             return
 
         filepath = self._get_filepath(station)
@@ -54,27 +58,26 @@ class ParquetHandler:
 
                 df = df.sort_values('date').reset_index(drop=True)
 
-                logger.info(f"Merged data for station '{station.name}': "
-                            f"{len(existing_df)} existing + {len(new_df)} new = {len(df)} total records"
-                            )
+                logger.info("Merged data for station '%s': %s existing + %s new = %s total records",
+                            station.name, len(existing_df), len(new_df), len(df))
 
-            except Exception as e:
-                logger.error(f"Failed to read existing file for station '{station.name}': "
-                             f"{type(e).__name__} - {str(e)}. Creating new file."
-                             )
-
+            except Exception as e:  # pylint: disable=broad-exception-caught
+                logger.error("Failed to read existing file for station '%s': %s - %s",
+                             station.name, type(e).__name__, str(e))
                 df = new_df
         else:
             df = new_df
-            logger.info(f"Creating new file for station '{station.name}' with {len(df)} records")
+            logger.info("Creating new file for station '%s' with %s records",
+                        station.name, len(df))
 
         # Save to Parquet
         try:
             df.to_parquet(filepath, engine='pyarrow', compression='snappy', index=False)
-            logger.info(f"Saved {len(df)} reports for station '{station.name}' to {filepath}")
+            logger.info("Saved %s reports for station '%s' to %s", len(df), station.name, filepath)
 
-        except Exception as e:
-            logger.error(f"Failed to save reports for station '{station.name}': {type(e).__name__} - {str(e)}")
+        except Exception as e:  # pylint: disable=broad-exception-caught
+            logger.error("Failed to save reports for station '%s': %s - %s",
+                         station.name, type(e).__name__, str(e))
             raise
 
     def load_station_reports(self, station: Station, loader: DataLoader | None = None) -> None:
@@ -91,17 +94,19 @@ class ParquetHandler:
         filepath = self._get_filepath(station)
 
         if not filepath.exists():
-            logger.warning(f"No parquet file found for station '{station.name}' (ID: {station.id})")
+            logger.warning("No parquet file found for station '%s' (ID: %s)",
+                           station.name, station.id)
             station.reports = []
             return
 
         try:
             df = pd.read_parquet(filepath, engine='pyarrow')
             loader.load_reports(station, df)
-            logger.info(f"Loaded {len(station.reports)} reports for station '{station.name}'")
+            logger.info("Loaded %s reports for station '%s'", len(station.reports), station.name)
 
-        except Exception as e:
-            logger.error(f"Failed to load reports for station '{station.name}': {type(e).__name__} - {str(e)}")
+        except Exception as e:  # pylint: disable=broad-exception-caught
+            logger.error("Failed to load reports for station '%s': %s - %s",
+                         station.name, type(e).__name__, str(e))
             station.reports = []
 
     def station_file_exists(self, station: Station) -> bool:
@@ -116,7 +121,7 @@ class ParquetHandler:
         """
         filepath = self._get_filepath(station)
         exists = filepath.exists()
-        logger.debug(f"File check for station {station.name}: {exists}")
+        logger.debug("File check for station '%s': %s", station.name, exists)
         return exists
 
     def _get_filepath(self, station: Station) -> Path:

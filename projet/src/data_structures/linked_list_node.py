@@ -1,3 +1,7 @@
+"""
+Linked list node implementation for weather stations.
+"""
+
 from __future__ import annotations
 from dataclasses import dataclass
 

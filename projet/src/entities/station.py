@@ -1,21 +1,32 @@
+"""
+Module for representing a weather station.
+"""
+
 import pandas as pd
-from src.entities.weather_report import WeatherReport
+from .weather_report import WeatherReport
 
 
 class Station:
-    def __init__(self, id: str, name: str, longitude: float, latitude: float,
-                 reports: list[WeatherReport] = []) -> None:
+    """
+    Represents a weather station with its reports.
+    """
+    def __init__(self, station_id: str, name: str, longitude: float, latitude: float,
+                 reports: list[WeatherReport] = None) -> None:
         """Instantiate the Station class
 
         Args:
-            id (str): Station identifier
+            station_id (str): Station identifier
             name (str): Station name
             longitude (float)
             latitude (float)
             reports (list[WeatherReport], optional): List of weather reports linked to the station.
-                Defaults to [].
+                Defaults to None.
         """
-        self.id: str = id
+        # pylint: disable=too-many-arguments, too-many-positional-arguments
+        # pylint: disable=too-many-instance-attributes
+        if reports is None:
+            reports = []
+        self.id: str = station_id
         self.name: str = name
         self.longitude = longitude
         self.latitude = latitude

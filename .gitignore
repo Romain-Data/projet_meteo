@@ -10,3 +10,6 @@ __pycache__/
 *$py.class
 .flake8
 .vscode/
+.pytest_cache/
+.pylintrc
+ETAT.md
