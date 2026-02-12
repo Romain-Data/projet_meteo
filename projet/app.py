@@ -107,10 +107,10 @@ def _render_dashboard(current_station, weather_charts):
     Extracted from main() to reduce local variable count.
     """
     # 8. DISPLAY STATION INFO
-    latest_report = current_station.get_latest_report()
+    latest_reports = current_station.get_latest_reports()
 
     st.header(f"📍 {current_station.name}")
-    st.caption(f"Last update: {latest_report.display_date}")
+    st.caption(f"Last update: {latest_reports.display_date}")
     st.markdown("---")
 
     # 9. DISPLAY CHARTS AND METRICS

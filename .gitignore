@@ -1,6 +1,5 @@
 .DS*
 test.ipynb
-test*
 env/
 logs/
 *.log
@@ -13,3 +12,5 @@ __pycache__/
 .pytest_cache/
 .pylintrc
 ETAT.md
+.coverage
+Barême Projet Météo.pdf

@@ -27,7 +27,7 @@ def setup_logging(log_level: str = "INFO", log_file: str = "app.log"):
     # File handler (automatic rotation)
     file_handler = RotatingFileHandler(
         log_path,
-        maxBytes=5 * 1024 * 1024,  # 5 MB
+        maxBytes=5 * 1024 * 1024,   # 5 MB
         backupCount=3,              # Keep 3 last versions
         encoding='utf-8'
     )

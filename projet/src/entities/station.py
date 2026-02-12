@@ -10,12 +10,12 @@ class Station:
     """
     Represents a weather station with its reports.
     """
-    def __init__(self, station_id: str, name: str, longitude: float, latitude: float,
+    def __init__(self, station_id: str | int, name: str, longitude: float, latitude: float,
                  reports: list[WeatherReport] = None) -> None:
         """Instantiate the Station class
 
         Args:
-            station_id (str): Station identifier
+            station_id (str | int): Station identifier
             name (str): Station name
             longitude (float)
             latitude (float)
@@ -54,7 +54,7 @@ class Station:
 
         return pd.DataFrame(data)
 
-    def get_latest_report(self) -> WeatherReport:
+    def get_latest_reports(self) -> WeatherReport:
         """
         Returns the most recent WeatherReport from the station's reports.
 
