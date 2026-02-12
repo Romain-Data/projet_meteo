@@ -4,11 +4,39 @@ Contains shared logic for creating Plotly traces, annotations, and layouts.
 """
 
 import logging
+from datetime import datetime, timedelta
 import pandas as pd
 import plotly.graph_objects as go
 
 
 logger = logging.getLogger(__name__)
+
+
+def filter_last_7_days(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Filter a DataFrame to keep only records from the last 7 days.
+    
+    Args:
+        df: DataFrame containing a 'date' column with datetime objects.
+        
+    Returns:
+        pd.DataFrame: Filtered DataFrame.
+    """
+    if df.empty or 'date' not in df.columns:
+        return df
+
+    # Ensure date column is datetime
+    if not pd.api.types.is_datetime64_any_dtype(df['date']):
+        df = df.copy()
+        df['date'] = pd.to_datetime(df['date'])
+
+    # Time zone management
+    if df['date'].dt.tz is not None:
+        cutoff_date = pd.Timestamp.now(tz='UTC') - pd.Timedelta(days=7)
+    else:
+        cutoff_date = datetime.now() - timedelta(days=7)
+
+    return df[df['date'] >= cutoff_date]
 
 
 def create_line_trace(

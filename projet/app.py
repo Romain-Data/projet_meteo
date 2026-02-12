@@ -17,6 +17,7 @@ from projet.config.config_loader import ConfigLoader
 from projet.config.logging_config import setup_logging
 from projet.src.data_structures.linked_list_navigator import LinkedListNavigator
 from projet.src.api.request_queue import ApiRequestQueue
+from projet.src.viz import viz_utils
 
 setup_logging(log_level="INFO", log_file="weather_app.log")
 logger = logging.getLogger(__name__)
@@ -96,7 +97,7 @@ def main():
 
         _render_dashboard(current_station, weather_charts)
 
-    except Exception as e:  # pylint: disable=broad-exception-caught
+    except Exception as e:
         logger.critical("Erreur fatale: %s", e, exc_info=True)
         st.error(f"An application error occurred: {e}")
 
@@ -128,7 +129,8 @@ def _render_dashboard(current_station, weather_charts):
     if selected_metric == "surprise":
         st.video("https://www.youtube.com/watch?v=dQw4w9WgXcQ", autoplay=True)
     else:
-        df_reports = current_station.get_all_reports()
+        df_all = current_station.get_all_reports()
+        df_reports = viz_utils.filter_last_7_days(df_all)
 
         if not df_reports.empty:
             fig = weather_charts.plot(selected_metric, df_reports)

@@ -23,3 +23,5 @@ GitPython
 # Utilitaires
 requests
 watchdog
+pytest
+pylint

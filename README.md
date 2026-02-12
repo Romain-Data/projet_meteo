@@ -44,6 +44,8 @@ docker compose up
 │   │   ├── config_loader.py
 │   │   └── logging_config.py
 │   ├── data                            # Données et Stockage Parquet
+│   │   ├── parquet
+│   │   └── stations
 │   ├── docs                            # Documentation (Data Profiling)
 │   │   └── DATA_PROFILING.md
 │   ├── src                             # Core Logic
@@ -60,18 +62,29 @@ docker compose up
 │   │   │   ├── station_display_decorator.py
 │   │   │   └── weather_report.py
 │   │   ├── interfaces
+│   │   │   └── station_navigator.py
 │   │   ├── processing                  # Transformation et Validation
+│   │   │   ├── transformer.py
+│   │   │   └── validator.py
 │   │   ├── services                    # Services (Data Fetcher)
+│   │   │   ├── data_fetcher.py
+│   │   │   └── loader.py
 │   │   ├── storage                     # Parquet Handler
+│   │   │   └── parquet_handler.py
 │   │   └── viz                         # Factory et Visualisations
+│   │       ├── data_vizualizer.py
+│   │       ├── humidity_vizualizer.py
+│   │       ├── pressure_vizualizer.py
+│   │       ├── temperature_vizualizer.py
+│   │       └── viz_utils.py
 │   ├── __init__.py
-│   ├── __main__.py                     # Point d'entrée package
-│   ├── app.py
+│   ├── app.py                          # Point d'entrée application
 │   └── app_init.py
 ├── tests                               # 146 tests unitaires
 ├── README.md
 ├── requirements.txt
-├── Dockerfile
+├── docker-compose.yml                  # Configuration Docker
+├── Dockerfile                          # Configuration Docker
 └── run.py
 ```
 

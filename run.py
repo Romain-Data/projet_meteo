@@ -1,4 +1,11 @@
+"""
+Ce script est le point d'entrée de l'application.
+Il permet de lancer l'application, de lancer les tests,
+d'installer les dépendances et de nettoyer les fichiers temporaires.
+"""
+
 import os
+import shutil
 import sys
 import subprocess
 from pathlib import Path
@@ -50,27 +57,8 @@ def test():
         print("\n\n🛑 Tests interrompus")
         sys.exit(130)  # Code standard pour interruption
 
-
-def install():
-    """Installe les dépendances"""
-    try:
-        print("📦 Installation des dépendances...")
-        subprocess.run(
-            [sys.executable, "-m", "pip", "install", "-r", "requirements.txt"],
-            check=True
-        )
-        print("✅ Dépendances installées avec succès")
-    except KeyboardInterrupt:
-        print("\n\n🛑 Installation interrompue")
-        sys.exit(130)
-    except subprocess.CalledProcessError:
-        print("❌ Erreur lors de l'installation")
-        sys.exit(1)
-
-
 def clean():
     """Nettoie les fichiers temporaires"""
-    import shutil
 
     print("🧹 Nettoyage des fichiers temporaires...")
 
@@ -138,7 +126,6 @@ def help_cmd():
 commands = {
     "run": run,
     "test": test,
-    "install": install,
     "clean": clean,
     "help": help_cmd,
 }

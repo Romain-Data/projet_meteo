@@ -3,12 +3,12 @@ Module for creating data visualizations.
 """
 
 import logging
-from datetime import datetime, timedelta
 import pandas as pd
 
 from .humidity_vizualizer import HumidityVizualizer
 from .pressure_vizualizer import PressureVizualizer
 from .temperature_vizualizer import TemperatureVizualizer
+from . import viz_utils
 
 logger = logging.getLogger(__name__)
 
@@ -37,18 +37,7 @@ class DataVizualiserFactory:
             ValueError: If the provided mesure_type is not supported.
         """
         # Filter data for the last 7 days
-        if not reports.empty and 'date' in reports.columns:
-            if not pd.api.types.is_datetime64_any_dtype(reports['date']):
-                reports = reports.copy()
-                reports['date'] = pd.to_datetime(reports['date'])
-
-            # Time zone management to avoid comparison errors
-            if reports['date'].dt.tz is not None:
-                cutoff_date = pd.Timestamp.now(tz='UTC') - pd.Timedelta(days=7)
-            else:
-                cutoff_date = datetime.now() - timedelta(days=7)
-
-            reports = reports[reports['date'] >= cutoff_date]
+        reports = viz_utils.filter_last_7_days(reports)
 
         if mesure_type == "temperature":
             return TemperatureVizualizer().plot(reports)
