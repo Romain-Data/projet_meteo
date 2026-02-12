@@ -30,6 +30,7 @@
 ```bash
 docker compose up
 ```
+La commande `docker compose up` va monter le conteneur Docker, lancer pylint, pytest puis lancer l'application Streamlit.
 
 # Architecture de fichiers
 ```text
