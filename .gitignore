@@ -10,7 +10,6 @@ __pycache__/
 .flake8
 .vscode/
 .pytest_cache/
-.pylintrc
 ETAT.md
 .coverage
 Barême Projet Météo.pdf
