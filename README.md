@@ -1,6 +1,6 @@
-# projet_meteo
+# Projet Meteo
 
-Pitch client : société météo
+**Pitch client**
 
 - une appli pour suivre la météo toulousaine
 - possibilité de choisir une station météo pour afficher données spécifiques
@@ -13,81 +13,65 @@ Pitch client : société météo
 
 
 # Design patterns implémentés
-- [x] Singleton sur [config_loader.py](projet/config/config_loader.py)
-- [x] Builder sur [station_buider.py](projet/src/entities/station_builder.py)
-- [x] Factory sur [data_vizualizer.py](projet/src/viz/data_vizualizer.py)
-- [x] Decorator [station_display_decorator.py](projet/src/components/station_display_decorator.py)
+- [x] **Singleton** : [config_loader.py](projet/config/config_loader.py) et [app_init.py](projet/app_init.py)
+- [x] **Builder** : [station_builder.py](projet/src/entities/station_builder.py)
+- [x] **Factory** : [data_vizualizer_factory.py](projet/src/viz/data_vizualizer_factory.py)
+- [x] **Decorator** : [station_display_decorator.py](projet/src/entities/station_display_decorator.py)
+- [x] **File** (Queue): [request_queue.py](projet/src/api/request_queue.py)
 
+# Conformité Barême
+- [x] **Structures de données** : Liste chaînée (`LinkedListNavigator`), File (`ApiRequestQueue`), Dictionnaire (Configuration JSON).
+- [x] **Qualité** : Score PyLint 10/10, Tests unitaires (146 tests, >99% couv).
+- [x] **Documentation** : [DATA_PROFILING.md](projet/docs/DATA_PROFILING.md), Docstrings et Type Hinting.
+- [x] **Architecture** : Lancement du code via une commande Docker
 
 # Installation et Lancement
 
-````
-Python 3.12.4
-```
-
-## 1. Cloner le dépôt
 ```bash
-git clone https://github.com/Romain-Data/projet_meteo.git
-cd projet_meteo
-```
-
-## 2. Installer les dépendances
-```bash
-pip install -r requirements.txt
-```
-
-## 3. Lancer l'application
-```bash
-python run.py run
+docker compose up
 ```
 
 # Architecture de fichiers
 ```text
 .
 ├── projet
-│   ├── components                      # Composant de l'application Streamlit
+│   ├── components                      # Composants UI Streamlit
 │   │   ├── metrics_display.py
 │   │   ├── navigation_header.py
 │   │   └── sidebar.py
-│   ├── config                          # Configuration
+│   ├── config                          # Configuration et Singleton
 │   │   ├── config.json
 │   │   ├── config_loader.py
 │   │   └── logging_config.py
-│   ├── data                            # Données brutes et stockage
-│   │   ├── parquet
-│   │   └── stations
-│   ├── logs                            # Logs de l'application
-│   │   └── weather_app.log
-│   ├── src                             # Source code
-│   │   ├── api                         # API
+│   ├── data                            # Données et Stockage Parquet
+│   ├── docs                            # Documentation (Data Profiling)
+│   │   └── DATA_PROFILING.md
+│   ├── src                             # Core Logic
+│   │   ├── api                         # API et File (Queue)
 │   │   │   ├── extractor.py
 │   │   │   └── request_queue.py
-│   │   ├── data_structures             # Structures de données
+│   │   ├── data_structures             # Liste Chaînée
 │   │   │   ├── linked_list_navigator.py
 │   │   │   └── linked_list_node.py
-│   │   ├── entities                    # Entités et builder
+│   │   ├── entities                    # Entités, Builder et Decorator
 │   │   │   ├── city.py
 │   │   │   ├── station.py
 │   │   │   ├── station_builder.py
+│   │   │   ├── station_display_decorator.py
 │   │   │   └── weather_report.py
-│   │   ├── interfaces                  # Interfaces
-│   │   │   └── station_navigator.py
-│   │   ├── processing                  # Transformation et validation des données
-│   │   │   ├── transformer.py
-│   │   │   └── validator.py
-│   │   ├── services                    # Services
-│   │   │   ├── data_fetcher.py
-│   │   │   └── loader.py
-│   │   ├── storage                     # Gestion du stockage
-│   │   │   └── parquet_handler.py
-│   │   └── viz                         # Visualisation des données
-│   │       ├── data_vizualizer_factory.py
-│   │       ├── humidity_vizualizer.py
-│   │       ├── pressure_vizualizer.py
-│   │       └── temperature_vizualizer.py
+│   │   ├── interfaces
+│   │   ├── processing                  # Transformation et Validation
+│   │   ├── services                    # Services (Data Fetcher)
+│   │   ├── storage                     # Parquet Handler
+│   │   └── viz                         # Factory et Visualisations
+│   ├── __init__.py
+│   ├── __main__.py                     # Point d'entrée package
 │   ├── app.py
 │   └── app_init.py
+├── tests                               # 146 tests unitaires
 ├── README.md
 ├── requirements.txt
-└── run.py                              # Point d'entrée
+├── Dockerfile
+└── run.py
 ```
+

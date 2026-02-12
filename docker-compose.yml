@@ -1,0 +1,13 @@
+version: '5.0'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports: 
+      - "8501:8501"
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+      - ENV=development

@@ -1,7 +1,25 @@
-numpy==2.3.4
-pandas==2.3.3
-plotly==6.3.1
-pyarrow==21.0.0
-requests==2.32.5
-streamlit==1.51.0
-toml==0.10.2w
+# Analyse de données
+pandas
+numpy
+pyarrow
+
+# Visualisation
+matplotlib
+seaborn
+plotly
+altair
+
+# Application & Serveur
+streamlit
+
+# Développement & Tests
+pytest
+pytest-cov
+pytest-mock
+pylint
+isort
+GitPython
+
+# Utilitaires
+requests
+watchdog
