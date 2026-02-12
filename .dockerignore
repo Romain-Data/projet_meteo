@@ -1,0 +1,14 @@
+.DS*
+test.ipynb
+env/
+logs/
+*.log
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+.flake8
+.vscode/
+.pytest_cache/
+ETAT.md
+.coverage
