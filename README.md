@@ -78,7 +78,6 @@ La commande `docker compose up` va monter le conteneur Docker avec Python 3.12, 
 │   │       ├── pressure_vizualizer.py
 │   │       ├── temperature_vizualizer.py
 │   │       └── viz_utils.py
-│   ├── __init__.py
 │   ├── app.py                          # Point d'entrée application
 │   └── app_init.py
 ├── tests                               # 146 tests unitaires
